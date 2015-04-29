@@ -42,7 +42,6 @@ public class ReservationServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String slot = request.getParameter("slot");
-		String movie = request.getParameter("movie");
 
 		if (slot != null)
 			secondStep(request, response);
