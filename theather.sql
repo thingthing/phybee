@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `theater`.`schedule` (
   `id_room` INT NOT NULL,
   `start` TIME(0) NOT NULL,
   `end` TIME(0) NOT NULL,
+  `date` DATE NOT NULL,
   `seat_remain` INT NOT NULL,
   `priority_seat_remain` INT NOT NULL,
   PRIMARY KEY (`id`),
