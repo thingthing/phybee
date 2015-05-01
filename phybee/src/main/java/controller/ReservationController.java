@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import service.ReservationService;
+
 @Controller
 public class ReservationController {
 
@@ -20,8 +22,8 @@ public class ReservationController {
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) {
 		System.out.println("Book, firstStep");
  
-		String[] movies = { "Big hero 6", "Mon voisin Totoro", "Transformers",
-		"One piece" };
+		ReservationService res = new ReservationService();
+		ArrayList<String>  movies = res.getFilmList();
 		String[] dates = { "Monday", "Tuesday", "Wednesday", "Thursday",
 		"Friday", "Saturday", "Sunday" };
 		String[] slots = { "Big hero 6 VF 14:00 06/01/2015 101",
