@@ -18,8 +18,8 @@
 		</thead>
 		<tbody>
 				<tr>
-					<td><c:out value="${requestScope.movie}" /></td>
-					<td><c:out value="${requestScope.slot}" /></td>
+					<td><c:out value="${movie}" /></td>
+					<td><c:out value="${slot}" /></td>
 				</tr>
 		</tbody>
 	</table>
@@ -34,7 +34,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="item" items="${requestScope.ticket}">
+			<c:forEach var="item" items="${ticket}">
 				<tr>
 					<td><c:out value="${item}" /></td>
 					<td><c:out value="30" /></td>
