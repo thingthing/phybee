@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import bean.ScheduleBean;
 import db.PhybeeDb;
 
@@ -32,6 +34,9 @@ public class ReservationService
 
 			db.closeConnection();
 
+		}  catch (NamingException e)
+		{
+			e.printStackTrace();
 		} catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
@@ -66,6 +71,9 @@ public class ReservationService
 
 			db.closeConnection();
 
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
 		} catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();

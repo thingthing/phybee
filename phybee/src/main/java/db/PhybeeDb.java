@@ -13,36 +13,25 @@ import javax.sql.DataSource;
 public class PhybeeDb
 {
 	private Connection connection;
-	
-	public PhybeeDb()
+
+	public PhybeeDb() throws NamingException, SQLException
 	{
 		InitialContext initialContext;
-		try
-		{
-			initialContext = new InitialContext();
-			Context envContext = (Context) initialContext
-					.lookup("java:comp/env");
-			DataSource dataSource = (DataSource) envContext
-					.lookup("jdbc/phybeedb");
-			
-			this.connection = dataSource.getConnection();
-			
-		} catch (NamingException e)
-		{
-			e.printStackTrace();
-		}  catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
-		}
+		initialContext = new InitialContext();
+		Context envContext = (Context) initialContext.lookup("java:comp/env");
+		DataSource dataSource = (DataSource) envContext.lookup("jdbc/theater");
+
+		this.connection = dataSource.getConnection();
+
 	}
-	
+
 	public ResultSet executeQuery(String query) throws SQLException
 	{
 		PreparedStatement preparedStatement = this.connection
 				.prepareStatement(query);
 		return preparedStatement.executeQuery();
 	}
-	
+
 	public void closeConnection() throws SQLException
 	{
 		this.connection.close();
