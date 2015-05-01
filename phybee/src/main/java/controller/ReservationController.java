@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReservationController {
 
-	@RequestMapping("/reservation/movie")
+	@RequestMapping(value="/reservation/movie", method=RequestMethod.GET)
 	public ModelAndView firstStep(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) {
@@ -35,7 +36,6 @@ public class ReservationController {
 						slot.add(s);
 					}
 				}
-
 			}
 		}
 		
@@ -51,16 +51,45 @@ public class ReservationController {
 	
 	@RequestMapping("/reservation/ticket")
 	public ModelAndView secondStep(
-			@RequestParam(value = "movie", required = true) String movie,
 			@RequestParam(value = "slot", required = true) String slot) {
 		System.out.println("Book, secondStep");
 		
 		String[] ticket = { "Adult", "Child", "Disabled" };
 
+		String movie = "Haha";
+		
 		ModelAndView mv = new ModelAndView("bookSecondStep");
-		mv.addObject("slot", slot);
 		mv.addObject("movie", movie);
+		mv.addObject("slot", slot);
 		mv.addObject("ticket", ticket);
+		return mv;
+	}
+	
+	@RequestMapping("/reservation/validation")
+	public ModelAndView thirdStep(
+			@RequestParam(value = "slot", required = true) String slot,
+			@RequestParam(value = "ticket", required = true) List<String> ticket) {
+		System.out.println("Book, thirdStep");
+		
+		String[] payment = {"CB", "Alipay", "VISA"};
+		
+		ModelAndView mv = new ModelAndView("bookThirdStep");
+		mv.addObject("slot", slot);
+		mv.addObject("ticket", ticket);
+//		mv.addObject("amount", amount);
+		mv.addObject("payment", payment);
+		return mv;
+	}
+	
+	@RequestMapping("/reservation/redirection")
+	public ModelAndView fourthStep(
+			@RequestParam(value = "slot", required = true) String slot,
+			@RequestParam(value = "ticket", required = true) List<String> ticket,
+			@RequestParam(value = "amount", required = true) double amount,
+			@RequestParam(value = "payment", required = true) String payment) {
+		System.out.println("Book, thirdStep");
+		
+		ModelAndView mv = new ModelAndView("bookThirdStep");
 		return mv;
 	}
 

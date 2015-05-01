@@ -18,11 +18,12 @@
 		</thead>
 		<tbody>
 				<tr>
-					<td><c:out value="${movie}" /></td>
-					<td><c:out value="${slot}" /></td>
+					<td><c:out value="${movie}"/></td>
+					<td><c:out value="${slot}"/></td>
 				</tr>
 		</tbody>
 	</table>
+	<form method="post" action="/phybee/reservation/validation">
 	<table>
 		<caption>Ticket</caption>
 		<thead>
@@ -37,12 +38,15 @@
 			<c:forEach var="item" items="${ticket}">
 				<tr>
 					<td><c:out value="${item}" /></td>
-					<td><c:out value="30" /></td>
+					<td><c:out value="30"/></td>
 					<td><c:out value="7.90e"/></td>
-					<td><input type="text" name="numberTicket" size="30" placeholder="Ticket Number"></td>
+					<td><input type="text" name="ticket" size="30" placeholder="Ticket Number"></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<input type="hidden" name="slot" value="${slot}"/>
+	<input type="submit" value="Pay !">
+	</form>
 </body>
 </html>
