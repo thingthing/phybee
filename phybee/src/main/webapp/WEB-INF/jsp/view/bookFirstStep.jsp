@@ -8,12 +8,12 @@
 <title>Booking - Choose Slot</title>
 </head>
 <body>
-	<form method="post" action="/EnterpriseJavaProgramming/reservation">
+	<form method="post" action="/phybee/reservation/movie">
 		<label>Movie:</label>
 		<select name="movie">
-			<c:forEach var="item" items="${requestScope.movies}">
+			<c:forEach var="item" items="${movies}">
 				<c:choose>
-					<c:when test="${requestScope.movie eq item}">
+					<c:when test="${movie eq item}">
 						<option value="${item}" selected>${item}</option>
 					</c:when>
 					<c:otherwise>
@@ -23,9 +23,9 @@
 			</c:forEach>
 		</select>
 		<select name="date">
-			<c:forEach var="item" items="${requestScope.dates}">
+			<c:forEach var="item" items="${dates}">
 				<c:choose>
-					<c:when test="${requestScope.date eq item}">
+					<c:when test="${date eq item}">
 						<option value="${item}" selected>${item}</option>
 					</c:when>
 					<c:otherwise>
@@ -46,11 +46,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="item" items="${requestScope.slots}">
+			<c:forEach var="item" items="${slot}">
 				<tr>
 					<td><c:out value="NaN" /></td>
 					<td><c:out value="${item}" /></td>
-					<td><a href="/EnterpriseJavaProgramming/reservation?slot=1"
+					<td><a href="/phybee/reservation/ticket?movie=${movie}&slot=${item}"
 						class="link"><c:out value="Book Now !" /></a></td>
 				</tr>
 			</c:forEach>
