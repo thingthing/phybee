@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 
 import bean.ScheduleBean;
+import bean.TicketBean;
 import db.PhybeeDb;
 
 public class ReservationService
@@ -44,6 +45,35 @@ public class ReservationService
 
 		return filmList;
 	}
+	
+	public ArrayList<TicketBean> getTicketInfo() {
+		
+		ArrayList<TicketBean> ticketList = new ArrayList<TicketBean>();
+
+		try
+		{
+			String sql = "select * from ticket";
+			PhybeeDb db = new PhybeeDb();
+			ResultSet resultSet = db.executeQuery(sql);
+
+			while (resultSet.next())
+			{
+				ticketList.add(new TicketBean(resultSet.getInt("id"), resultSet.getString("type"), resultSet.getDouble("price")));
+			}
+
+			db.closeConnection();
+
+		}  catch (NamingException e)
+		{
+			e.printStackTrace();
+		} catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
+
+		return ticketList;
+	}
+
 
 	private ArrayList<ScheduleBean> getScheduleInfoSql(String sql)
 	{
@@ -90,7 +120,8 @@ public class ReservationService
 
 	public ArrayList<ScheduleBean> getScheduleInfo(String film, Date date)
 	{
-		String sql = " and m.title LIKE '%" + film + "%' and s.date = " + date;
+		String sql = " and m.title LIKE '%" + film + "%' and s.date = '" + date + "'";
+		System.out.println(sql);
 		return (this.getScheduleInfoSql(sql));
 	}
 	
@@ -99,10 +130,10 @@ public class ReservationService
 		String sql = " and m.title LIKE '%" + film + "%'";
 		return (this.getScheduleInfoSql(sql));
 	}
-	
+
 	public ArrayList<ScheduleBean> getScheduleInfo(Date date)
 	{
-		String sql = " and s.date = " + date;
+		String sql = " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
-	}
+	}	
 }
