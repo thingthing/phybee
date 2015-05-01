@@ -9,7 +9,11 @@ import java.sql.Timestamp;
  */
 public class MovieBean implements Serializable{
 
-    private int mId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int mId;
     private int mIdProducer;
     private String mTitle;
     private String mSynopsis;
