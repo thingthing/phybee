@@ -12,7 +12,7 @@
 <title>Booking - Choose Slot</title>
 </head>
 <body>
-	<form method="get" action="/reservation/movie">
+	<form method="get" action="<c:url value="/reservation/movie"/>">
 		<label>Movie:</label>
 		<select name="movie">
 			<c:forEach var="item" items="${movies}">
@@ -26,7 +26,7 @@
 				</c:choose>
 			</c:forEach>
 		</select>
-		<p>Date: <input name="date" type="text" id="datepicker"></p>
+		<p>Date: <input name="date" type="text" id="datepicker" value="${date}"></p>
 		<input type="submit" value="Submit">
 	</form>
 	<table>
