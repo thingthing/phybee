@@ -26,7 +26,8 @@
 				</c:choose>
 			</c:forEach>
 		</select>
-		<p>Date: <input name="date" type="text" id="datepicker" value="${date}"></p>
+		<div id="datepicker">Date: </div>
+		<input name="date" type="hidden" id="date" value="${date}">
 		<input type="submit" value="Submit">
 	</form>
 	<table>
