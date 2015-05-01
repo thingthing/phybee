@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import service.ReservationService;
 
 @Controller
 public class ReservationController {
@@ -18,24 +22,33 @@ public class ReservationController {
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) {
 		System.out.println("Book, firstStep");
  
-		String[] movies = { "Big hero 6", "Mon voisin Totoro", "Transformers",
-		"One piece" };
+		ReservationService res = new ReservationService();
+		ArrayList<String>  movies = res.getFilmList();
 		String[] dates = { "Monday", "Tuesday", "Wednesday", "Thursday",
 		"Friday", "Saturday", "Sunday" };
-		String[] slots = { "Big hero 6 VF 14:00 Thursday 18 101",
-				"Transformers VO 18:25 Wednesday 19 102", "Mon voisin Totoro VO 12:25 Wednesday 19 102" };
+		String[] slots = { "Big hero 6 VF 14:00 06/01/2015 101",
+				"Transformers VO 18:25 06/01/2015 102", "Mon voisin Totoro VO 12:25 06/01/2015 102" };
 		List<String> slot = new ArrayList<String>();
+		
+		
 
 		if (!movie.isEmpty() || !date.isEmpty()) {
 			
-			
-			for (String s : slots) {
-				if (!movie.isEmpty() && !date.isEmpty()) {
-					if (s.contains(movie) && s.contains(date)) { // if (slots.movie.equals(movie) &&
-												// slots.date.equals(date))
-						slot.add(s);
+			try {
+				SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		        java.util.Date parsed = format.parse(date);
+		        java.sql.Date sql = new java.sql.Date(parsed.getTime());
+				for (String s : slots) {
+					if (!movie.isEmpty() && !date.isEmpty()) {
+						if (s.contains(movie) && s.contains(date)) { // if (slots.movie.equals(movie) &&
+													// slots.date.equals(date))
+							slot.add(s);
+						}
 					}
 				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		

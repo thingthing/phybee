@@ -133,3 +133,8 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `producer` (`firstname`, `lastname`) VALUES ('Phybee', 'Java');
+INSERT INTO `movie` (`id_producer`, `title`, `genre`, `time`, `poster`, `release`) VALUES (1,'Big hero 6','Animation', MAKETIME(2,15,00), '', CURDATE());
+INSERT INTO `movie` (`id_producer`, `title`, `genre`, `time`, `poster`, `release`) VALUES (1,'Transformers','Explosion', MAKETIME(3,35,00), '', CURDATE());
+
