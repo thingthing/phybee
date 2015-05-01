@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+.movieprofil-mini-block {
+    width: 49%;
+    height: 200px;
+    display:inline-block;
+}
+
+.movieprofil-mini-block img, .movieprofil-mini-block span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.movielist {
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    color: orange;
+    style: italic;
+}
+
+/*
+.movieprofil {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+*/
+
+.movieprofil-mini {
+    /*padding-left: 115px;
+    padding-left-value: 115px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;*/
+}
+
+.movieprofil-mini h4{
+    height: 60px;
+    margin: 0px;
+    margin-top: 0px;
+    margin-right-value: 0px;
+    margin-bottom: 0px;
+    margin-left-value: 0px;
+    margin-left-ltr-source: physical;
+    margin-left-rtl-source: physical;
+    margin-right-ltr-source: physical;
+    margin-right-rtl-source: physical;
+    padding: 0px;
+    padding-top: 0px;
+    padding-right-value: 0px;
+    padding-bottom: 0px;
+    padding-left-value: 0px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    vertical-align: top;
+}
