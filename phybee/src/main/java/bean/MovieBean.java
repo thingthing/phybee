@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * Created by Elyo on 01/05/2015.
  */
-public class Movie implements Serializable{
+public class MovieBean implements Serializable{
 
     private int mId;
     private int mIdProducer;
@@ -73,7 +73,7 @@ public class Movie implements Serializable{
         this.mDate = mDate;
     }
 
-    public Movie(int id, int idProducer, String title,
+    public MovieBean(int id, int idProducer, String title,
                  String synopsis, Timestamp time, String poster, Date date) {
         this.setmId(id);
         this.setmIdProducer(mIdProducer);
@@ -84,7 +84,7 @@ public class Movie implements Serializable{
         this.setmDate(date);
     }
 
-    public Movie(String title,
+    public MovieBean(String title,
                  String synopsis, Timestamp time, String poster, Date date) {
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
