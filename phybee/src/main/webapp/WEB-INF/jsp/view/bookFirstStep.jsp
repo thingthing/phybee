@@ -3,13 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
   <script src="<c:url value="/resources/js/DatePicker.js"/>"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -39,7 +37,7 @@
 		</select>
 		<br/><br/>
 	<h1>Date</h1><br/>
-		<div id="datepicker" class="label label-primary"></div>
+		<div id="datepicker"></div>
 		<input name="date" type="hidden" id="date" value="${date}">
 		<input type="submit" value="Submit">
 		<br/><br/>

@@ -81,6 +81,7 @@ public class ReservationService
 
 		sql = "select s.*, m.title from schedule as s, movie as m where m.id = s.id_movie"
 				+ sql;
+		System.out.println(sql);
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
@@ -121,7 +122,6 @@ public class ReservationService
 	public ArrayList<ScheduleBean> getScheduleInfo(String film, Date date)
 	{
 		String sql = " and m.title LIKE '%" + film + "%' and s.date = '" + date + "'";
-		System.out.println(sql);
 		return (this.getScheduleInfoSql(sql));
 	}
 	
