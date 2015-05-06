@@ -1,5 +1,14 @@
 @CHARSET "UTF-8";
+/*JSP nowPlayingMovie*/
+/*Movie List Main Block*/
+.movielist {
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+/*Movie profil block*/
 .movieprofil-mini-block {
     width: 49%;
     height: 200px;
@@ -11,34 +20,15 @@
     vertical-align: middle;
 }
 
-.movielist {
-    width: 50%;
-    height: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-p {
-    color: orange;
-    style: italic;
-}
-
-/*
-.movieprofil {
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-*/
-
-.movieprofil-mini {
+/*Movie Profil info inside Movie Profil Block*/
+.movieprofil-mini-info {
     /*padding-left: 115px;
     padding-left-value: 115px;
     padding-left-ltr-source: physical;
     padding-left-rtl-source: physical;*/
 }
 
-.movieprofil-mini h4{
+.movieprofil-mini-info h4{
     height: 60px;
     margin: 0px;
     margin-top: 0px;
@@ -59,4 +49,90 @@ p {
     padding-right-ltr-source: physical;
     padding-right-rtl-source: physical;
     vertical-align: top;
+}
+
+p {
+    color: orange;
+    style: italic;
+}
+
+/*JSP scheduleMovie*/
+/*schedule Main Block*/
+.schedule-movielist {
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.schedule-movieprofil-mini-block h4 {
+
+    text-align: center;
+}
+
+.schedule-movieprofil-mini-block img, .schedule-movieprofil-mini-block span{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.schedule-movielist-synopsis {
+    width: 600px;
+}
+
+/*
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #000000;
+    width: 65px;
+    text-align: center;
+}*/
+table {
+    color: #333;
+    font-family: sans-serif;
+    font-size: .9em;
+    font-weight: 300;
+    line-height: 40px;
+    border: 2px solid #428bca;
+    width: 800px;
+    margin: 20px auto;
+}
+
+thead tr:first-child {
+    background: #428bca;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+th {padding: 0 15px 0 20px;}
+td:first-child {padding-left: 20px;}
+
+thead tr:last-child th {border-bottom: 3px solid #ddd;}
+
+tbody tr:hover {background-color: #f0fbff;}
+tbody tr:last-child td {border: none;}
+tbody td {
+    text-align: center;
+    border-bottom: 2px solid #ddd;}
+
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(6){
+    text-align: center;
+}
+
+.link {
+    color: #428bca;
+    text-align: center;
+    text-decoration: none;
+    padding-left: 15px;
+}
+
+.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
