@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -135,5 +136,30 @@ public class ReservationService
 	{
 		String sql = " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
-	}	
+	}
+	
+	public void setReservationInfo(Integer adult, Integer child, Integer disabled, Integer schedule_id, Integer user_id)
+	{
+		try
+		{
+			PhybeeDb db = new PhybeeDb();
+			PreparedStatement preparedStatement = db.prepareQuery("insert into reservation (id_user, id_schedule, nd_seat, nd_priority_seat) values (?,?,?,?)");
+
+			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(2, schedule_id);
+			preparedStatement.setInt(3, adult+child);
+			preparedStatement.setInt(4, disabled);
+			
+			preparedStatement.executeUpdate();
+			
+			db.closeConnection();
+
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+		} catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
+	}
 }

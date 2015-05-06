@@ -27,11 +27,15 @@ public class PhybeeDb
 
 	public ResultSet executeQuery(String query) throws SQLException
 	{
-		PreparedStatement preparedStatement = this.connection
-				.prepareStatement(query);
+		PreparedStatement preparedStatement = this.prepareQuery(query);
 		return preparedStatement.executeQuery();
 	}
 
+	public PreparedStatement prepareQuery(String query) throws SQLException
+	{
+		return (this.connection.prepareStatement(query));
+	}
+	
 	public void closeConnection() throws SQLException
 	{
 		this.connection.close();
