@@ -20,9 +20,11 @@
    	    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style='width: 30%'>30%</div>
     </div>
     </div>
-    <div class ="panel panel-primary">
-	<form method="get" action="<c:url value="/reservation/movie"/>">
-		<h1>Movie</h1><br/>
+    <div class ="panel panel-primary container">
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+	<form class="form-inline" method="get" action="<c:url value="/reservation/movie"/>">
+		<div class="form-group">
 		<select name="movie">
 			<c:forEach var="item" items="${movies}">
 				<c:choose>
@@ -35,13 +37,15 @@
 				</c:choose>
 			</c:forEach>
 		</select>
-		<br/><br/>
-	<h1>Date</h1><br/>
-		<div id="datepicker"></div>
+		</div>
+
+		<div id="datepicker" class="form-group"></div>
 		<input name="date" type="hidden" id="date" value="${date}">
-		<input type="submit" value="Submit">
-		<br/><br/>
+		
+		<input type="submit" value="Submit" class="btn btn-primary">
 	</form>
+	</div>
+	</div>
 	</div>
 	<table class="table">
 		<caption>Available Slot</caption>
