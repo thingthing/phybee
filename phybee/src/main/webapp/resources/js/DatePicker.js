@@ -8,5 +8,6 @@ $(function() {
 		var stringDate = event.date.getFullYear() + "-" + (event.date.getMonth() + 1) + "-" + event.date.getDate();
 		$('#date').val(stringDate); // Updates value of of your input
 	});
-	$date.datepicker("update", new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]));
+	if (dateSplit.length == 3)
+		$date.datepicker("update", new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]));
 });
