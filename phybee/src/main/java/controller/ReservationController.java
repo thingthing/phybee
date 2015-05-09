@@ -126,7 +126,11 @@ public class ReservationController {
 			@RequestParam(value = "adult", required = true) int adult,
 			@RequestParam(value = "child", required = true) int child,
 			@RequestParam(value = "disabled", required = true) int disabled) {
-		System.out.println("Book, thirdStep");
+		System.out.println("Book, fourth");
+		
+		ReservationService res = new ReservationService();
+		//@todo: Add user id
+		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), 1);
 		
 		ModelAndView mv = new ModelAndView("helloworld");
 		return mv;

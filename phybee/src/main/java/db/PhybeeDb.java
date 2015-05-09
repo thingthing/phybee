@@ -27,6 +27,7 @@ public class PhybeeDb
 
 	public ResultSet executeQuery(String query) throws SQLException
 	{
+		System.out.println(query);
 		PreparedStatement preparedStatement = this.prepareQuery(query);
 		return preparedStatement.executeQuery();
 	}

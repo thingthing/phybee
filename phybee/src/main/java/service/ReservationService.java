@@ -19,6 +19,33 @@ public class ReservationService
 
 	}
 
+	public void removeAvailableSeat(Integer id_schedule, Integer seats_taken, Boolean is_priority)
+	{
+		try
+		{
+			PhybeeDb db = new PhybeeDb();
+			PreparedStatement preparedStatement = db.prepareQuery("update schedule set ? = (? - ?) where id=?");
+			
+			String column_name = (is_priority ? "priority_" : "") + "seat_remain";
+			
+			preparedStatement.setString(1, column_name);
+			preparedStatement.setString(2, column_name);
+			preparedStatement.setInt(3, seats_taken);
+			preparedStatement.setInt(4, id_schedule);
+			
+			preparedStatement.executeUpdate();
+			
+			db.closeConnection();
+
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+		} catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
+	}
+	
 	public ArrayList<String> getFilmList()
 	{
 		ArrayList<String> filmList = new ArrayList<String>();
@@ -82,7 +109,6 @@ public class ReservationService
 
 		sql = "select s.*, m.title from schedule as s, movie as m where m.id = s.id_movie"
 				+ sql;
-		System.out.println(sql);
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
@@ -143,12 +169,13 @@ public class ReservationService
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery("insert into reservation (id_user, id_schedule, nd_seat, nd_priority_seat) values (?,?,?,?)");
+			PreparedStatement preparedStatement = db.prepareQuery("insert into reservation (id_user, id_schedule, adult, child, disabled) values (?,?,?,?,?)");
 
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, schedule_id);
-			preparedStatement.setInt(3, adult+child);
-			preparedStatement.setInt(4, disabled);
+			preparedStatement.setInt(3, adult);
+			preparedStatement.setInt(4, child);
+			preparedStatement.setInt(5, disabled);
 			
 			preparedStatement.executeUpdate();
 			
