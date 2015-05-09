@@ -1,8 +1,13 @@
 package controller;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.DateService;
+import service.MovieService;
 import service.ReservationService;
+import bean.MovieBean;
 import bean.ScheduleBean;
 import bean.TicketBean;
 
@@ -19,7 +26,7 @@ import bean.TicketBean;
 public class ReservationController {
 
 	@RequestMapping(value="/reservation/movie", method=RequestMethod.GET)
-	public ModelAndView firstStep(
+	public ModelAndView chooseMovieAndDate(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) throws ParseException {
 		System.out.println("Book, firstStep");
@@ -27,86 +34,98 @@ public class ReservationController {
 		ReservationService res = new ReservationService();
 
 		ArrayList<String>  movies = res.getFilmList();
-		ArrayList<ScheduleBean> slot = null;
+		ArrayList<ScheduleBean> schedule = null;
 
 		if (!movie.isEmpty() || !date.isEmpty()) {
 			if (!movie.isEmpty() && !date.isEmpty())
-				slot = res.getScheduleInfo(movie, DateService.parseDate(date, "yyyy-MM-dd"));
+				schedule = res.getScheduleInfo(movie, DateService.parseDate(date, "yyyy-MM-dd"));
 			else if (!movie.isEmpty())
-				slot = res.getScheduleInfo(movie);
+				schedule = res.getScheduleInfo(movie);
 			else if (!date.isEmpty())
-				slot = res.getScheduleInfo(DateService.parseDate(date, "yyyy-MM-dd"));
+				schedule = res.getScheduleInfo(DateService.parseDate(date, "yyyy-MM-dd"));
 		}
 		
 		ModelAndView mv = new ModelAndView("bookFirstStep");
 		mv.addObject("movie", movie);
 		mv.addObject("movies", movies);
 		mv.addObject("date", date);
-		if (slot != null && slot.size() > 0)
-			mv.addObject("slot", slot);
+		if (schedule != null && schedule.size() > 0)
+			mv.addObject("schedule", schedule);
 		return mv;
 	}
 	
 	@RequestMapping("/reservation/ticket")
-	public ModelAndView secondStep(
-			@RequestParam(value = "slot", required = true) String slot) {
+	public ModelAndView chooseTicket(
+			@RequestParam(value = "schedule", required = true) String scheduleId) {
 		System.out.println("Book, secondStep");
-		
-//		String[] ticket = { "Adult", "Child", "Disabled" };
 
 		ReservationService res = new ReservationService();
+		MovieService mov = new MovieService();
 		
-//		ScheduleBean schedule = res.getScheduleInfo(slot);
-//		MovieBean movie = res.getMovieInfo(schedule.getId_movie());
+		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0);
+		MovieBean movie = mov.getMovieInfo(schedule.getId_movie()).get(0);
 		List<TicketBean> ticket = res.getTicketInfo();
 		
 		ModelAndView mv = new ModelAndView("bookSecondStep");
-//		mv.addObject("movie", movie);
-//		mv.addObject("slot", schedule);
+		mv.addObject("movie", movie);
+		mv.addObject("schedule", schedule);
 		mv.addObject("ticket", ticket);
 		return mv;
 	}
 	
 	@RequestMapping("/reservation/validation")
-	public ModelAndView thirdStep(
-			@RequestParam(value = "slot", required = true) String slot,
+	public ModelAndView seeSummary(
+			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "Adult", required = true) String adult,
 			@RequestParam(value = "Child", required = true) String child,
 			@RequestParam(value = "Disabled", required = true) String disabled) {
 		System.out.println("Book, thirdStep");
-		
-		String[] payment = {"CB", "Alipay", "VISA"};
+
 		double amount = 0.00;
 		
 		ReservationService res = new ReservationService();
 		
-//		ScheduleBean schedule = res.getScheduleInfo(slot);
+		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0);
+		Map<TicketBean, Integer> basket = new HashMap<TicketBean, Integer>();
+
 		List<TicketBean> ticket = res.getTicketInfo();
-		
+
 		for (TicketBean t : ticket) {
 			if (t.getType().equals("Adult"))
-				t.setNumber(Integer.parseInt(adult));
+				basket.put(t, Integer.parseInt(adult));
 			else if (t.getType().equals("Child"))
-				t.setNumber(Integer.parseInt(child));
+				basket.put(t, Integer.parseInt(child));
 			else if (t.getType().equals("Disabled"))
-				t.setNumber(Integer.parseInt(disabled));
-			amount += t.getPrice() * t.getNumber();
+				basket.put(t, Integer.parseInt(disabled));
 		}
 		
+		for (TicketBean key : basket.keySet()) {
+			amount += basket.get(key) * key.getPrice();
+		}
+		
+		NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.CHINA);
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setCurrencySymbol("¥");
+		dfs.setGroupingSeparator('.');
+		dfs.setMonetaryDecimalSeparator('.');
+		((DecimalFormat) format).setDecimalFormatSymbols(dfs);
+		
 		ModelAndView mv = new ModelAndView("bookThirdStep");
-//		mv.addObject("slot", schedule);
-		mv.addObject("ticket", ticket);
-		mv.addObject("amount", amount);
-		mv.addObject("payment", payment);
+		mv.addObject("schedule", schedule);
+		mv.addObject("basket", basket);
+		mv.addObject("amount", format.format(amount));
+		mv.addObject("adult", adult);
+		mv.addObject("child", child);
+		mv.addObject("disabled", disabled);
 		return mv;
 	}
 	
 	@RequestMapping("/reservation/redirection")
-	public ModelAndView fourthStep(
-			@RequestParam(value = "slot", required = true) String slot,
-			@RequestParam(value = "ticket", required = true) List<String> ticket,
-			@RequestParam(value = "amount", required = true) double amount,
-			@RequestParam(value = "payment", required = true) String payment) {
+	public ModelAndView validateReservation(
+			@RequestParam(value = "schedule", required = true) String scheduleId,
+			@RequestParam(value = "adult", required = true) int adult,
+			@RequestParam(value = "child", required = true) int child,
+			@RequestParam(value = "disabled", required = true) int disabled) {
 		System.out.println("Book, thirdStep");
 		
 		ModelAndView mv = new ModelAndView("helloworld");

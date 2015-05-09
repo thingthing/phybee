@@ -61,7 +61,7 @@ public class MovieService
 	
 	public ArrayList<MovieBean> getMovieInfo(Integer movie_id)
 	{
-		String sql = "select * from schedule movie where id = " + movie_id;
+		String sql = "select * from movie where id = " + movie_id;
 		return this.searchMovieDb(sql);
 	}
 }
