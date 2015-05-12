@@ -1,10 +1,13 @@
 package controller;
 
 import bean.UserBean;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import service.UserService;
 
 import java.util.Map;
 
@@ -30,7 +33,9 @@ public class RegistrationController {
         System.out.println("username: " + userBean.getLastName());
         System.out.println("password: " + userBean.getPassword());
         System.out.println("email: " + userBean.getEmail());
+        userBean = UserService.subscribe(userBean.getFirstName(), userBean.getLastName(), userBean.getPassword(), userBean.getEmail());
 
+        System.out.println("Id: "+ userBean.getId());
         return "RegistrationSuccess";
     }
 }
