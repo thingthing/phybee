@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class PhybeeDb
 
 	public PreparedStatement prepareQuery(String query) throws SQLException
 	{
-		return (this.connection.prepareStatement(query));
+		return (this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS));
 	}
 	
 	public void closeConnection() throws SQLException
