@@ -1,6 +1,6 @@
 package controller;
 
-import bean.User;
+import bean.UserBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,23 +13,23 @@ import java.util.Map;
 public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET)
     public String viewRegistration(Map<String, Object> model) {
-        User userForm = new User();
+        UserBean userForm = new UserBean();
         model.put("userForm", userForm);
 
         return "Registration";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processRegistration(@ModelAttribute("userForm") User user,
+    public String processRegistration(@ModelAttribute("userForm") UserBean userBean,
                                       Map<String, Object> model) {
 
         // implement your own registration logic here...
 
         // for testing purpose:
-        System.out.println("username: " + user.getFirstName());
-        System.out.println("username: " + user.getLastName());
-        System.out.println("password: " + user.getPassword());
-        System.out.println("email: " + user.getEmail());
+        System.out.println("username: " + userBean.getFirstName());
+        System.out.println("username: " + userBean.getLastName());
+        System.out.println("password: " + userBean.getPassword());
+        System.out.println("email: " + userBean.getEmail());
 
         return "RegistrationSuccess";
     }

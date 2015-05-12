@@ -1,12 +1,29 @@
 package bean;
 
-public class User {
+public class UserBean {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private Integer id;
 
-    public String getFirstName() {
+    public UserBean(String firstName, String lastName, String email,
+			String password, Integer id)
+	{
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.id = id;
+	}
+
+	public UserBean()
+	{
+		super();
+	}
+
+	public String getFirstName() {
         return firstName;
     }
 
@@ -37,4 +54,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public Integer getId()
+	{
+		return id;
+	}
+
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 }
