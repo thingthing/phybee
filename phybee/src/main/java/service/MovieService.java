@@ -30,12 +30,14 @@ public class MovieService
 			{
 				movieList.add(new MovieBean(
 						resultSet.getInt("id"),
+						resultSet.getInt("id_genre"),
 						resultSet.getInt("id_producer"),
 						resultSet.getString("title"),
 						resultSet.getString("synopsis"),
 						resultSet.getTimestamp("time"),
 						resultSet.getString("poster"),
-						resultSet.getDate("release")
+						resultSet.getDate("release"),
+						resultSet.getDate("end_release")
 						));
 			}
 
