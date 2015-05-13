@@ -17,7 +17,7 @@ public class MovieService
 		
 	}
 	
-	private ArrayList<MovieBean> searchMovieDb(String sql)
+	private static ArrayList<MovieBean> searchMovieDb(String sql)
 	{
 		ArrayList<MovieBean> movieList = new ArrayList<MovieBean>();
 		
@@ -53,17 +53,24 @@ public class MovieService
 		return movieList;
 	}
 	
-	public ArrayList<MovieBean> getCurrentMovies()
+	public static ArrayList<MovieBean> getNewMovies()
 	{
-		//@TODO: Add date when movie is not in theater
-		String sql = "select * from schedule movie where release >= CURDATE()";
-		
-		return this.searchMovieDb(sql);
+		String sql = "select * from movie where `release` <= CURDATE() &&"
+				+ " end_release > CURDATE() &&"
+				+ " CURDATE() <= DATE_ADD(release,INTERVAL 7 DAY)";
+		return MovieService.searchMovieDb(sql);
 	}
 	
-	public ArrayList<MovieBean> getMovieInfo(Integer movie_id)
+	public static ArrayList<MovieBean> getCurrentMovies()
+	{
+		String sql = "select * from movie where `release` <= CURDATE() &&"
+				+ " end_release > CURDATE()";
+		return MovieService.searchMovieDb(sql);
+	}
+	
+	public static MovieBean getMovieInfo(Integer movie_id)
 	{
 		String sql = "select * from movie where id = " + movie_id;
-		return this.searchMovieDb(sql);
+		return MovieService.searchMovieDb(sql).get(0);
 	}
 }

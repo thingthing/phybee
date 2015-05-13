@@ -60,10 +60,9 @@ public class ReservationController {
 		System.out.println("Book, secondStep");
 
 		ReservationService res = new ReservationService();
-		MovieService mov = new MovieService();
 		
 		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0);
-		MovieBean movie = mov.getMovieInfo(schedule.getId_movie()).get(0);
+		MovieBean movie = MovieService.getMovieInfo(schedule.getId_movie());
 		List<TicketBean> ticket = res.getTicketInfo();
 		
 		ModelAndView mv = new ModelAndView("bookSecondStep");

@@ -21,15 +21,15 @@
     <c:when test="${not empty listmovie}">--%>
         <div class="schedule-movielist">
             <div class="schedule-movieprofil-mini-block">
-                    <h4>${title}</h4>
+                    <h4>${list.mTitle}</h4>
                     <img alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="${list.mPoster}">
                             <span class="schedule-movieprofil-mini">
                                 <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
                                 <p>Runtime : </p>
-                                <p>Open Nationwide : </p>
+                                <p>Open Nationwide : ${list.mDate } </p>
                                 <p>Distributor : </p>
-                                <p>Starring : </p>
-                                <p>Synopsis : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque malesuada velit a arcu sodales, vel pellentesque mi laoreet. Phasellus varius metus a finibus laoreet. Vestibulum feugiat congue ligula, sit amet elementum diam. Nam venenatis eget nisi sit amet luctus. Aenean elementum quis lorem consectetur consequat. Vivamus pellentesque at velit vitae imperdiet. Maecenas efficitur congue leo, eu aliquam turpis tempor id. Nulla tincidunt tellus sit amet placerat porttitor. </p>
+                                <p>Starring :  </p>
+                                <p>Synopsis : ${list.mSynopsis }</p>
                             </span>
                     <div>
                         <table>

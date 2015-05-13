@@ -1,11 +1,14 @@
 package controller;
 
 import bean.MovieBean;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import service.MovieService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +25,7 @@ public class MovieController {
     @RequestMapping("/movie")
     public ModelAndView nowPlayingMovie () {
 
-        this.listMovie.clear();
-        for (int i = 0; i < 10; i++) {
-            MovieBean movie = new MovieBean("Title " + Integer.toString(i), "Synopsis" + Integer.toString(i), null, "http://static.cotecine.fr/tb/Affiches/155x210/FAST+AND+FURIOUS+7.JPG", null);
-            this.listMovie.add(movie);
-        }
+    	this.listMovie = MovieService.getCurrentMovies();
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
         return mv;
@@ -47,11 +46,12 @@ public class MovieController {
 
     @RequestMapping("/movie/movie")
     public ModelAndView profilMovie(
-            @RequestParam(value = "slot", required = true) String title
+            @RequestParam(value = "slot", required = true) Integer movie_id
     ) {
 
         ModelAndView mv = new ModelAndView("profilMovie");
-        mv.addObject("title", title);
+        MovieBean movie = MovieService.getMovieInfo(movie_id);
+        mv.addObject("list", movie);
         /*mv.addObject("listmovie", title);*/
         return mv;
     }
