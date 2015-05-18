@@ -33,7 +33,7 @@ public class RegistrationController {
         System.out.println("username: " + userBean.getLastName());
         System.out.println("password: " + userBean.getPassword());
         System.out.println("email: " + userBean.getEmail());
-        userBean = UserService.subscribe(userBean.getFirstName(), userBean.getLastName(), userBean.getPassword(), userBean.getEmail());
+        userBean = UserService.subscribe(userBean.getFirstName(), userBean.getLastName(), userBean.getEmail(), userBean.getPassword());
 
         System.out.println("Id: "+ userBean.getId());
         return "RegistrationSuccess";

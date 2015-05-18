@@ -21,7 +21,7 @@ public class UserService
 	public static UserBean login(String login, String password)
 			throws Exception
 	{
-		String sql = "select * from account where email = '' and password = '?'";
+		String sql = "select * from account where email = ? and password = ?";
 		UserBean user = new UserBean();
 
 		try
@@ -30,6 +30,7 @@ public class UserService
 			PreparedStatement preparedStatement = db.prepareQuery(sql);
 			preparedStatement.setString(1, login);
 			preparedStatement.setString(2, password);
+			System.out.println(preparedStatement);
 			ResultSet resultset = preparedStatement.executeQuery();
 			if (!resultset.next())
 			{

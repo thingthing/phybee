@@ -35,6 +35,7 @@ public class PhybeeDb
 
 	public PreparedStatement prepareQuery(String query) throws SQLException
 	{
+		System.out.println(query);
 		return (this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS));
 	}
 	

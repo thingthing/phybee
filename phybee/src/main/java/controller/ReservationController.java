@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,10 +22,14 @@ import service.ReservationService;
 import bean.MovieBean;
 import bean.ScheduleBean;
 import bean.TicketBean;
+import bean.UserBean;
 
 @Controller
 public class ReservationController {
 
+	@Autowired
+	private UserBean user;
+	
 	@RequestMapping(value="/reservation/movie", method=RequestMethod.GET)
 	public ModelAndView chooseMovieAndDate(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
@@ -120,18 +125,23 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/reservation/redirection")
-	public ModelAndView validateReservation(
+	public String validateReservation(
 			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "adult", required = true) int adult,
 			@RequestParam(value = "child", required = true) int child,
 			@RequestParam(value = "disabled", required = true) int disabled) {
-		System.out.println("Book, fourth");
+		Integer userId = user.getId();
+		System.out.println("Book, fourth user id is " + userId);
 		
 		ReservationService res = new ReservationService();
-		//@todo: Add user id
-		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), 1);
+
+		if (userId <= 0)
+		{
+			userId = 1;
+			System.out.println("user not found");
+		}
+		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
 		
-		ModelAndView mv = new ModelAndView("helloworld");
-		return mv;
+		return "redirect:/hello";
 	}
 }
