@@ -23,9 +23,10 @@ import bean.ScheduleBean;
 import bean.TicketBean;
 
 @Controller
+@RequestMapping(value = "/reservation")
 public class ReservationController {
 
-	@RequestMapping(value="/reservation/movie", method=RequestMethod.GET)
+	@RequestMapping(value="/movie", method=RequestMethod.GET)
 	public ModelAndView chooseMovieAndDate(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) throws ParseException {
@@ -54,7 +55,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/ticket")
+	@RequestMapping("/ticket")
 	public ModelAndView chooseTicket(
 			@RequestParam(value = "schedule", required = true) String scheduleId) {
 		System.out.println("Book, secondStep");
@@ -72,7 +73,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/validation")
+	@RequestMapping("/validation")
 	public ModelAndView seeSummary(
 			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "Adult", required = true) String adult,
@@ -119,7 +120,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/redirection")
+	@RequestMapping("/redirection")
 	public ModelAndView validateReservation(
 			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "adult", required = true) int adult,
