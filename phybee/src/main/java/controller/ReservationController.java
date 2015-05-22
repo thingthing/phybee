@@ -140,6 +140,8 @@ public class ReservationController {
 			userId = 1;
 			System.out.println("user not found");
 		}
+		res.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
+		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
 		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
 		
 		return "redirect:/hello";
