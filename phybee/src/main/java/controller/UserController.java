@@ -4,10 +4,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import service.LoginValidator;
 import service.UserService;
 import bean.UserBean;
 
@@ -17,6 +19,9 @@ public class UserController
 {
 	@Autowired
 	private UserBean user;
+	
+	@Autowired
+	private LoginValidator validator;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(Map<String, Object> model)
@@ -30,9 +35,16 @@ public class UserController
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(
-			@ModelAttribute("login") UserBean userBean)
+			@ModelAttribute("login") UserBean userBean, BindingResult result)
 	{
-
+		//Validation code
+	    validator.validate(userBean, result);
+	     
+	    //Check validation errors
+	    if (result.hasErrors()) {
+	        return "login";
+	    }
+	    
 		try
 		{
 			userBean = UserService.login(userBean.getEmail(), userBean.getPassword());
