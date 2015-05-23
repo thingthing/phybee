@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition"
+		template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+	</definition>
+
+	<definition name="helloworld" extends="base.definition">
+		<put-attribute name="title" value="Hello" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/helloworld.jsp" />
+	</definition>
+	
+	<definition name="bookFirstStep" extends="base.definition">
+		<put-attribute name="title" value="Reservation - Choose Slot" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/bookFirstStep.jsp" />
+	</definition>
+	
+	<definition name="bookSecondStep" extends="base.definition">
+		<put-attribute name="title" value="Reservation - Buy Ticket" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/bookSecondStep.jsp" />
+	</definition>
+	
+	<definition name="bookThirdStep" extends="base.definition">
+		<put-attribute name="title" value="Reservation - Summary" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/bookThirdStep.jsp" />
+	</definition>
+
+</tiles-definitions>

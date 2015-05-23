@@ -50,7 +50,6 @@ public class UserController
 			userBean = UserService.login(userBean.getEmail(), userBean.getPassword());
 		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		user.setEmail(userBean.getEmail());
