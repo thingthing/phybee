@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `theater`.`account` (
   `enabled` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`email`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
 -- Table `theater`.`account_roles`
