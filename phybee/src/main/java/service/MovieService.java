@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 
 import db.PhybeeDb;
+import bean.GenreBean;
 import bean.MovieBean;
 
 public class MovieService
@@ -14,13 +15,13 @@ public class MovieService
 
 	public MovieService()
 	{
-		
+
 	}
-	
+
 	private static ArrayList<MovieBean> searchMovieDb(String sql)
 	{
 		ArrayList<MovieBean> movieList = new ArrayList<MovieBean>();
-		
+
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
@@ -28,17 +29,14 @@ public class MovieService
 
 			while (resultSet.next())
 			{
-				movieList.add(new MovieBean(
-						resultSet.getInt("id"),
-						resultSet.getInt("id_genre"),
-						resultSet.getInt("id_producer"),
-						resultSet.getString("title"),
-						resultSet.getString("synopsis"),
-						resultSet.getTimestamp("time"),
-						resultSet.getString("poster"),
-						resultSet.getDate("release"),
-						resultSet.getDate("end_release")
-						));
+				movieList.add(new MovieBean(resultSet.getInt("id"), resultSet
+						.getInt("id_producer"), resultSet.getString("title"),
+						resultSet.getString("synopsis"), resultSet
+								.getTimestamp("time"), resultSet
+								.getString("poster"), resultSet
+								.getDate("release"), resultSet
+								.getDate("end_release"), GenreService
+								.getGenreOfMovie(resultSet.getInt("id"))));
 			}
 
 			db.closeConnection();
@@ -52,14 +50,14 @@ public class MovieService
 		}
 		return movieList;
 	}
-	
+
 	public static ArrayList<MovieBean> getFuturMovies()
 	{
 		String sql = "select * from movie where `release` >= DATE_ADD(CURDATE(),INTERVAL 7 DAY) &&"
 				+ " `release` <= DATE_ADD(CURDATE(),INTERVAL 14 DAY)";
 		return MovieService.searchMovieDb(sql);
 	}
-	
+
 	public static ArrayList<MovieBean> getNewMovies()
 	{
 		String sql = "select * from movie where `release` <= CURDATE() &&"
@@ -67,14 +65,14 @@ public class MovieService
 				+ " CURDATE() <= DATE_ADD(release,INTERVAL 7 DAY)";
 		return MovieService.searchMovieDb(sql);
 	}
-	
+
 	public static ArrayList<MovieBean> getCurrentMovies()
 	{
 		String sql = "select * from movie where `release` <= CURDATE() &&"
 				+ " end_release > CURDATE()";
 		return MovieService.searchMovieDb(sql);
 	}
-	
+
 	public static MovieBean getMovieInfo(Integer movie_id)
 	{
 		String sql = "select * from movie where id = " + movie_id;

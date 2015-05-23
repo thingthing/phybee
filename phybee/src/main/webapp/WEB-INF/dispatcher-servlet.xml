@@ -69,7 +69,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="defaultLocale" value="fr" />
 	</bean>
 
-
 	<!-- SPRING MVC Data Validation -->
 	<bean id="loginValidator" class="service.LoginValidator">
 		<!-- Injection of MessageSource -->

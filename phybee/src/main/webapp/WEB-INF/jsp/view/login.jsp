@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
@@ -13,15 +13,24 @@
 	<span style="float: right"> <a href="?lang=en">en</a> | <a
 		href="?lang=fr">fr</a>
 	</span>
-	<form:form commandName="login" name="login">
-		<spring:message code="field.email"/>:<form:input path="email" />
-		<font color="red"><form:errors path="email" /></font>
-		<br />
-		<br /> <spring:message code="field.password"/>:<form:password path="password" />
-		<font color="red"><form:errors path="password" /></font>
-		<br />
-		<br />
+
+	<c:if test="${not empty error}">
+		<div class="error">${error}</div>
+	</c:if>
+	<c:if test="${not empty msg}">
+		<div class="msg">${msg}</div>
+	</c:if>
+
+	<form name="loginForm"
+		action="<c:url value='/auth/login_check' />"
+		method='POST'>
+		<spring:message code="field.email" />
+		:
+		<input type='text' name="email" />
+		<spring:message code="field.password" />
+		:
+		<input type='password' name="password" />
 		<input type="submit" value="Login" />
-	</form:form>
+	</form>
 </body>
 </html>
