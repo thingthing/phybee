@@ -17,6 +17,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="bean.JstlView" />
 		<property name="prefix">
 			<value>/WEB-INF/jsp/view/</value>
 		</property>
