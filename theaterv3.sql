@@ -187,10 +187,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Sample Data
 -- -----------------------------------------------------
-INSERT INTO `theater`.`account` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES ('1', 'Esteban', 'Roux', 'esteban.roux@aol.fr', 'phybee');
-INSERT INTO `theater`.`account` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES ('2', 'Stepa', 'Nenkho', 'stepanenkho@gmail.com', 'nhk');
-INSERT INTO `theater`.`account` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES ('3', 'Charles', 'Francois', 'dark.sasuke@caramail.com', 'luv');
-
 INSERT INTO `theater`.`room` (`id`, `name`, `seat`, `priority_seat`) VALUES ('1', 'Evanouken', '200', '25');
 INSERT INTO `theater`.`room` (`id`, `name`, `seat`, `priority_seat`) VALUES ('2', 'Artotszka', '200', '0');
 INSERT INTO `theater`.`room` (`id`, `name`, `seat`, `priority_seat`) VALUES ('3', 'Mention', '230', '20');
