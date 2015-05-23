@@ -27,9 +27,10 @@ CREATE TABLE IF NOT EXISTS `theater`.`account` (
   `lastname` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`email`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB
 
 -- -----------------------------------------------------
 -- Table `theater`.`account_roles`
