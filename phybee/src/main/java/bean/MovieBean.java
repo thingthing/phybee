@@ -14,7 +14,6 @@ public class MovieBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int mId;
-	private int mIdGenre;
     private int mIdProducer;
     private String mTitle;
     private String mSynopsis;
@@ -79,11 +78,10 @@ public class MovieBean implements Serializable{
         this.mDate = mDate;
     }
 
-    public MovieBean(int id, int idGenre, int idProducer, String title,
+    public MovieBean(int id, int idProducer, String title,
                  String synopsis, Timestamp time, String poster,
                  Date date, Date end_date) {
         this.setmId(id);
-        this.setmIdGenre(idGenre);
         this.setmIdProducer(mIdProducer);
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
@@ -101,16 +99,6 @@ public class MovieBean implements Serializable{
         this.setmPoster(poster);
         this.setmDate(date);
     }
-
-	public int getmIdGenre()
-	{
-		return mIdGenre;
-	}
-
-	public void setmIdGenre(int mIdGenre)
-	{
-		this.mIdGenre = mIdGenre;
-	}
 
 	public Date getmEndDate()
 	{
