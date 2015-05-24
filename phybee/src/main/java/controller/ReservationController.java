@@ -38,14 +38,14 @@ public class ReservationController {
  
 		ReservationService res = new ReservationService();
 
-		ArrayList<String>  movies = res.getFilmList();
+		ArrayList<MovieBean> movies = MovieService.getCurrentMovies();
 		ArrayList<ScheduleBean> schedule = null;
 
 		if (!movie.isEmpty() || !date.isEmpty()) {
 			if (!movie.isEmpty() && !date.isEmpty())
-				schedule = res.getScheduleInfo(movie, DateService.parseDate(date, "yyyy-MM-dd"));
+				schedule = res.getScheduleInfo(Integer.parseInt(movie), DateService.parseDate(date, "yyyy-MM-dd"));
 			else if (!movie.isEmpty())
-				schedule = res.getScheduleInfo(movie);
+				schedule = res.getScheduleInfoWithFilmId(Integer.parseInt(movie));
 			else if (!date.isEmpty())
 				schedule = res.getScheduleInfo(DateService.parseDate(date, "yyyy-MM-dd"));
 		}
