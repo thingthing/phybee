@@ -27,22 +27,18 @@
 			value="Login" />
 	</form>
 </sec:authorize>
-
 <sec:authorize access="hasRole('ROLE_USER')">
 	<!-- For login user -->
-	<c:url value="/j_spring_security_logout" var="logoutUrl" />
+<%--	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 	<form action="${logoutUrl}" method="post" id="logoutForm"></form>
 	<script>
 		function formSubmit() {
 			document.getElementById("logoutForm").submit();
 		}
 	</script>
-
+--%>
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>
-			${user.firstName} ${user.lastName} | <a
-				href="javascript:formSubmit()"> Logout</a>
-		</h2>
+			${user.firstName} ${user.lastName}
 	</c:if>
 
-</sec:authorize>
+</sec:authorize> 
