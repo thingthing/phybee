@@ -4,21 +4,12 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
-<link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/DatePicker.js"/>"></script>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-</head>
-<body class="content">
-	<br />
-	<br />
+<body>
 	<div class="progress">
 		<div class="progress-bar progress-bar-striped" role="progressbar"
 			aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
