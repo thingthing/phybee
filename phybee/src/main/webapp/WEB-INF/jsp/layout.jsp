@@ -6,6 +6,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 

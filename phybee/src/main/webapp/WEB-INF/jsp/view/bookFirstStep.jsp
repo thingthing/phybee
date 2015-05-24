@@ -5,8 +5,6 @@
 <html>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/DatePicker.js"/>"></script>
 <body>
