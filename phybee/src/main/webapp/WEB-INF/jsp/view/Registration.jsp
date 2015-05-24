@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="contents" align="center">
-  <form:form modelAttribute="user" method="POST" enctype="utf8">
+  <form:form modelAttribute="userForm" method="POST" enctype="utf8">
     <br>
     <tr>
       <td><label>First Name:</label></td>
@@ -49,9 +49,11 @@
     <button type="submit">Sign up</button>
   </form:form>
   <br>
+<%--
   <a href="<c:url value="login.html" />">
     <spring:message code="label.form.loginLink"></spring:message>
   </a>
+--%>
 </div>
 </body>
 </html>
