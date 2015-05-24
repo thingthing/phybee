@@ -3,32 +3,46 @@ package bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+
+/**
+ * Created by Eric on 23/05/2015.
+ */
 @Component
 @Scope("session")
 public class UserBean {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public UserBean(String firstName, String lastName, String email,
-			String password, Integer id)
-	{
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.id = id;
-	}
+    private String firstName;
 
-	public UserBean()
-	{
-		super();
-	}
+    private String lastName;
 
-	public String getFirstName() {
+    private String email;
+
+    @Column(length = 60)
+    private String password;
+
+    private boolean enabled;
+
+    private boolean tokenExpired;
+
+    public UserBean() {
+        super();
+        this.enabled = false;
+        this.tokenExpired = false;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
@@ -48,8 +62,8 @@ public class UserBean {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String username) {
+        this.email = username;
     }
 
     public String getPassword() {
@@ -60,13 +74,48 @@ public class UserBean {
         this.password = password;
     }
 
-	public Integer getId()
-	{
-		return id;
-	}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean expired) {
+        this.tokenExpired = expired;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final UserBean user = (UserBean) obj;
+        if (!email.equals(user.email))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("User [firstName=").append(firstName).append("]").append("[lastName=").append(lastName).append("]").append("[username").append(email).append("]");
+        return builder.toString();
+    }
 }
