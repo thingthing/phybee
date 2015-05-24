@@ -57,4 +57,14 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/view/infos.jsp" />
 	</definition>
 
+	<definition name="registration" extends="base.definition">
+		<put-attribute name="title" value="Register" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/registration.jsp" />
+	</definition>
+
+	<definition name="registrationSuccess" extends="base.definition">
+		<put-attribute name="title" value="Register Success" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/registrationSuccess.jsp" />
+	</definition>
+
 </tiles-definitions>
