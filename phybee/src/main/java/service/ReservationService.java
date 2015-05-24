@@ -158,6 +158,19 @@ public class ReservationService
 		return (this.getScheduleInfoSql(sql));
 	}
 
+	public ArrayList<ScheduleBean> getScheduleInfo(Integer filmId, Date date)
+	{
+		String sql = " and m.id = " + filmId + " and s.date = '" + date + "'";
+		return (this.getScheduleInfoSql(sql));
+	}
+	
+	public ArrayList<ScheduleBean> getScheduleInfoWithFilmId(Integer filmId)
+	{
+		String sql = " and m.id " + filmId;
+		return (this.getScheduleInfoSql(sql));
+	}
+
+	
 	public ArrayList<ScheduleBean> getScheduleInfo(Date date)
 	{
 		String sql = " and s.date = '" + date + "'";

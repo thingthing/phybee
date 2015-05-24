@@ -78,4 +78,11 @@ public class MovieService
 		String sql = "select * from movie where id = " + movie_id;
 		return MovieService.searchMovieDb(sql).get(0);
 	}
+	
+	public static ArrayList<MovieBean> getMoiveByGenre(Integer genre_id)
+	{
+		//@TODO: SQL syntax to get movie by genre
+		String sql = "select * from movie, moviegenre as g";
+		return MovieService.searchMovieDb(sql);
+	}
 }

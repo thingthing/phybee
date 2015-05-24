@@ -14,8 +14,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="bean" />
 	<context:component-scan base-package="service" />
-		<context:component-scan
-		base-package="net.viralpatel.spring3.controller" />
 
   	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -37,6 +35,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		</property>
 		<property name="order" value="1" />
 	</bean>
+	
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

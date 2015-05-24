@@ -1,1 +1,3 @@
-<p>Copyright © ViralPatel.net</p>
+<footer>
+	<p>Copyright © Phybee 2015</p>
+</footer>
