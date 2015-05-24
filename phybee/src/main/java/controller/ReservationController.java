@@ -45,7 +45,7 @@ public class ReservationController {
 			if (!movie.isEmpty() && !date.isEmpty())
 				schedule = res.getScheduleInfo(Integer.parseInt(movie), DateService.parseDate(date, "yyyy-MM-dd"));
 			else if (!movie.isEmpty())
-				schedule = res.getScheduleInfo(Integer.parseInt(movie));
+				schedule = res.getScheduleInfoWithFilmId(Integer.parseInt(movie));
 			else if (!date.isEmpty())
 				schedule = res.getScheduleInfo(DateService.parseDate(date, "yyyy-MM-dd"));
 		}
