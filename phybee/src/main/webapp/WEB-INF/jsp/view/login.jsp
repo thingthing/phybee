@@ -23,8 +23,8 @@
 		<spring:message code="field.email" />
 		: <input type='text' name="email" />
 		<spring:message code="field.password" />
-		: <input type='password' name="password" /> <input type="submit"
-			value="Login" />
+		: <input type='password' name="password" />
+        <input type="submit" value="<spring:message code="field.login" />"/>
 	</form>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_USER')">
