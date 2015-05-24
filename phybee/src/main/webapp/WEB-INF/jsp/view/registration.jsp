@@ -15,7 +15,9 @@
 --%>
 <html>
 <body>
-<div id="contents" align="center">
+<div id="contents" align="center" class="register-main">
+  <div class="register-body">
+    <h3>Create your account</h3>
   <form:form modelAttribute="userForm" method="POST" enctype="utf8">
     <br>
     <tr>
@@ -54,6 +56,7 @@
       <spring:message code="label.form.loginLink"></spring:message>
     </a>
   --%>
+  </div>
 </div>
 </body>
 </html>
