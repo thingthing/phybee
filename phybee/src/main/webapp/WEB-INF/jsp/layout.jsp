@@ -14,8 +14,17 @@
 <table class="content">
 	<tbody>
 		<tr>
-			<td><tiles:insertAttribute name="menu" /></td>
-			<td><tiles:insertAttribute name="login" /></td>
+			<td>
+				<nav class="navbar navbar-inverse">
+					<div class="container">
+						<tiles:insertAttribute name="header" />
+						<div class="navbar-collapse collapse">
+							<tiles:insertAttribute name="menu" />
+							<tiles:insertAttribute name="login" />
+						</div>
+					</div>
+				</nav>
+			</td>
 		</tr>
 		<tr>
 			<td><tiles:insertAttribute name="body" /></td>
