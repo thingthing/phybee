@@ -2,35 +2,33 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<script src="<c:url value="/resources/js/Carousel.js"/>"></script>
 <body>
 	<div id="carousel-example-generic" class="carousel slide"
-		data-ride="carousel">
+		data-ride="carousel" data-interval="3000" >
 		<ol class="carousel-indicators">
 			<c:forEach var="i" begin="1" end="${movies.size()}"
 				varStatus="status">
-				<li data-target="#carousel-example-generic" data-slide-to="i"
+				<li data-target="#carousel-example-generic" data-slide-to="${i}"
 					${status.first ? 'class="active"' : ''}></li>
 			</c:forEach>
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<c:forEach var="item" items="${movies}" varStatus="status">
-				<div ${status.first ? 'class="item-active"' : 'class="item"' }>
+				<div ${status.first ? 'class="item active"' : 'class="item"' }>
 					<img src="<c:url value="/resources/poster/${item.getmPoster()}"/>"
 						alt="${item.getmId()}" data-holder-rendered="true" width="50%"
-						height="auto">
+						height="auto" style="margin-left:25%">
 				</div>
 			</c:forEach>
 		</div>
 
 		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev"> <span
-			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
+			data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next"> <span
+			data-slide="next"> <span
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
+
 		</a>
 	</div>
 	<h1>Title : ${title}</h1>
