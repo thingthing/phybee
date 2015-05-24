@@ -28,6 +28,7 @@ public class MovieController {
     	this.listMovie = MovieService.getCurrentMovies();
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
+        mv.addObject("timem", listMovie.get(0).getmTime().getTime());
         return mv;
     }
 

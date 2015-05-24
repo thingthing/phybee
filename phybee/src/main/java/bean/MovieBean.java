@@ -2,6 +2,7 @@ package bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class MovieBean implements Serializable{
     private ArrayList<GenreBean> mGenre;
     private String mTitle;
     private String mSynopsis;
-    private Timestamp mTime;
+    private Time mTime;
     private String mPoster;
     private Date mDate;
     private Date mEndDate;
@@ -56,11 +57,11 @@ public class MovieBean implements Serializable{
         this.mSynopsis = mSynopsis;
     }
 
-    public Timestamp getmTime() {
+    public Time getmTime() {
         return mTime;
     }
 
-    public void setmTime(Timestamp mTime) {
+    public void setmTime(Time mTime) {
         this.mTime = mTime;
     }
 
@@ -81,7 +82,7 @@ public class MovieBean implements Serializable{
     }
 
     public MovieBean(int id, int idProducer, String title,
-                 String synopsis, Timestamp time, String poster,
+                 String synopsis, Time time, String poster,
                  Date date, Date end_date, ArrayList<GenreBean> genre) {
         this.setmId(id);
         this.setmIdProducer(mIdProducer);
@@ -95,7 +96,7 @@ public class MovieBean implements Serializable{
     }
 
     public MovieBean(String title,
-                 String synopsis, Timestamp time, String poster, Date date) {
+                 String synopsis, Time time, String poster, Date date) {
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
         this.setmTime(time);
