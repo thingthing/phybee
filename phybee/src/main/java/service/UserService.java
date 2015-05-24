@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 
+import bean.UserDTOBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import db.PhybeeDb;
 import bean.UserBean;
+import validator.EmailExistsException;
 
 public class UserService
 {
@@ -35,10 +37,11 @@ public class UserService
 				throw new Exception("User not found");
 			} else
 			{
-				user = new UserBean(resultset.getString("firstname"),
-						resultset.getString("lastname"),
-						resultset.getString("email"),
-						resultset.getString("password"), resultset.getInt("id"));
+				user.setFirstName(resultset.getString("firstname"));
+				user.setLastName(resultset.getString("lastname"));
+				user.setEmail(resultset.getString("email"));
+				user.setPassword(resultset.getString("password"));
+				user.setId(resultset.getInt("id"));
 			}
 			db.closeConnection();
 		} catch (NamingException e)
@@ -51,10 +54,17 @@ public class UserService
 		return (user);
 	}
 
-	public static UserBean subscribe(String firstName, String lastName,
-			String email, String password)
+	public static UserBean subscribe(UserDTOBean accountDto) throws EmailExistsException
 	{
-		UserBean user = new UserBean(firstName, lastName, email, password, -1);
+		if (emailExist(accountDto.getEmail())) {
+			throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		UserBean user = new UserBean();
+		user.setFirstName(accountDto.getFirstName());
+		user.setLastName(accountDto.getLastName());
+		user.setEmail(accountDto.getEmail());
+		user.setPassword(accountDto.getPassword());
+		user.setId(-1);
 
 		try
 		{
@@ -62,11 +72,11 @@ public class UserService
 			PreparedStatement preparedStatement = db.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
 
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(password);
+			String hashedPassword = passwordEncoder.encode(accountDto.getPassword());
 			
-			preparedStatement.setString(1, firstName);
-			preparedStatement.setString(2, lastName);
-			preparedStatement.setString(3, email);
+			preparedStatement.setString(1, accountDto.getFirstName());
+			preparedStatement.setString(2, accountDto.getLastName());
+			preparedStatement.setString(3, accountDto.getEmail());
 			preparedStatement.setString(4, hashedPassword);
 			preparedStatement.executeUpdate();
 			
@@ -78,7 +88,7 @@ public class UserService
             }
 			
 			preparedStatement = db.prepareQuery("insert into account_roles (email, ROLE) values (?,?)");
-			preparedStatement.setString(1, email);
+			preparedStatement.setString(1, accountDto.getEmail());
 			preparedStatement.setString(2, "ROLE_USER");
 			preparedStatement.executeUpdate();
 			
@@ -92,5 +102,26 @@ public class UserService
 			sqlException.printStackTrace();
 		}
 		return (user);
+	}
+
+	private static boolean emailExist(final String email) {
+		String sql = "select * from account where email = ?";
+		try {
+			PhybeeDb db = new PhybeeDb();
+			PreparedStatement preparedStatement = db.prepareQuery(sql);
+			preparedStatement.setString(1, email);
+			System.out.println(preparedStatement);
+			ResultSet resultset = preparedStatement.executeQuery();
+			if (!resultset.next()) {
+				db.closeConnection();
+				return false;
+			}
+			db.closeConnection();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+		return (true);
 	}
 }

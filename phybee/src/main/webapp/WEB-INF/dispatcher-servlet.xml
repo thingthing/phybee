@@ -14,9 +14,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="bean" />
 	<context:component-scan base-package="service" />
+	<context:component-scan base-package="validator" />
 
-  	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean
+			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/jsp/view/</value>
 		</property>
