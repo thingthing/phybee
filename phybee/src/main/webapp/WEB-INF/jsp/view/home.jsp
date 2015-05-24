@@ -11,27 +11,15 @@
 
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<!-- For login user -->
-		<c:url value="/j_spring_security_logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm"></form>
-		<script>
-			function formSubmit() {
-				document.getElementById("logoutForm").submit();
-			}
-		</script>
-		<c:url value="/reservation/movie" var="reservation" />
-		<a href="${reservation}">reservation</a>
-
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<h2>
-				User : ${pageContext.request.userPrincipal.name} | <a
-					href="javascript:formSubmit()"> Logout</a>
+				User : ${pageContext.request.userPrincipal.name}
 			</h2>
 		</c:if>
 
 	</sec:authorize>
 	<sec:authorize access="isAnonymous()">
-		<c:url value="/login" var="loginUrl" />
-		<a href="${loginUrl}">Login</a>
+		You're not connected
 	</sec:authorize>
 </body>
 </html>

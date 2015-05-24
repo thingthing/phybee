@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +26,14 @@ import bean.TicketBean;
 import bean.UserBean;
 
 @Controller
+@RequestMapping(value="/reservation")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ReservationController {
 
 	@Autowired
 	private UserBean user;
 	
-	@RequestMapping(value="/reservation/movie", method=RequestMethod.GET)
+	@RequestMapping(value="/movie", method=RequestMethod.GET)
 	public ModelAndView chooseMovieAndDate(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) throws ParseException {
@@ -59,7 +62,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/ticket")
+	@RequestMapping("/ticket")
 	public ModelAndView chooseTicket(
 			@RequestParam(value = "schedule", required = true) String scheduleId) {
 		System.out.println("Book, secondStep");
@@ -77,7 +80,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/validation")
+	@RequestMapping("/validation")
 	public ModelAndView seeSummary(
 			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "Adult", required = true) String adult,
@@ -124,7 +127,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping("/reservation/redirection")
+	@RequestMapping("/redirection")
 	public String validateReservation(
 			@RequestParam(value = "schedule", required = true) String scheduleId,
 			@RequestParam(value = "adult", required = true) int adult,

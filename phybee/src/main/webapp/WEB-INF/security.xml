@@ -12,13 +12,13 @@
 			<cache-control />
 		</headers>
 
-		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/reservation**" access="hasRole('ROLE_ADMIN')" />
 
 		<form-login login-page="/login" default-target-url="/home"
-			authentication-failure-url="/login?error" username-parameter="email"
+			authentication-failure-url="/home?error" username-parameter="email"
 			password-parameter="password" login-processing-url="/auth/login_check" />
 
-		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />
+		<logout logout-success-url="/home?logout" delete-cookies="JSESSIONID" />
 
 	</http>
 

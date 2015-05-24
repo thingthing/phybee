@@ -20,12 +20,15 @@ public class UserController
 
 	@RequestMapping(value =
 	{ "/", "/home**" }, method = RequestMethod.GET)
-	public ModelAndView defaultPage()
+	public ModelAndView defaultPage(
+			@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout)
 	{
 
 		ModelAndView model = new ModelAndView();
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String name = auth.getName(); // get logged in username
 
 		if (!name.equals("anonymousUser"))
@@ -51,22 +54,11 @@ public class UserController
 
 			System.out.println("Id: " + user.getId());
 
-			model.addObject("username", name);
+			model.addObject("user", userBean);
 		}
 		model.addObject("title", "Spring Security Password Encoder");
 		model.addObject("message", "This is default page!");
-		model.setViewName("home");
-		return model;
 
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(
-			@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout)
-	{
-
-		ModelAndView model = new ModelAndView();
 		if (error != null)
 		{
 			model.addObject("error", "Invalid username and password!");
@@ -76,6 +68,16 @@ public class UserController
 		{
 			model.addObject("msg", "You've been logged out successfully.");
 		}
+		model.setViewName("home");
+		return model;
+
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login()
+	{
+
+		ModelAndView model = new ModelAndView();
 		model.setViewName("login");
 
 		return model;

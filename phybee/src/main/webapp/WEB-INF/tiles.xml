@@ -3,10 +3,10 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="base.definition"
-		template="/WEB-INF/jsp/layout.jsp">
+	
+	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="login" value="/WEB-INF/jsp/view/login.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
@@ -16,17 +16,19 @@
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/home.jsp" />
 	</definition>
-	
+
 	<definition name="scheduleMovie" extends="base.definition">
 		<put-attribute name="title" value="Movie Schedule" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/scheduleMovie.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/scheduleMovie.jsp" />
 	</definition>
-	
+
 	<definition name="nowPlayingMovie" extends="base.definition">
 		<put-attribute name="title" value="Movies Available" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/nowPlayingMovie.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/nowPlayingMovie.jsp" />
 	</definition>
-	
+
 	<definition name="profilMovie" extends="base.definition">
 		<put-attribute name="title" value="Movie Information" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/profilMovie.jsp" />
@@ -34,24 +36,28 @@
 
 	<definition name="incomingMovie" extends="base.definition">
 		<put-attribute name="title" value="Movie Information" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/incomingMovie.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/incomingMovie.jsp" />
 	</definition>
-	
+
 	<definition name="bookFirstStep" extends="base.definition">
 		<put-attribute name="title" value="Reservation - Choose Slot" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/bookFirstStep.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/bookFirstStep.jsp" />
 	</definition>
-	
+
 	<definition name="bookSecondStep" extends="base.definition">
 		<put-attribute name="title" value="Reservation - Buy Ticket" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/bookSecondStep.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/bookSecondStep.jsp" />
 	</definition>
-	
+
 	<definition name="bookThirdStep" extends="base.definition">
 		<put-attribute name="title" value="Reservation - Summary" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/bookThirdStep.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/view/bookThirdStep.jsp" />
 	</definition>
-	
+
 	<definition name="infos" extends="base.definition">
 		<put-attribute name="title" value="Theater Information" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/infos.jsp" />

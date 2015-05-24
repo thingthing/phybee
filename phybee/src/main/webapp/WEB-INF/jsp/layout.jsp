@@ -1,5 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.css"/>">
 <link rel="stylesheet"
@@ -9,13 +10,16 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <table class="content">
-    <tbody><tr>
-        <td><tiles:insertAttribute name="header"/></td>
-    </tr>
-    <tr>
-        <td><tiles:insertAttribute name="body"/></td>
-    </tr>
-    <tr>
-        <td><tiles:insertAttribute name="footer"/></td>
-    </tr>
-</tbody></table>
+	<tbody>
+		<tr>
+			<td><tiles:insertAttribute name="menu" /></td>
+			<td><tiles:insertAttribute name="login" /></td>
+		</tr>
+		<tr>
+			<td><tiles:insertAttribute name="body" /></td>
+		</tr>
+		<tr>
+			<td><tiles:insertAttribute name="footer" /></td>
+		</tr>
+	</tbody>
+</table>
