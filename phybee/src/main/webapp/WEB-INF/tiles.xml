@@ -22,17 +22,17 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/view/scheduleMovie.jsp" />
 	</definition>
 	
-	<definition name="movie" extends="base.definition">
+	<definition name="nowPlayingMovie" extends="base.definition">
 		<put-attribute name="title" value="Movies Available" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/nowPlayingMovie.jsp" />
 	</definition>
 	
-	<definition name="movieInfo" extends="base.definition">
+	<definition name="profilMovie" extends="base.definition">
 		<put-attribute name="title" value="Movie Information" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/profilMovie.jsp" />
 	</definition>
 
-	<definition name="incoming" extends="base.definition">
+	<definition name="incomingMovie" extends="base.definition">
 		<put-attribute name="title" value="Movie Information" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/incomingMovie.jsp" />
 	</definition>
