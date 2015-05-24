@@ -31,9 +31,13 @@
                            <a href="<c:url value="/movie/movie?slot=${list.mId}"/>" class="link"> <img alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="${list.mPoster}"></a>
                             <span class="movieprofil-mini-info">
                                 <h4>${list.mTitle}</h4>
-                                <p>genre: </p>
-                                <p>duration: </p>
-                                <p>available since: </p>
+                                <p>genre:
+                                    <c:forEach var="genre" items="${list.mGenre}">
+                                        ${genre.name}
+                                    </c:forEach>
+                                </p>
+                                <p>duration: ${list.mTime}</p>
+                                <p>available since: ${list.mDate.toString()}</p>
                             </span>
                             <span class="listinput">
 
