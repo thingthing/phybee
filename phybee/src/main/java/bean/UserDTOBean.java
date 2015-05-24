@@ -1,16 +1,11 @@
 package bean;
 
 import com.sun.istack.internal.NotNull;
-import org.springframework.stereotype.Component;
-
-import org.springframework.context.annotation.Scope;
 import org.hibernate.validator.constraints.NotEmpty;
 import validator.PasswordMatches;
 import validator.ValidEmail;
 
 
-@Component
-@Scope("session")
 @PasswordMatches
 public class UserDTOBean {
     @NotNull

@@ -3,5 +3,11 @@ package validator;
 /**
  * Created by Eric on 23/05/2015.
  */
-public class EmailExistsException {
+
+@SuppressWarnings("serial")
+public class EmailExistsException extends Throwable {
+
+        public EmailExistsException(String message) {
+            super(message);
+        }
 }
