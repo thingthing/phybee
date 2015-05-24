@@ -27,7 +27,6 @@ import bean.UserBean;
 
 @Controller
 @RequestMapping(value="/reservation")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ReservationController {
 
 	@Autowired
