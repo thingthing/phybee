@@ -2,6 +2,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
+<script src="<c:url value="/resources/js/Carousel.js"/>"></script>
 <body>
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
@@ -16,8 +17,8 @@
 			<c:forEach var="item" items="${movies}" varStatus="status">
 				<div ${status.first ? 'class="item-active"' : 'class="item"' }>
 					<img src="<c:url value="/resources/poster/${item.getmPoster()}"/>"
-						alt="${item.getmId()}" data-holder-rendered="true" width="60%"
-						height="400">
+						alt="${item.getmId()}" data-holder-rendered="true" width="50%"
+						height="auto">
 				</div>
 			</c:forEach>
 		</div>
