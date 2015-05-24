@@ -3,30 +3,35 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body>
+	<div id="carousel-example-generic" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<c:forEach var="i" begin="1" end="${movies.size()}"
+				varStatus="status">
+				<li data-target="#carousel-example-generic" data-slide-to="i"
+					${status.first ? 'class="active"' : ''}></li>
+			</c:forEach>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<c:forEach var="item" items="${movies}" varStatus="status">
+				<div ${status.first ? 'class="item-active"' : 'class="item"' }>
+					<img src="<c:url value="/resources/poster/${item.getmPoster()}"/>"
+						alt="${item.getmId()}" data-holder-rendered="true" width="60%"
+						height="400">
+				</div>
+			</c:forEach>
+		</div>
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-        <c:forEach var="item-active" items="${movies}">
-          <li data-target="#carousel-example-generic" data-slide-to="${item.getmId()}"></li>
-          </c:forEach>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-        <c:forEach var="item" items="${movies}">
-          <div class="item-active">
-            <img src="/resources/poster/${item.getmPoster()}" alt="${item.getmId()}" data-holder-rendered="true">
-          </div>
-          </c:forEach>
-        </div>
-
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-</div>
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
 	<c:if test="${not empty username}">
