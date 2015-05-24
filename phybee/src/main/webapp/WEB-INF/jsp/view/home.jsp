@@ -16,8 +16,8 @@
 			<c:forEach var="item" items="${movies}" varStatus="status">
 				<div ${status.first ? 'class="item-active"' : 'class="item"' }>
 					<img src="<c:url value="/resources/poster/${item.getmPoster()}"/>"
-						alt="${item.getmId()}" data-holder-rendered="true" width="60%"
-						height="400">
+						alt="${item.getmId()}" data-holder-rendered="true" width="40%"
+						height="auto">
 				</div>
 			</c:forEach>
 		</div>
