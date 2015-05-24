@@ -3,6 +3,7 @@ package bean;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Created by Elyo on 01/05/2015.
@@ -14,8 +15,8 @@ public class MovieBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int mId;
-	private int mIdGenre;
     private int mIdProducer;
+    private ArrayList<GenreBean> mGenre;
     private String mTitle;
     private String mSynopsis;
     private Timestamp mTime;
@@ -79,11 +80,10 @@ public class MovieBean implements Serializable{
         this.mDate = mDate;
     }
 
-    public MovieBean(int id, int idGenre, int idProducer, String title,
+    public MovieBean(int id, int idProducer, String title,
                  String synopsis, Timestamp time, String poster,
-                 Date date, Date end_date) {
+                 Date date, Date end_date, ArrayList<GenreBean> genre) {
         this.setmId(id);
-        this.setmIdGenre(idGenre);
         this.setmIdProducer(mIdProducer);
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
@@ -91,6 +91,7 @@ public class MovieBean implements Serializable{
         this.setmPoster(poster);
         this.setmDate(date);
         this.setmEndDate(end_date);
+        this.setmGenre(genre);
     }
 
     public MovieBean(String title,
@@ -102,16 +103,6 @@ public class MovieBean implements Serializable{
         this.setmDate(date);
     }
 
-	public int getmIdGenre()
-	{
-		return mIdGenre;
-	}
-
-	public void setmIdGenre(int mIdGenre)
-	{
-		this.mIdGenre = mIdGenre;
-	}
-
 	public Date getmEndDate()
 	{
 		return mEndDate;
@@ -120,5 +111,15 @@ public class MovieBean implements Serializable{
 	public void setmEndDate(Date mEndDate)
 	{
 		this.mEndDate = mEndDate;
+	}
+
+	public ArrayList<GenreBean> getmGenre()
+	{
+		return mGenre;
+	}
+
+	public void setmGenre(ArrayList<GenreBean> mGenre)
+	{
+		this.mGenre = mGenre;
 	}
 }

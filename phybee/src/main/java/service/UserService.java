@@ -3,12 +3,11 @@ package service;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.naming.NamingException;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import db.PhybeeDb;
-import bean.ScheduleBean;
 import bean.UserBean;
 
 public class UserService
@@ -18,10 +17,10 @@ public class UserService
 
 	}
 
-	public static UserBean login(String login, String password)
+	public static UserBean login(String login)
 			throws Exception
 	{
-		String sql = "select * from account where email = ? and password = ?";
+		String sql = "select * from account where email = ?";
 		UserBean user = new UserBean();
 
 		try
@@ -29,7 +28,6 @@ public class UserService
 			PhybeeDb db = new PhybeeDb();
 			PreparedStatement preparedStatement = db.prepareQuery(sql);
 			preparedStatement.setString(1, login);
-			preparedStatement.setString(2, password);
 			System.out.println(preparedStatement);
 			ResultSet resultset = preparedStatement.executeQuery();
 			if (!resultset.next())
@@ -63,10 +61,13 @@ public class UserService
 			PhybeeDb db = new PhybeeDb();
 			PreparedStatement preparedStatement = db.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
 
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(password);
+			
 			preparedStatement.setString(1, firstName);
 			preparedStatement.setString(2, lastName);
 			preparedStatement.setString(3, email);
-			preparedStatement.setString(4, password);
+			preparedStatement.setString(4, hashedPassword);
 			preparedStatement.executeUpdate();
 			
 			ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -75,6 +76,12 @@ public class UserService
 				System.out.println("User id == " + id);
                 user.setId(id);
             }
+			
+			preparedStatement = db.prepareQuery("insert into account_roles (email, ROLE) values (?,?)");
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, "ROLE_USER");
+			preparedStatement.executeUpdate();
+			
 			db.closeConnection();
 
 		} catch (NamingException e)

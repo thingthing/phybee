@@ -144,6 +144,6 @@ public class ReservationController {
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
 		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
 		
-		return "redirect:/hello";
+		return "redirect:/home";
 	}
 }
