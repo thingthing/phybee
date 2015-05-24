@@ -37,7 +37,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><img alt="${movie.getmTitle()}" style="max-width:110px;max-height:145px;" src="${movie.getmPoster()}"></td>
+				<td><img alt="${movie.getmTitle()}" style="max-width:110px;max-height:145px;" src="/resources/poster/${movie.getmPoster()}"></td>
 				<td><c:out value="${movie.getmTitle()}" /></td>
 				<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
 				<td><c:out value="${movie.getmTime()}" /></td>
