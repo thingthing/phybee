@@ -12,34 +12,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <html>
-<head>
-    <title>Sign up successful</title>
-</head>
 <body>
 <div align="center">
-    <table border="0">
-        <tr>
-            <td colspan="2" align="center"><h2>Signing up Succeeded!</h2></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <h3>Thank you for signing up! Here's the review of your details:</h3>
-            </td>
-        </tr>
-        <tr>
-            <td>Fist Name:</td>
-            <td>${userForm.firstName}</td>
-        </tr>
-        <tr>
-            <td>Last Name:</td>
-            <td>${userForm.lastName}</td>
-        </tr>
-        <tr>
-            <td>E-mail:</td>
-            <td>${userForm.email}</td>
-        </tr>
-    </table>
-    <a href="<c:url value="/login"/>">Login</a>
+  <table border="0">
+    <tr>
+      <td colspan="2" align="center"><h2>Signing up Succeeded!</h2></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <h3>Thank you for signing up! Here's the review of your details:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>Fist Name:</td>
+      <td>${userForm.firstName}</td>
+    </tr>
+    <tr>
+      <td>Last Name:</td>
+      <td>${userForm.lastName}</td>
+    </tr>
+    <tr>
+      <td>E-mail:</td>
+      <td>${userForm.email}</td>
+    </tr>
+  </table>
+  <a href="<c:url value="/login"/>">Login</a>
 </div>
 </body>
 </html>
