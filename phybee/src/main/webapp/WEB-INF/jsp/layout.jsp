@@ -6,14 +6,25 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
+<script src="<c:url value="/resources/js/jquery-1.11.3.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <table class="content">
 	<tbody>
 		<tr>
-			<td><tiles:insertAttribute name="menu" /></td>
-			<td><tiles:insertAttribute name="login" /></td>
+			<td>
+				<nav class="navbar navbar-inverse">
+					<div class="container">
+						<tiles:insertAttribute name="header" />
+						<div class="navbar-collapse collapse">
+							<tiles:insertAttribute name="menu" />
+							<tiles:insertAttribute name="login" />
+						</div>
+					</div>
+				</nav>
+			</td>
 		</tr>
 		<tr>
 			<td><tiles:insertAttribute name="body" /></td>
