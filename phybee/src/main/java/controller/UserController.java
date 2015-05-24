@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import service.MovieService;
 import service.UserService;
+import bean.MovieBean;
 import bean.UserBean;
 
 @Controller
@@ -22,7 +26,6 @@ public class UserController
 	{ "/", "/home**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage()
 	{
-
 		ModelAndView model = new ModelAndView();
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -53,8 +56,12 @@ public class UserController
 
 			model.addObject("username", name);
 		}
+		
+		List<MovieBean> movies = MovieService.getCurrentMovies();
+		
 		model.addObject("title", "Spring Security Password Encoder");
 		model.addObject("message", "This is default page!");
+		model.addObject("movies", movies);
 		model.setViewName("home");
 		return model;
 
