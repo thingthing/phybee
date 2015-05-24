@@ -18,3 +18,4 @@ phybee/.settings
 phybee/.idea
 .idea
 **database.xml
+phybee/src/main/webapp/WEB-INF/database.xml
