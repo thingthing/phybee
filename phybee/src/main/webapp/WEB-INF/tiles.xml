@@ -59,7 +59,7 @@
 
 	<definition name="registration" extends="base.definition">
 		<put-attribute name="title" value="Register" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/registration.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/Registration.jsp" />
 	</definition>
 
 	<definition name="registrationSuccess" extends="base.definition">
