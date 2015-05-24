@@ -59,12 +59,25 @@ public class UserController
 
 			model.addObject("user", userBean);
 		}
-
+		
 		List<MovieBean> movies = MovieService.getCurrentMovies();
-
+		
 		model.addObject("title", "Spring Security Password Encoder");
 		model.addObject("message", "This is default page!");
+<<<<<<< HEAD
+=======
 		model.addObject("movies", movies);
+		model.setViewName("home");
+		return model;
+
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(
+			@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout)
+	{
+>>>>>>> f89660281ab0396bf4b5f3525b66761839f1874c
 
 		if (error != null)
 		{
