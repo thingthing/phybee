@@ -22,13 +22,18 @@
         <div class="schedule-movielist">
             <div class="schedule-movieprofil-mini-block">
                     <h4>${list.mTitle}</h4>
-                    <img alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="${list.mPoster}">
+                    <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>">
                             <span class="schedule-movieprofil-mini">
                                 <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
-                                <p>Runtime : </p>
+                                <p>Runtime : ${list.mTime} </p>
                                 <p>Open Nationwide : ${list.mDate } </p>
                                 <p>Distributor : </p>
                                 <p>Starring :  </p>
+                                    <p>
+                                        Genre: <c:forEach var="genre" items="${list.mGenre}">
+                                        ${genre.name}
+                                    </c:forEach>
+                                    </p>
                                 <p>Synopsis : ${list.mSynopsis }</p>
                             </span>
                     <div>

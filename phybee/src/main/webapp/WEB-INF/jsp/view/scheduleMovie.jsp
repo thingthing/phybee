@@ -23,7 +23,7 @@
             <c:forEach var="list" items="${listmovie}">
                 <div class="schedule-movieprofil-mini-block">
                     <h4>${list.mTitle}</h4>
-                    <a href="<c:url value="/movie/movie?&slot=${list.mTitle}"/>" class="link"> <img alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="${list.mPoster}"></a>
+                    <a href="<c:url value="/movie/movie?&slot=${list.mTitle}"/>" class="link"> <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>"></a>
                             <span class="schedule-movieprofil-mini">
                                 <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
                                 <p>Runtime : </p>

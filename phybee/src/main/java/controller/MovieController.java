@@ -45,7 +45,7 @@ public class MovieController {
         return mv;
     }
 
-    @RequestMapping("/movie/movie")
+    @RequestMapping("/moviedetails")
     public ModelAndView profilMovie(
             @RequestParam(value = "slot", required = true) Integer movie_id
     ) {
