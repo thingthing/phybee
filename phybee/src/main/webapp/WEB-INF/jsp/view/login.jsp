@@ -20,11 +20,18 @@
 
 				<form name="loginForm" action="<c:url value='/auth/login_check' />"
 					method="POST" class="form">
-					<spring:message code="field.email" />
-					: <input type='text' name="email" />
+					<h4>
+						<span class="label label-primary"><spring:message code="field.email" /> :</span>
+					</h4>
+					<input type='text' name="email" />
+					<h4>
+						<span class="label label-primary"><spring:message code="field.password" /> :</span>
+					</h4>
 					<spring:message code="field.password" />
-					: <input type='password' name="password" /> <input type="submit"
-						value="<spring:message code="field.login" />" class="btn"/>
+					<input type='password' name="password" />
+					<a href="<c:url value="/register"/>"> <spring:message code="field.register" /></a>
+					<br />
+					<input type="submit" value="<spring:message code="field.login" />" class="btn" />
 				</form>
 			</div></li>
 	</sec:authorize>
@@ -39,7 +46,9 @@
 
 		</sec:authorize></li>
 
-	<li><a href="?lang=en">EN</a></li>
-	<li><a href="?lang=fr">FR</a></li>
+	<li><a href="?lang=en"><img
+			src="<c:url value="/resources/flag/England.png"/>" alt="EN" width="20" height="20"></a></li>
+	<li><a href="?lang=fr"><img
+			src="<c:url value="/resources/flag/France.png"/>" alt="FR" width="20" height="20"></a></li>
 </ul>
 
