@@ -11,20 +11,37 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="/resources/css/phybee.css" />
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myTab a").click(function(e){
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script>
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+    </style>
+
     <title>${title}</title>
 </head>
 <body>
-<%--<c:choose>
-    <c:when test="${empty listmovie}">
-        <p>No movies available</p>
-    </c:when>
-    <c:when test="${not empty listmovie}">--%>
-        <div class="schedule-movielist">
-            <div class="schedule-movieprofil-mini-block">
+
+<div class="bs-example">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#sectionA">${list.mTitle}</a></li>
+        <li><a href="#sectionB">Trailer</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="sectionA" class="tab-pane fade in active">
+            <div class="schedule-movielist">
+                <div class="schedule-movieprofil-mini-block">
                     <h4>${list.mTitle}</h4>
                     <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>">
                             <span class="schedule-movieprofil-mini">
-                                <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
                                 <p>Runtime : ${list.mTime} </p>
                                 <p>Open Nationwide : ${list.mDate } </p>
                                 <p>Producer : </p>
@@ -35,10 +52,10 @@
                                     </p>
                                 <p>Synopsis : ${list.mSynopsis}</p>
                             </span>
-                <div class="profil-movie-interact">
-                    <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Play</button></a>
-                    <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-info">Get Tickets</button></a>
-                </div>
+                    <div class="profil-movie-interact">
+                        <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Play</button></a>
+                        <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
+                    </div>
                     <div>
                         <table class="table-schedule">
                             <tr class="table-schedule-tr">
@@ -52,13 +69,13 @@
                             </tr>
                         </table>
                     </div>
-                        <%--<tr>
-                            <td>Cellule 3</td>
-                            <td>Cellule 4</td>
-                        </tr>--%>
                 </div>
+            </div>        </div>
+        <div id="sectionB" class="tab-pane fade">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="http://www.tudou.com/v/GecMp3EZf10/&bid=05&resourceId=0_05_05_99/v.swf"></iframe>
         </div>
-    <%--</c:when>
-</c:choose>--%>
+    </div>
+</div>
 </body>
 </html>
