@@ -1,7 +1,9 @@
 package controller;
 
 import bean.MovieBean;
+import bean.UserBean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ import java.util.List;
 @Controller
 public class MovieController {
 
+	@Autowired
+	private UserBean user;
+	
     private List<MovieBean> listMovie = new ArrayList<>();
 
     @RequestMapping("/movie")
@@ -28,6 +33,7 @@ public class MovieController {
     	this.listMovie = MovieService.getCurrentMovies();
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
+        mv.addObject("user", user);
         mv.addObject("timem", listMovie.get(0).getmTime().getTime());
         return mv;
     }
@@ -38,6 +44,7 @@ public class MovieController {
         this.listMovie = MovieService.getFuturMovies();
         ModelAndView mv = new ModelAndView("scheduleMovie");
         mv.addObject("listmovie", listMovie);
+        mv.addObject("user", user);
         return mv;
     }
 
@@ -47,6 +54,7 @@ public class MovieController {
         this.listMovie = MovieService.getCurrentMovies();
         ModelAndView mv = new ModelAndView("scheduleMovie");
         mv.addObject("listmovie", listMovie);
+        mv.addObject("user", user);
         return mv;
     }
 
@@ -58,6 +66,7 @@ public class MovieController {
         ModelAndView mv = new ModelAndView("profilMovie");
         MovieBean movie = MovieService.getMovieInfo(movie_id);
         mv.addObject("list", movie);
+        mv.addObject("user", user);
         /*mv.addObject("listmovie", title);*/
         return mv;
     }

@@ -78,7 +78,7 @@ public class UserController
 
 			System.out.println("Id: " + user.getId());
 
-			model.addObject("user", userBean);
+			model.addObject("user", user);
 		}
 
 		List<MovieBean> movies = MovieService.getCurrentMovies();
@@ -108,6 +108,30 @@ public class UserController
 		}
 
 		model.setViewName("login");
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/profil", method = RequestMethod.GET)
+	public ModelAndView profig()
+	{
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.setViewName("profil");
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ModelAndView infos()
+	{
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.setViewName("infos");
 
 		return model;
 

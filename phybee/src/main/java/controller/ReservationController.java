@@ -56,6 +56,7 @@ public class ReservationController {
 		mv.addObject("movie", movie);
 		mv.addObject("movies", movies);
 		mv.addObject("date", date);
+		mv.addObject("user", user);
 		if (schedule != null && schedule.size() > 0)
 			mv.addObject("schedule", schedule);
 		return mv;
@@ -78,6 +79,7 @@ public class ReservationController {
 		mv.addObject("schedule", schedule);
 		mv.addObject("ticket", ticket);
 		mv.addObject("error", error);
+		mv.addObject("user", user);
 		return mv;
 	}
 	
@@ -130,6 +132,7 @@ public class ReservationController {
 		mv.addObject("adult", adult);
 		mv.addObject("child", child);
 		mv.addObject("disabled", disabled);
+		mv.addObject("user", user);
 		return mv;
 	}
 	

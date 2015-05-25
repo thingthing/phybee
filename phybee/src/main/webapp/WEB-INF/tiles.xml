@@ -82,7 +82,7 @@
 	<definition name="loginTemplate" template="/WEB-INF/jsp/view/login.jsp">
 		<put-attribute name="loginForm" value="/WEB-INF/jsp/loginForm.jsp" />
 	</definition>
-	
+
 	<definition name="login" extends="base.definition">
 		<put-attribute name="title" value="Login" />
 		<put-attribute name="body" value="loginTemplate" />
@@ -91,5 +91,10 @@
 	<definition name="accessDenied" extends="base.definition">
 		<put-attribute name="title" value="Denied" />
 		<put-attribute name="body" value="/WEB-INF/jsp/view/accessDenied.jsp" />
+	</definition>
+
+	<definition name="profil" extends="base.definition">
+		<put-attribute name="title" value="Profil" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/profil.jsp" />
 	</definition>
 </tiles-definitions>
