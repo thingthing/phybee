@@ -42,10 +42,10 @@
                                 <p>available since: ${list.mDate.toString()}</p>
                             </span>
                             <span class="listinput">
-                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Infos</button></a>
-                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Schedule</button></a>
-                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Video</button></a>
-                                <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-info">Get Tickets</button></a>
+                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Infos</button></a>
+                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Schedule</button></a>
+                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Video</button></a>
+                                <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
                             </span>
                         </div>
             </c:forEach>
