@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="/resources/css/movie.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/phybee.css" />
     <title>${title}</title>
 </head>
 <body>
@@ -40,15 +40,15 @@
                     <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-info">Get Tickets</button></a>
                 </div>
                     <div>
-                        <table>
-                            <tr>
-                                <td>Monday</td>
-                                <td>Tuesday</td>
-                                <td>Wednesday</td>
-                                <td>Thursday</td>
-                                <td>Friday</td>
-                                <td>Saturday</td>
-                                <td>Sunday</td>
+                        <table class="table-schedule">
+                            <tr class="table-schedule-tr">
+                                <td class="table-schedule-td">Monday</td>
+                                <td class="table-schedule-td">Tuesday</td>
+                                <td class="table-schedule-td">Wednesday</td>
+                                <td class="table-schedule-td">Thursday</td>
+                                <td class="table-schedule-td">Friday</td>
+                                <td class="table-schedule-td">Saturday</td>
+                                <td class="table-schedule-td">Sunday</td>
                             </tr>
                         </table>
                     </div>

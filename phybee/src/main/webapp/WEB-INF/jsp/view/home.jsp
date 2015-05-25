@@ -38,7 +38,7 @@
           <img class="img-circle" src="<c:url value="/resources/poster/${item.getmPoster()}"/>" alt="${item.getmId()}" width="140" height="140">
           <h2>${item.getmTitle()}</h2>
           <p>${item.getmSynopsis()}</p>
-          <p><a class="btn btn-primary" href="<c:url value="/movie/movie?slot=${item.getmId()}"/>" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-primary" href="<c:url value="/moviedetails?movie=${item.getmId()}"/>" role="button">View details &raquo;</a></p>
         </div>
 		</c:forEach>
       </div>
