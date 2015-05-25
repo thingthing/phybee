@@ -1,6 +1,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link rel="icon" 
+      type="image/png" 
+      href="<c:url value="/resources/logo/Phybee.png"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.css"/>">
 <link rel="stylesheet"
