@@ -1,5 +1,6 @@
 package controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,30 @@ public class UserController
 	@Autowired
 	private UserBean user;
 
+	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+	public ModelAndView accesssDenied(Principal user)
+	{
+
+		ModelAndView model = new ModelAndView();
+
+		if (user != null)
+		{
+			model.addObject("msg", "Hi " + user.getName()
+					+ ", you do not have permission to access this page!");
+		} else
+		{
+			model.addObject("msg",
+					"You do not have permission to access this page!");
+		}
+
+		model.setViewName("accessDenied");
+		return model;
+
+	}
+
 	@RequestMapping(value =
 	{ "/", "/home**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage(
-			@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout)
 	{
 		ModelAndView model = new ModelAndView();
@@ -66,11 +87,6 @@ public class UserController
 		model.addObject("message", "This is default page!");
 		model.addObject("movies", movies);
 
-		if (error != null)
-		{
-			model.addObject("error", "Invalid username and password!");
-		}
-
 		if (logout != null)
 		{
 			model.addObject("msg", "You've been logged out successfully.");
@@ -81,10 +97,16 @@ public class UserController
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login()
+	public ModelAndView login(
+			@RequestParam(value = "error", required = false) String error)
 	{
 
 		ModelAndView model = new ModelAndView();
+		if (error != null)
+		{
+			model.addObject("error", "Invalid username and password!");
+		}
+
 		model.setViewName("login");
 
 		return model;
