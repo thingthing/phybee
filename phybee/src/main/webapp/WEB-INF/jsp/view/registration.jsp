@@ -15,13 +15,12 @@
 --%>
 <html>
 <body>
-<div id="contents" align="center" class="container">
-  <div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4">
+<div id="contents" align="center" class="container row col-sm-6 col-md-4 col-md-offset-4">
       <div class="account-wall">
         <h3>Create your account</h3>
         <form:form modelAttribute="userForm" method="POST" enctype="utf8" class="form-signin">
-          <br>
+          <br/>
+          <table>
           <tr>
             <td><label><spring:message code="register.firstName" /></label></td>
             <td><form:input path="firstName" value="" /></td>
@@ -51,16 +50,15 @@
             <td><button type="submit" class="btn btn-lg btn-primary btn-block" ><spring:message code="register.signUp" /></button>
             </td>
           </tr>
+          </table>
         </form:form>
-        <br>
+        <br/>
         <%--
           <a href="<c:url value="login.html" />">
             <spring:message code="label.form.loginLink"></spring:message>
           </a>
         --%>
       </div>
-    </div>
-  </div>
 </div>
 </body>
 </html>

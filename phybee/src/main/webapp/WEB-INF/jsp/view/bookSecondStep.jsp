@@ -23,10 +23,11 @@
 	<h2>
 		<span class="label label-primary">Movie Information</span>
 	</h2>
+	<br />
+	<div class="movie-info"><img class="img-circle" src="<c:url value="/resources/poster/${movie.getmPoster()}"/>" alt="${movie.getmId()}" width="140" height="140">
 	<table class="table">
 		<thead>
 			<tr>
-				<th></th>
 				<th>Title</th>
 				<th>Synopsis</th>
 				<th>Duration</th>
@@ -37,16 +38,16 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><img alt="${movie.getmTitle()}" style="max-width:110px;max-height:145px;" src="/resources/poster/${movie.getmPoster()}"></td>
 				<td><c:out value="${movie.getmTitle()}" /></td>
 				<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
-				<td><c:out value="${movie.getmTime()<%-- .getHour()} --%>:${movie.getmTime()<%-- .getMinute() --%>}" /></td>
+				<td><c:out value="${movie.getmTime()}" /></td>
 				<td><c:out value="${schedule.getStart().toString()}" /></td>
 				<td><c:out value="${schedule.getEnd().toString()}" /></td>
 				<td><c:out value="${schedule.getDate().toString()}" /></td>
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<form method="post" action="<c:url value="/reservation/validation"/>">
 		<br />
 		<h2>

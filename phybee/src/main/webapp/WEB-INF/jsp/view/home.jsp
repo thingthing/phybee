@@ -8,7 +8,7 @@
 		<ol class="carousel-indicators">
 			<c:forEach var="i" begin="1" end="${movies.size()}"
 				varStatus="status">
-				<li data-target="#carousel-example-generic" data-slide-to="${i}"
+				<li data-target="#carousel-example-generic" data-slide-to="${i - 1}"
 					${status.first ? 'class="active"' : ''}></li>
 			</c:forEach>
 		</ol>
@@ -31,23 +31,16 @@
 
 		</a>
 	</div>
-	<h1>Title : ${title}</h1>
-	<h1>Message : ${message}</h1>
-	<c:if test="${not empty username}">
-		<h1>User : ${username}</h1>
-	</c:if>
-
-	<sec:authorize access="hasRole('ROLE_USER')">
-		<!-- For login user -->
-		<c:if test="${pageContext.request.userPrincipal.name != null}">
-			<h2>
-				User : ${pageContext.request.userPrincipal.name}
-			</h2>
-		</c:if>
-
-	</sec:authorize>
-	<sec:authorize access="isAnonymous()">
-		You're not connected
-	</sec:authorize>
+	<br /><br />
+	<div class="row">
+		<c:forEach var="item" items="${movies}" begin="1" end="3">
+        <div class="col-lg-4" align="center">
+          <img class="img-circle" src="<c:url value="/resources/poster/${item.getmPoster()}"/>" alt="${item.getmId()}" width="140" height="140">
+          <h2>${item.getmTitle()}</h2>
+          <p>${item.getmSynopsis()}</p>
+          <p><a class="btn btn-primary" href="<c:url value="/movie/movie?slot=${item.getmId()}"/>" role="button">View details &raquo;</a></p>
+        </div>
+		</c:forEach>
+      </div>
 </body>
 </html>
