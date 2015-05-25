@@ -12,9 +12,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <html>
-<head>
-    <title>Sign up successful</title>
-</head>
 <body>
 <div align="center">
   <table border="0">

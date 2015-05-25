@@ -74,6 +74,7 @@ public class RegistrationController {
         try {
             registered = UserService.subscribe(accountDto);
         } catch (final EmailExistsException e) {
+            e.printStackTrace();
             return null;
         }
         return registered;

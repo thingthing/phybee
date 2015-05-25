@@ -37,10 +37,10 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><img alt="${movie.getmTitle()}" style="max-width:110px;max-height:145px;" src="${movie.getmPoster()}"></td>
+				<td><img alt="${movie.getmTitle()}" style="max-width:110px;max-height:145px;" src="/resources/poster/${movie.getmPoster()}"></td>
 				<td><c:out value="${movie.getmTitle()}" /></td>
 				<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
-				<td><c:out value="${movie.getmTime()}" /></td>
+				<td><c:out value="${movie.getmTime()<%-- .getHour()} --%>:${movie.getmTime()<%-- .getMinute() --%>}" /></td>
 				<td><c:out value="${schedule.getStart().toString()}" /></td>
 				<td><c:out value="${schedule.getEnd().toString()}" /></td>
 				<td><c:out value="${schedule.getDate().toString()}" /></td>
