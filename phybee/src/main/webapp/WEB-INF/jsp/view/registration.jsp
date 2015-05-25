@@ -6,7 +6,7 @@
 <div id="contents" align="center" class="container row col-sm-6 col-md-4 col-md-offset-4">
       <div class="account-wall">
         <h3>Create your account</h3>
-        <form:form modelAttribute="userForm" method="POST" enctype="utf8" class="form-signin">
+        <form:form modelAttribute="userForm" method="POST" class="form-signin">
           <br/>
           <table>
           <tr>
