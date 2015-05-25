@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -28,7 +29,7 @@
 		</c:when>
 	</c:choose>
 	<h2>
-		<span class="label label-primary">Movie Information</span>
+		<span class="label label-primary"><spring:message code="reservation.minfo"/></span>
 	</h2>
 	<br />
 	<div class="movie-info">
@@ -38,17 +39,17 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Title</th>
+					<th><spring:message code="reservation.title"/></th>
 					<th>Synopsis</th>
-					<th>Duration</th>
-					<th>Start Time</th>
-					<th>End Time</th>
+					<th><spring:message code="reservation.duration"/></th>
+					<th><spring:message code="reservation.start"/></th>
+					<th><spring:message code="reservation.end"/></th>
 					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td><c:out value="${movie.getmTitle()}" /></td>
+					<td><b><c:out value="${movie.getmTitle()}" /></b></td>
 					<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
 					<td><c:out value="${movie.getmTime()}" /></td>
 					<td><c:out value="${schedule.getStart().toString()}" /></td>
@@ -61,15 +62,15 @@
 	<form method="post" action="<c:url value="/reservation/validation"/>">
 		<br />
 		<h2>
-			<span class="label label-primary">Ticket</span>
+			<span class="label label-primary"><spring:message code="reservation.tinfo"/></span>
 		</h2>
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Type name</th>
-					<th>Available</th>
-					<th>Price</th>
-					<th>Number</th>
+					<th>Type</th>
+					<th><spring:message code="reservation.seats"/></th>
+					<th><spring:message code="reservation.price"/></th>
+					<th><spring:message code="reservation.number"/></th>
 				</tr>
 			</thead>
 			<tbody>

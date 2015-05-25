@@ -15,9 +15,11 @@
 		<div class="carousel-inner" role="listbox">
 			<c:forEach var="item" items="${movies}" varStatus="status">
 				<div ${status.first ? 'class="item active"' : 'class="item"' }>
-					<img class="fill" src="<c:url value="/resources/poster/car_${item.getmPoster()}"/>"
+                    <a href="<c:url value="/moviedetails?movie=${item.getmId()}"/>">
+                    <img class="fill" src="<c:url value="/resources/poster/car_${item.getmPoster()}"/>"
 						alt="${item.getmId()}" data-holder-rendered="true" width="auto"
 						height="auto">
+                        </a>
 				</div>
 			</c:forEach>
 		</div>
