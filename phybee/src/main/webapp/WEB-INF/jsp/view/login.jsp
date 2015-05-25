@@ -29,10 +29,11 @@
 					</h4>
 					<spring:message code="field.password" />
 					<input type='password' name="password" />
-					<a href="<c:url value="/register"/>"> <spring:message code="field.register" /></a>
 					<br />
 					<input type="submit" value="<spring:message code="field.login" />" class="btn" />
 				</form>
+				<br />
+				<a href="<c:url value="/register"/>"> <spring:message code="field.register" /></a>
 			</div></li>
 	</sec:authorize>
 

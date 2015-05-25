@@ -20,7 +20,7 @@
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/reservation/**" access="hasRole('ROLE_USER')" />
 
-		<form-login login-page="/" default-target-url="/register"
+		<form-login login-page="/" default-target-url="/"
 			authentication-failure-url="/home?error" username-parameter="email"
 			password-parameter="password" login-processing-url="/auth/login_check" />
 
