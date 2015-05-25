@@ -172,6 +172,9 @@ p {
     width: 600px;
 }
 
+.table-bordered {
+    width: 40%;
+}
 /*Profil Movie*/
 .profil-movie-interact {
 

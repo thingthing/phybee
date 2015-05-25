@@ -56,19 +56,39 @@
                         <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Play</button></a>
                         <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
                     </div>
-                    <div>
-                        <table class="table-schedule">
-                            <tr class="table-schedule-tr">
-                                <td class="table-schedule-td">Monday</td>
-                                <td class="table-schedule-td">Tuesday</td>
-                                <td class="table-schedule-td">Wednesday</td>
-                                <td class="table-schedule-td">Thursday</td>
-                                <td class="table-schedule-td">Friday</td>
-                                <td class="table-schedule-td">Saturday</td>
-                                <td class="table-schedule-td">Sunday</td>
-                            </tr>
-                        </table>
-                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                        </tr>
+                        <tr>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                            <td>14:00</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>        </div>
         <div id="sectionB" class="tab-pane fade">
