@@ -34,6 +34,7 @@
     <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#sectionA">${list.mTitle}</a></li>
         <li><a href="#sectionB">Trailer</a></li>
+        <li><a href="#sectionC">Schedule</a></li>
     </ul>
     <div class="tab-content">
         <div id="sectionA" class="tab-pane fade in active">
@@ -53,49 +54,50 @@
                                 <p>Synopsis : ${list.mSynopsis}</p>
                             </span>
                     <div class="profil-movie-interact">
-                        <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Play</button></a>
                         <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Monday</th>
-                            <th>Tuesday</th>
-                            <th>Wednesday</th>
-                            <th>Thursday</th>
-                            <th>Friday</th>
-                            <th>Saturday</th>
-                            <th>Sunday</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                        </tr>
-                        <tr>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                            <td>14:00</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-            </div>        </div>
+            </div>
+        </div>
         <div id="sectionB" class="tab-pane fade">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="http://www.tudou.com/v/GecMp3EZf10/&bid=05&resourceId=0_05_05_99/v.swf"></iframe>
+            </div>
         </div>
-    </div>
-</div>
+        <div id="sectionC" class="tab-pane fade">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                </tr>
+                <tr>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                    <td>14:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 </body>
 </html>
