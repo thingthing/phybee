@@ -5,7 +5,7 @@
 <tiles-definitions>
 
 	<definition name="menuLogin" template="/WEB-INF/jsp/menuLogin.jsp">
-		<put-attribute name="login" value="/WEB-INF/jsp/view/login.jsp" />
+		<put-attribute name="loginForm" value="/WEB-INF/jsp/loginForm.jsp" />
 	</definition>
 
 	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
@@ -79,9 +79,13 @@
 			value="/WEB-INF/jsp/view/registrationSuccess.jsp" />
 	</definition>
 
+	<definition name="loginTemplate" template="/WEB-INF/jsp/view/login.jsp">
+		<put-attribute name="loginForm" value="/WEB-INF/jsp/loginForm.jsp" />
+	</definition>
+	
 	<definition name="login" extends="base.definition">
 		<put-attribute name="title" value="Login" />
-		<put-attribute name="body" value="/WEB-INF/jsp/view/login.jsp" />
+		<put-attribute name="body" value="loginTemplate" />
 	</definition>
 
 	<definition name="accessDenied" extends="base.definition">

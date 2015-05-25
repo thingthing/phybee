@@ -11,7 +11,7 @@
 			href="#" data-toggle="dropdown" id="navLogin"><spring:message
 					code="field.login" /></a>
 			<div class="dropdown-menu" style="padding: 17px;">
-				<tiles:insertAttribute name="login" />
+				<tiles:insertAttribute name="loginForm" />
 			</div></li>
 	</sec:authorize>
 
