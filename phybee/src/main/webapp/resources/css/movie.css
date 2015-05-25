@@ -51,7 +51,7 @@
 }
 
 p {
-    color: orange;
+    color: #000000;
     style: italic;
 }
 
@@ -62,18 +62,40 @@ p {
     margin-right: auto;
 }
 
+.schedule-movieprofil-mini-block {
+
+}
+
 .schedule-movieprofil-mini-block h4 {
 
-    text-align: center;
+    text-align: left;
 }
 
 .schedule-movieprofil-mini-block img, .schedule-movieprofil-mini-block span{
     display: inline-block;
     vertical-align: middle;
+    text-align: left;
+}
+.schedule-movielist-interact {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.schedule-movielist-interact a {
+    display: block;
+}
+
+.table-schedule {
+
 }
 
 .schedule-movielist-synopsis {
     width: 600px;
+}
+
+/*Profil Movie*/
+.profil-movie-interact {
+
 }
 
 table {
@@ -83,7 +105,9 @@ table {
 td {
     border: 1px solid #000000;
     width: 65px;
+/*
     text-align: center;
+*/
 }
 /*
 table {

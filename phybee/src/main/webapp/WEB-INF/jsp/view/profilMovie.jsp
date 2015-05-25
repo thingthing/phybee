@@ -27,15 +27,18 @@
                                 <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
                                 <p>Runtime : ${list.mTime} </p>
                                 <p>Open Nationwide : ${list.mDate } </p>
-                                <p>Distributor : </p>
-                                <p>Starring :  </p>
+                                <p>Producer : </p>
                                     <p>
                                         Genre: <c:forEach var="genre" items="${list.mGenre}">
                                         ${genre.name}
                                     </c:forEach>
                                     </p>
-                                <p>Synopsis : ${list.mSynopsis }</p>
+                                <p>Synopsis : ${list.mSynopsis}</p>
                             </span>
+                <div class="profil-movie-interact">
+                    <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Play</button></a>
+                    <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-info">Get Tickets</button></a>
+                </div>
                     <div>
                         <table>
                             <tr>

@@ -32,14 +32,19 @@ public class MovieController {
         return mv;
     }
 
+    @RequestMapping("/incoming")
+    public ModelAndView incomingMovie() {
+
+        this.listMovie = MovieService.getFuturMovies();
+        ModelAndView mv = new ModelAndView("scheduleMovie");
+        mv.addObject("listmovie", listMovie);
+        return mv;
+    }
+
     @RequestMapping("/schedule")
     public ModelAndView scheduleMovie() {
-        this.listMovie.clear();
-        for (int i = 0; i < 10; i++) {
-            MovieBean movie = new MovieBean("Title " + Integer.toString(i), "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper, urna a sollicitudin semper, eros dolor elementum leo, et fringilla nisi enim non velit. Donec a iaculis orci. In vestibulum massa sit amet ante efficitur hendrerit. In consectetur, lacus in condimentum imperdiet, tortor nunc interdum nisi, vel luctus urna orci at mauris. Vestibulum scelerisque quis ipsum quis cursus. Aliquam auctor lacus urna, nec efficitur justo mattis nec. Etiam vestibulum velit erat, sed cursus mi aliquam viverra. Maecenas nisi lacus, tristique sed lectus non, imperdiet bibendum felis. ", null, "http://static.cotecine.fr/tb/Affiches/155x210/FAST+AND+FURIOUS+7.JPG", null);
-            this.listMovie.add(movie);
-        }
 
+        this.listMovie = MovieService.getCurrentMovies();
         ModelAndView mv = new ModelAndView("scheduleMovie");
         mv.addObject("listmovie", listMovie);
         return mv;
@@ -47,7 +52,7 @@ public class MovieController {
 
     @RequestMapping("/moviedetails")
     public ModelAndView profilMovie(
-            @RequestParam(value = "slot", required = true) Integer movie_id
+            @RequestParam(value = "movie", required = true) Integer movie_id
     ) {
 
         ModelAndView mv = new ModelAndView("profilMovie");
