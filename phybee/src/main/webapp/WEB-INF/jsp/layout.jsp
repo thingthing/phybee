@@ -20,7 +20,7 @@
 						<tiles:insertAttribute name="header" />
 						<div class="navbar-collapse collapse">
 							<tiles:insertAttribute name="menu" />
-							<tiles:insertAttribute name="login" />
+							<tiles:insertAttribute name="menuLoginLayout" />
 						</div>
 					</div>
 				</nav>

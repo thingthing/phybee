@@ -13,15 +13,18 @@
 		<headers>
 			<cache-control />
 		</headers>
-		<intercept-url pattern="/login" access="permitAll" />
+		<access-denied-handler error-page="/accessdenied" />
+		
+		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/logout" access="permitAll" />
-		<intercept-url pattern="/accessdenied" access="permitAll" />
+		<intercept-url pattern="/register" access="isAnonymous()" />
+		<intercept-url pattern="/accessdenied" access="permitAll" />	
 		<intercept-url pattern="/home" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/reservation/**" access="hasRole('ROLE_USER')" />
 
-		<form-login login-page="/" default-target-url="/"
-			authentication-failure-url="/home?error" username-parameter="email"
+		<form-login login-page="/login" default-target-url="/"
+			authentication-failure-url="/login?error" username-parameter="email"
 			password-parameter="password" login-processing-url="/auth/login_check" />
 
 		<logout logout-success-url="/home?logout" delete-cookies="JSESSIONID" />
