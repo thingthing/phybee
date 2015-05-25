@@ -14,12 +14,22 @@
 
 	<form name="loginForm" action="<c:url value='/auth/login_check' />"
 		method="POST" class="form">
-		<spring:message code="field.email" />
-		: <input type='text' name="email" />
+		<h4>
+			<span class="label label-primary"><spring:message
+					code="field.email" /> :</span>
+		</h4>
+		<input type='text' name="email" />
+		<h4>
+			<span class="label label-primary"><spring:message
+					code="field.password" /> :</span>
+		</h4>
 		<spring:message code="field.password" />
-		: <input type='password' name="password" /> <input type="submit"
-			value="<spring:message code="field.login" />" class="btn" />
+		<input type='password' name="password" /> <br /> <input
+			type="submit" value="<spring:message code="field.login" />"
+			class="btn" />
 	</form>
+	<br />
+	<a href="<c:url value="/register"/>"> <spring:message
+			code="field.register" /></a>
+
 </sec:authorize>
-
-

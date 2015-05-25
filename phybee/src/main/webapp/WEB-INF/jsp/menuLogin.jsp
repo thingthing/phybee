@@ -22,7 +22,11 @@
 	</c:if>
 		</a></li>
 	</sec:authorize>
-	<li><a href="?lang=en">EN</a></li>
-	<li><a href="?lang=fr">FR</a></li>
+	<li><a href="?lang=en"><img
+			src="<c:url value="/resources/flag/England.png"/>" alt="EN"
+			width="20" height="20"></a></li>
+	<li><a href="?lang=fr"><img
+			src="<c:url value="/resources/flag/France.png"/>" alt="FR" width="20"
+			height="20"></a></li>
 </ul>
 

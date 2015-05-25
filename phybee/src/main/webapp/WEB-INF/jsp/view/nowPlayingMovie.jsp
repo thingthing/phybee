@@ -11,11 +11,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="/resources/css/movie.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/phybee.css" />
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<%--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+--%>
 
 </head>
 <body>
@@ -28,7 +30,7 @@
             <div class="movielist">
             <c:forEach var="list" items="${listmovie}">
                         <div class="movieprofil-mini-block">
-                           <a href="<c:url value="/moviedetails?slot=${list.mId}"/>" class="link"> <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>"></a>
+                           <a href="<c:url value="/moviedetails?movie=${list.mId}"/>" class="link"> <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>"></a>
                             <span class="movieprofil-mini-info">
                                 <h4>${list.mTitle}</h4>
                                 <p>genre:
@@ -40,7 +42,6 @@
                                 <p>available since: ${list.mDate.toString()}</p>
                             </span>
                             <span class="listinput">
-
                                 <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Infos</button></a>
                                 <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Schedule</button></a>
                                 <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-info">Video</button></a>

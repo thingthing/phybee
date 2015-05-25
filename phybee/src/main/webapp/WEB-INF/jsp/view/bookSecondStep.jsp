@@ -20,33 +20,43 @@
 			style="width: 60%"></div>
 	</div>
 	<br />
+	<c:choose>
+		<c:when test="${not empty error}">
+			<h4>
+				<span class="label label-danger">${error}</span>
+			</h4>
+		</c:when>
+	</c:choose>
 	<h2>
 		<span class="label label-primary">Movie Information</span>
 	</h2>
 	<br />
-	<div class="movie-info"><img class="img-circle" src="<c:url value="/resources/poster/${movie.getmPoster()}"/>" alt="${movie.getmId()}" width="140" height="140">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Synopsis</th>
-				<th>Duration</th>
-				<th>Start Time</th>
-				<th>End Time</th>
-				<th>Date</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><c:out value="${movie.getmTitle()}" /></td>
-				<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
-				<td><c:out value="${movie.getmTime()}" /></td>
-				<td><c:out value="${schedule.getStart().toString()}" /></td>
-				<td><c:out value="${schedule.getEnd().toString()}" /></td>
-				<td><c:out value="${schedule.getDate().toString()}" /></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="movie-info">
+		<img class="img-circle"
+			src="<c:url value="/resources/poster/${movie.getmPoster()}"/>"
+			alt="${movie.getmId()}" width="140" height="140">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Synopsis</th>
+					<th>Duration</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><c:out value="${movie.getmTitle()}" /></td>
+					<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
+					<td><c:out value="${movie.getmTime()}" /></td>
+					<td><c:out value="${schedule.getStart().toString()}" /></td>
+					<td><c:out value="${schedule.getEnd().toString()}" /></td>
+					<td><c:out value="${schedule.getDate().toString()}" /></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<form method="post" action="<c:url value="/reservation/validation"/>">
 		<br />
@@ -71,7 +81,8 @@
 								<td><c:out value="${schedule.getPriority_seat_remain()}" /></td>
 								<td><c:out value="${item.getFormatPrice()}" /></td>
 								<td><input type="number" name="${item.getType()}" size="30"
-									min="0" max="${schedule.getPriority_seat_remain()}" step="1" value="0"></td>
+									min="0" max="${schedule.getPriority_seat_remain()}" step="1"
+									value="0"></td>
 							</c:when>
 							<c:otherwise>
 								<td><c:out value="${schedule.getSeat_remain()}" /></td>
@@ -86,8 +97,9 @@
 		</table>
 		<input type="hidden" name="schedule" value="${schedule.id}" />
 		<div class="row">
-			<a href="<c:url value="/reservation/movie?movie=${movie.getmId()}"/>" class="link btn btn-primary"><c:out value="Return" /></a>
-			<input type="submit" value="Continue" class="btn btn-primary">
+			<a href="<c:url value="/reservation/movie?movie=${movie.getmId()}"/>"
+				class="link btn btn-primary"><c:out value="Return" /></a> <input
+				type="submit" value="Continue" class="btn btn-primary">
 		</div>
 	</form>
 </body>

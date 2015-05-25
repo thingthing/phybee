@@ -63,7 +63,8 @@ public class ReservationController {
 	
 	@RequestMapping("/ticket")
 	public ModelAndView chooseTicket(
-			@RequestParam(value = "schedule", required = true) String scheduleId) {
+			@RequestParam(value = "schedule", required = true) String scheduleId,
+			@RequestParam(value = "error", required = false, defaultValue="") String error) {
 		System.out.println("Book, secondStep");
 
 		ReservationService res = new ReservationService();
@@ -76,6 +77,7 @@ public class ReservationController {
 		mv.addObject("movie", movie);
 		mv.addObject("schedule", schedule);
 		mv.addObject("ticket", ticket);
+		mv.addObject("error", error);
 		return mv;
 	}
 	
@@ -96,6 +98,11 @@ public class ReservationController {
 
 		List<TicketBean> ticket = res.getTicketInfo();
 
+		if (Integer.parseInt(adult) == 0 && Integer.parseInt(child) == 0 && Integer.parseInt(disabled) == 0) {
+			return chooseTicket(scheduleId, "Error: Can't buy 0 tickets !");
+		}
+			
+		
 		for (TicketBean t : ticket) {
 			if (t.getType().equals("Adult"))
 				basket.put(t, Integer.parseInt(adult));
@@ -139,8 +146,7 @@ public class ReservationController {
 
 		if (userId <= 0)
 		{
-			userId = 1;
-			System.out.println("user not found");
+			return "redirect:/home";
 		}
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);

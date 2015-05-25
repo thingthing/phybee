@@ -1,11 +1,10 @@
 <%--
   Created by IntelliJ IDEA.
   User: Elyo
-  Date: 05/05/2015
-  Time: 17:19
+  Date: 25/05/2015
+  Time: 15:52
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -16,7 +15,7 @@
 <body>
 <c:choose>
     <c:when test="${empty listmovie}">
-        <p>No movies available next week !</p><br>
+        <p>No movies available this week !</p>
     </c:when>
     <c:when test="${not empty listmovie}">
         <div class="schedule-movielist">
@@ -52,10 +51,10 @@
                             </tr>
                         </table>
                     </div>
-                    <%--<tr>
-                        <td>Cellule 3</td>
-                        <td>Cellule 4</td>
-                    </tr>--%>
+                        <%--<tr>
+                            <td>Cellule 3</td>
+                            <td>Cellule 4</td>
+                        </tr>--%>
                 </div>
             </c:forEach>
         </div>
