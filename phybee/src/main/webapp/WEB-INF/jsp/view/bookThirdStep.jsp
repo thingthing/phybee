@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -26,16 +27,14 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Title</th>
+				<th><spring:message code="reservation.title"/></th>
 				<th>Date</th>
-				<th>Start Time</th>
-				<th>End Time</th>
+                <th><spring:message code="reservation.start"/></th>
+                <th><spring:message code="reservation.end"/></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><c:out value="${schedule.getId()}" /></td>
 				<td><c:out value="${schedule.getTitle_movie()}" /></td>
 				<td><c:out value="${schedule.getDate().toString()}" /></td>
 				<td><c:out value="${schedule.getStart().toString()}" /></td>
@@ -45,14 +44,14 @@
 	</table>
 	<br />
 	<h2>
-		<span class="label label-primary">Ticket Information</span>
+		<span class="label label-primary"><spring:message code="reservation.tinfo"/></span>
 	</h2>
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Type</th>
-				<th>Price</th>
-				<th>Number</th>
+                <th><spring:message code="reservation.price"/></th>
+                <th><spring:message code="reservation.number"/></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -70,7 +69,7 @@
 		<thead>
 			<tr>
 				<th><h2>
-						<span class="label label-primary">Total Amount</span>
+						<span class="label label-primary">Total</span>
 					</h2></th>
 			</tr>
 		</thead>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
@@ -42,22 +43,20 @@
 	<br />
 	<br />
 	<h2>
-		<span class="label label-primary">Available Slot</span>
+		<span class="label label-primary"><spring:message code="reservation.availableSlot"/></span>
 	</h2>
 	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Date</th>
-				<th>Choose</th>
+				<th><spring:message code="field.schedule"/></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="item" items="${schedule}">
 				<tr>
-					<td><c:out value="${item.getId()}" /></td>
 					<td><c:out value="${item.getStart().toString()} to ${item.getEnd().toString()}" /></td>
-					<td><a href="<c:url value="/reservation/ticket?schedule=${item.id}"/>" class="link btn btn-primary"><c:out value="Book Now !" /></a></td>
+					<td><a href="<c:url value="/reservation/ticket?schedule=${item.id}"/>" class="link btn btn-primary"><spring:message code="reservation.book"/></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
