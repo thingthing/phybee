@@ -11,10 +11,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/aop 
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<context:component-scan base-package="controller" />
-	<context:component-scan base-package="bean" />
-	<context:component-scan base-package="service" />
-	<context:component-scan base-package="validator" />
+	<context:component-scan base-package="controller bean service validator" />
 
 	<bean
 			class="org.springframework.web.servlet.view.InternalResourceViewResolver">

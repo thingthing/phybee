@@ -5,9 +5,7 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
-import service.GenreService;
 import db.PhybeeDb;
-import bean.MovieBean;
 import bean.ProducerBean;
 
 public class ProducerService

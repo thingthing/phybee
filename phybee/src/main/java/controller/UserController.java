@@ -51,36 +51,16 @@ public class UserController
 	{
 		ModelAndView model = new ModelAndView();
 
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String name = auth.getName(); // get logged in username
-
-		if (!name.equals("anonymousUser"))
+		try
 		{
-			UserBean userBean = new UserBean();
-			try
-			{
-				userBean = UserService.login(name);
-			} catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			user.setEmail(userBean.getEmail());
-			user.setId(userBean.getId());
-			user.setFirstName(userBean.getFirstName());
-			user.setLastName(userBean.getLastName());
-			user.setPassword(userBean.getPassword());
-			// for testing purpose:
-			System.out.println("username: " + user.getFirstName());
-			System.out.println("username: " + user.getLastName());
-			System.out.println("password: " + user.getPassword());
-			System.out.println("email: " + user.getEmail());
-
-			System.out.println("Id: " + user.getId());
+			UserService.login(user);
 
 			model.addObject("user", user);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
 		}
-
+		
 		List<MovieBean> movies = MovieService.getCurrentMovies();
 
 		model.addObject("title", "Spring Security Password Encoder");
@@ -112,7 +92,7 @@ public class UserController
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public ModelAndView profig()
 	{
@@ -124,7 +104,7 @@ public class UserController
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ModelAndView infos()
 	{

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.DateService;
 import service.MovieService;
 import service.ReservationService;
+import service.UserService;
 import bean.MovieBean;
 import bean.ScheduleBean;
 import bean.TicketBean;
@@ -56,6 +57,17 @@ public class ReservationController {
 		mv.addObject("movie", movie);
 		mv.addObject("movies", movies);
 		mv.addObject("date", date);
+		if (user == null || user.getId() == null)
+		{
+			try
+			{
+				UserService.login(user);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		System.out.println("user is == " + user.getId());
 		mv.addObject("user", user);
 		if (schedule != null && schedule.size() > 0)
 			mv.addObject("schedule", schedule);

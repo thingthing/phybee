@@ -3,9 +3,14 @@ package service;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.naming.NamingException;
 
 import bean.UserDTOBean;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import db.PhybeeDb;
@@ -14,13 +19,41 @@ import validator.EmailExistsException;
 
 public class UserService
 {
+
 	public UserService()
 	{
 
 	}
 
-	public static UserBean login(String login)
-			throws Exception
+	public static UserBean login(UserBean user) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+
+		System.out.println("Try to login with name = "+ name);
+		if (!name.equals("anonymousUser"))
+		{
+			UserBean userBean = UserService.login(name);
+			
+			user.setEmail(userBean.getEmail());
+			user.setId(userBean.getId());
+			user.setFirstName(userBean.getFirstName());
+			user.setLastName(userBean.getLastName());
+			user.setPassword(userBean.getPassword());
+			// for testing purpose:
+			System.out.println("username: " + user.getFirstName());
+			System.out.println("username: " + user.getLastName());
+			System.out.println("password: " + user.getPassword());
+			System.out.println("email: " + user.getEmail());
+
+			System.out.println("Id: " + user.getId());
+			return (userBean);
+		}
+		throw new Exception("User not log in");
+	}
+
+	public static UserBean login(String login) throws Exception
 	{
 		String sql = "select * from account where email = ?";
 		UserBean user = new UserBean();
@@ -54,10 +87,14 @@ public class UserService
 		return (user);
 	}
 
-	public static UserBean subscribe(UserDTOBean accountDto) throws EmailExistsException
+	public static UserBean subscribe(UserDTOBean accountDto)
+			throws EmailExistsException
 	{
-		if (emailExist(accountDto.getEmail())) {
-			throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());
+		if (emailExist(accountDto.getEmail()))
+		{
+			throw new EmailExistsException(
+					"There is an account with that email adress: "
+							+ accountDto.getEmail());
 		}
 		UserBean user = new UserBean();
 		user.setFirstName(accountDto.getFirstName());
@@ -69,29 +106,33 @@ public class UserService
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
+			PreparedStatement preparedStatement = db
+					.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
 
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(accountDto.getPassword());
-			
+			String hashedPassword = passwordEncoder.encode(accountDto
+					.getPassword());
+
 			preparedStatement.setString(1, accountDto.getFirstName());
 			preparedStatement.setString(2, accountDto.getLastName());
 			preparedStatement.setString(3, accountDto.getEmail());
 			preparedStatement.setString(4, hashedPassword);
 			preparedStatement.executeUpdate();
-			
+
 			ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-			if (generatedKeys.next()) {
+			if (generatedKeys.next())
+			{
 				Integer id = generatedKeys.getInt(1);
 				System.out.println("User id == " + id);
-                user.setId(id);
-            }
-			
-			preparedStatement = db.prepareQuery("insert into account_roles (email, ROLE) values (?,?)");
+				user.setId(id);
+			}
+
+			preparedStatement = db
+					.prepareQuery("insert into account_roles (email, ROLE) values (?,?)");
 			preparedStatement.setString(1, accountDto.getEmail());
 			preparedStatement.setString(2, "ROLE_USER");
 			preparedStatement.executeUpdate();
-			
+
 			db.closeConnection();
 
 		} catch (NamingException e)
@@ -104,22 +145,27 @@ public class UserService
 		return (user);
 	}
 
-	private static boolean emailExist(final String email) {
+	private static boolean emailExist(final String email)
+	{
 		String sql = "select * from account where email = ?";
-		try {
+		try
+		{
 			PhybeeDb db = new PhybeeDb();
 			PreparedStatement preparedStatement = db.prepareQuery(sql);
 			preparedStatement.setString(1, email);
 			System.out.println(preparedStatement);
 			ResultSet resultset = preparedStatement.executeQuery();
-			if (!resultset.next()) {
+			if (!resultset.next())
+			{
 				db.closeConnection();
 				return false;
 			}
 			db.closeConnection();
-		} catch (NamingException e) {
+		} catch (NamingException e)
+		{
 			e.printStackTrace();
-		} catch (SQLException sqlException) {
+		} catch (SQLException sqlException)
+		{
 			sqlException.printStackTrace();
 		}
 		return (true);
