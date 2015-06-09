@@ -1,11 +1,15 @@
 package service;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
+import bean.MovieBean;
 import bean.UserDTOBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +35,11 @@ public class UserService
 				.getAuthentication();
 		String name = auth.getName();
 
-		System.out.println("Try to login with name = "+ name);
+		System.out.println("Try to login with name = " + name);
 		if (!name.equals("anonymousUser"))
 		{
 			UserBean userBean = UserService.login(name);
-			
+
 			user.setEmail(userBean.getEmail());
 			user.setId(userBean.getId());
 			user.setFirstName(userBean.getFirstName());
@@ -143,6 +147,48 @@ public class UserService
 			sqlException.printStackTrace();
 		}
 		return (user);
+	}
+
+	public static ArrayList<UserMovies> getUserMovies(Integer user_id)
+	{
+		String sql = "select r.*, s.*, m.* from reservation as r, schedule as s, movie as m where r.id_user = ? and r.id_schedule = s.id and s.id_movie = m.id";
+		ArrayList<UserMovies> movieList = new ArrayList<UserMovies>();
+
+		try
+		{
+			PhybeeDb db = new PhybeeDb();
+			PreparedStatement preparedStatement = db.prepareQuery(sql);
+			preparedStatement.setInt(1, user_id);
+			System.out.println(preparedStatement);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next())
+			{
+				MovieBean movie = new MovieBean(resultSet.getInt("m.id"),
+						resultSet.getInt("m.id_producer"),
+						resultSet.getString("m.title"),
+						resultSet.getString("m.synopsis"),
+						resultSet.getTime("m.time"),
+						resultSet.getString("m.poster"),
+						resultSet.getDate("m.release"),
+						resultSet.getDate("m.end_release"),
+						GenreService.getGenreOfMovie(resultSet.getInt("m.id")));
+				
+				movieList.add(new UserMovies(movie, resultSet.getInt("r.adult"),
+						resultSet.getInt("r.children"),
+						resultSet.getInt("r.disabled"),
+						resultSet.getDate("s.date"),
+						resultSet.getTime("s.start"),
+						resultSet.getTime("s.end")));
+			}
+			db.closeConnection();
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+		} catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
+		return (movieList);
 	}
 
 	private static boolean emailExist(final String email)
