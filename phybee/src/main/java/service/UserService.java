@@ -174,7 +174,7 @@ public class UserService
 						GenreService.getGenreOfMovie(resultSet.getInt("m.id")));
 				
 				movieList.add(new UserMovies(movie, resultSet.getInt("r.adult"),
-						resultSet.getInt("r.children"),
+						resultSet.getInt("r.child"),
 						resultSet.getInt("r.disabled"),
 						resultSet.getDate("s.date"),
 						resultSet.getTime("s.start"),

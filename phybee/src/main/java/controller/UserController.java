@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.MovieService;
+import service.UserMovies;
 import service.UserService;
 import bean.MovieBean;
 import bean.UserBean;
@@ -22,6 +23,7 @@ public class UserController
 {
 	@Autowired
 	private UserBean user;
+	private List<UserMovies> userMovies;
 
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public ModelAndView accesssDenied(Principal user)
@@ -96,9 +98,10 @@ public class UserController
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public ModelAndView profig()
 	{
-
+		this.userMovies = UserService.getUserMovies(user.getId());
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
+		model.addObject("listmovie", userMovies);
 		model.setViewName("profil");
 
 		return model;
