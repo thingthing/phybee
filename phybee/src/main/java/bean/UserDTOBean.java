@@ -1,9 +1,10 @@
 package bean;
 
-import com.sun.istack.internal.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import validator.PasswordMatches;
 import validator.ValidEmail;
+import javax.validation.constraints.NotNull;
 
 
 @PasswordMatches

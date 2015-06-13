@@ -163,6 +163,7 @@ public class ReservationController {
 		{
 			return "redirect:/home";
 		}
+		System.out.println("coucou");
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
 		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
