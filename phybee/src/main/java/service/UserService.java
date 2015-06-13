@@ -91,6 +91,12 @@ public class UserService
 		return (user);
 	}
 
+	private static String getHashPassword(String password)
+	{
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		return passwordEncoder.encode(password);
+	}
+	
 	public static UserBean subscribe(UserDTOBean accountDto)
 			throws EmailExistsException
 	{
@@ -113,10 +119,7 @@ public class UserService
 			PreparedStatement preparedStatement = db
 					.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
 
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(accountDto
-					.getPassword());
-
+			String hashedPassword = UserService.getHashPassword(accountDto.getPassword());
 			preparedStatement.setString(1, accountDto.getFirstName());
 			preparedStatement.setString(2, accountDto.getLastName());
 			preparedStatement.setString(3, accountDto.getEmail());
@@ -149,6 +152,34 @@ public class UserService
 		return (user);
 	}
 
+	public static boolean setUserPassword(UserBean currentUser, String password)
+	{
+		try
+		{
+			PhybeeDb db = new PhybeeDb();
+			PreparedStatement preparedStatement = db
+					.prepareQuery("update account set password=? where id=?");
+
+			String hashedPassword = UserService.getHashPassword(password);
+			preparedStatement.setString(1, hashedPassword);
+			preparedStatement.setInt(2, currentUser.getId());
+			preparedStatement.executeUpdate();
+
+			db.closeConnection();
+
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+			return (false);
+		} catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+			return (false);
+		}
+		currentUser.setPassword(password);
+		return (true);
+	}
+	
 	public static ArrayList<UserMovies> getUserMovies(Integer user_id)
 	{
 		String sql = "select r.*, s.*, m.* from reservation as r, schedule as s, movie as m where r.id_user = ? and r.id_schedule = s.id and s.id_movie = m.id";
