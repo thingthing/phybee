@@ -7,6 +7,7 @@
 <body>
     <h3 style="text-align: center"><spring:message>$${user.firstName} ${user.lastName}</spring:message></h3>
     <a href="<c:url value="/changePwd"/>"><spring:message code="account.changePwd" /></a>
+    <br /><br />
     <div class="profil-reservList">
 <table border="1" style="width: 100%">
     <tr>
