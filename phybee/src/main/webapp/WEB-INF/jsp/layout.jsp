@@ -6,6 +6,8 @@
 	href="<c:url value="/resources/css/bootstrap.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
 <script src="<c:url value="/resources/js/jquery-1.11.3.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
