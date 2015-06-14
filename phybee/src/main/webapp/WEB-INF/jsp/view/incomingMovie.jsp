@@ -42,10 +42,14 @@
 									<td width="400"><c:forEach var="genre"
 											items="${list.mGenre}">${genre.name} </c:forEach></td>
 									<td><a
-										href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"><button
-												type="button" class="btn btn-primary">Play</button></a> <a
-										href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button
-												type="button" class="btn btn-primary">Get Tickets</button></a></td>
+										href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"
+										class="btn btn-primary"> <spring:message
+												code="field.trailer" />
+									</a> <a
+										href="<c:url value="/reservation/movie?movie=${list.mId}"/>"
+										class="btn btn-primary"> <spring:message
+												code="field.getTicket" />
+									</a></td>
 								</tr>
 							</tbody>
 						</table>

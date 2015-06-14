@@ -50,7 +50,7 @@ public class MovieController {
         for (MovieBean m : listMovie) {
         	m.setmDateSchedule(res.getScheduleInfoWithFilmId(m.getmId()));
         }
-        ModelAndView mv = new ModelAndView("scheduleMovie");
+        ModelAndView mv = new ModelAndView("incomingMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);
         return mv;

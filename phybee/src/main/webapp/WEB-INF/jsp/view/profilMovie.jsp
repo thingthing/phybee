@@ -8,7 +8,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<script src="<c:url value="/resources/js/BigTab.js"/>"></script>
 
 <div class="bs-example">
 	<ul class="nav nav-tabs" id="myTab">
@@ -111,4 +110,10 @@
 		</div>
 	</div>
 </div>
+<script>
+$(function(){
+    var activeTab = $('[href=' + location.hash + ']');
+    activeTab && activeTab.tab('show');
+});
+</script>
 
