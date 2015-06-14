@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `theater`.`movie` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_producer` INT NOT NULL,
   `title` VARCHAR(100) NOT NULL,
-  `synopsis` VARCHAR(250) NULL DEFAULT 'Synopsis not available.',
+  `synopsis` LONGTEXT NULL,
   `time` TIME(0) NOT NULL,
   `poster` VARCHAR(45) NOT NULL,
   `release` DATE NOT NULL,
@@ -194,18 +194,19 @@ INSERT INTO `theater`.`room` (`id`, `name`, `seat`, `priority_seat`) VALUES ('3'
 INSERT INTO `theater`.`room` (`id`, `name`, `seat`, `priority_seat`) VALUES ('4', 'Phybee Master', '300', '10');
 
 INSERT INTO `theater`.`genre` (`id`, `name`) VALUES ('1', 'Animation'), ('2', 'Action'), ('3', 'Adventure');
-INSERT INTO `theater`.`genre` (`id`, `name`) VALUES ('4', 'Action'), ('5', 'Sci-Fi'), ('6', 'Horror'), ('7', 'Thriller'), ('8', 'Crime'), ('9', 'Comedy'), ('10', 'Drama');
+INSERT INTO `theater`.`genre` (`id`, `name`) VALUES ('4', 'Action'), ('5', 'Sci-Fi'), ('6', 'Horror'), ('7', 'Thriller'), ('8', 'Crime'), ('9', 'Comedy'), ('10', 'Drama'), ('11', 'Documentary'), ('12', 'Biography'), ('13', 'Family');
 INSERT INTO `theater`.`producer` (`id`, `name`) VALUES ('1', 'Chris Williams');
 INSERT INTO `theater`.`producer` (`id`, `name`) VALUES ('2', 'Joss Whedon');
-INSERT INTO `theater`.`producer` (`id`, `name`) VALUES ('3', 'Leigh Whannell'), ('4', 'Colin Trevorrow'), ('5', 'James Wan'), ('6', 'Andy Fickman'), ('7', 'Brad Peyton');
+INSERT INTO `theater`.`producer` (`id`, `name`) VALUES ('3', 'Leigh Whannell'), ('4', 'Colin Trevorrow'), ('5', 'James Wan'), ('6', 'Andy Fickman'), ('7', 'Brad Peyton'), ('8', 'Dana Nachman');
 
 INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('1', '1', 'Big Hero 6', 'The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.', '01:42:00', 'hero6.jpg', '2015-02-11', '2015-05-29');
 INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('2', '2', 'Avengers: Age of Ultron', 'When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it\'s up to Earth\'s Mightiest Heroes to stop the villainous Ultron from enacting his terrible plans.', '02:21:00', 'avg.jpg', '2015-04-22', '2015-06-22');
 INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('3', '3', 'Insidious: Chapter 3', 'A prequel set before the haunting of the Lambert family that reveals how gifted psychic Elise Rainier reluctantly agrees to use her ability to contact the dead in order to help a teenage girl who has been targeted by a dangerous supernatural entity.', '01:37:00', 'insidious.jpg', '2015-07-08', '2015-09-08');
-INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('4', '4', 'Jurassic World', 'Twenty-two years after the events of Jurassic Park (1993), Isla Nublar now features a fully functioning dinosaur theme park, Jurassic World, as originally envisioned by John Hammond. After 10 years of operation and visitor rates declining.', '02:10:00', 'jurassic.jpg', '2015-06-10', '2015-08-10');
+INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('4', '4', 'Jurassic World', 'Twenty-two years after the events of Jurassic Park, Isla Nublar now features a fully functioning dinosaur theme park, Jurassic World, as originally envisioned by John Hammond. After 10 years of operation and visitor rates declining, in order to fulfill a corporate mandate, a new attraction is created to re-spark visitor\'s interest, which backfires horribly.', '02:10:00', 'jurassic.jpg', '2015-06-10', '2015-08-10');
 INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('5', '5', 'Furious 7', 'Deckard Shaw seeks revenge against Dominic Toretto and his family for his comatose brother.', '02:17:00', 'furious7.jpg', '2015-04-01', '2015-06-30');
-INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('6', '6', 'Paul Blart: Mall Cop 2', 'After six years of keeping our malls safe, Paul Blart has earned a well-deserved vacation. He heads to Vegas with his teenage daughter before she heads off to college. But safety never takes a holiday and when duty calls, Blart answers.', '01:34:00', 'mallcop.jpg', '2015-04-17', '2016-06-01');
+INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('6', '6', 'Paul Blart: Mall Cop 2', 'After six years of keeping our malls safe, Paul Blart has earned a well-deserved vacation. He heads to Vegas with his teenage daughter before she heads off to college. But safety never takes a holiday and when duty calls, Blart answers.', '01:34:00', 'mallcop.jpg', '2015-04-17', '2015-06-01');
 INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('7', '7', 'San Andreas', 'In the aftermath of a massive earthquake in California, a rescue-chopper pilot makes a dangerous journey across the state in order to rescue his estranged daughter.', '01:54:00', 'andreas.jpg', '2015-05-29', '2015-07-29');
+INSERT INTO `theater`.`movie` (`id`, `id_producer`, `title`, `synopsis`, `time`, `poster`, `release`, `end_release`) VALUES ('8', '8', 'Batkid Begins', 'On one day, in one city, the world comes together to grant one 5 year old cancer patient his wish. Batkid Begins looks at the why of this flash phenomenon.', '01:27:00', 'batkid.jpg', '2015-06-26', '2015-09-26');
 
 INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('1', '1'), ('1', '2'), ('1','3');
 INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('2', '4'), ('2', '3'), ('2', '5');
@@ -214,6 +215,8 @@ INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('4', '2'),
 INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('5', '2'), ('5', '7'), ('5', '8');
 INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('6', '2'), ('6', '9');
 INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('7', '2'), ('7', '7'), ('7', '10');
+INSERT INTO `theater`.`movieGenre` (`id_moviex`, `id_genres`) VALUES ('8', '11'), ('8', '12'), ('8', '13');
+
 
 -- -----------------------------------------------------
 -- 27 May
@@ -574,6 +577,246 @@ INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, 
 INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('238', '5', '2', '2015-06-10', '14:30:00', '17:00:00', '200', '0');
 INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('239', '5', '2', '2015-06-10', '17:30:00', '20:00:00', '200', '0');
 INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('240', '5', '2', '2015-06-10', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 22 Juin
+-- -----------------------------------------------------
+-- SanAndreas Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('241', '7', '4', '2015-06-22', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('242', '7', '4', '2015-06-22', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('243', '7', '4', '2015-06-22', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('244', '7', '4', '2015-06-22', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('245', '4', '3', '2015-06-22', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('246', '4', '3', '2015-06-22', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('247', '4', '3', '2015-06-22', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('248', '4', '3', '2015-06-22', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('249', '2', '1', '2015-06-22', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('250', '2', '1', '2015-06-22', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('251', '2', '1', '2015-06-22', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('252', '2', '1', '2015-06-22', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('253', '5', '2', '2015-06-22', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('254', '5', '2', '2015-06-22', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('255', '5', '2', '2015-06-22', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('256', '5', '2', '2015-06-22', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 23 Juin
+-- -----------------------------------------------------
+-- SanAndreas Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('257', '7', '4', '2015-06-23', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('258', '7', '4', '2015-06-23', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('259', '7', '4', '2015-06-23', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('260', '7', '4', '2015-06-23', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('261', '4', '3', '2015-06-23', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('262', '4', '3', '2015-06-23', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('263', '4', '3', '2015-06-23', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('264', '4', '3', '2015-06-23', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('265', '2', '1', '2015-06-23', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('266', '2', '1', '2015-06-23', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('267', '2', '1', '2015-06-23', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('268', '2', '1', '2015-06-23', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('269', '5', '2', '2015-06-23', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('270', '5', '2', '2015-06-23', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('271', '5', '2', '2015-06-23', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('272', '5', '2', '2015-06-23', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 24 Juin
+-- -----------------------------------------------------
+-- SanAndreas Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('273', '7', '4', '2015-06-24', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('274', '7', '4', '2015-06-24', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('275', '7', '4', '2015-06-24', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('276', '7', '4', '2015-06-24', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('277', '4', '3', '2015-06-24', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('278', '4', '3', '2015-06-24', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('279', '4', '3', '2015-06-24', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('280', '4', '3', '2015-06-24', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('281', '2', '1', '2015-06-24', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('282', '2', '1', '2015-06-24', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('283', '2', '1', '2015-06-24', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('284', '2', '1', '2015-06-24', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('285', '5', '2', '2015-06-24', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('286', '5', '2', '2015-06-24', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('287', '5', '2', '2015-06-24', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('288', '5', '2', '2015-06-24', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 25 Juin
+-- -----------------------------------------------------
+-- SanAndreas Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('289', '7', '4', '2015-06-25', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('290', '7', '4', '2015-06-25', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('291', '7', '4', '2015-06-25', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('292', '7', '4', '2015-06-25', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('293', '4', '3', '2015-06-25', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('294', '4', '3', '2015-06-25', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('295', '4', '3', '2015-06-25', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('296', '4', '3', '2015-06-25', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('297', '2', '1', '2015-06-25', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('298', '2', '1', '2015-06-25', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('299', '2', '1', '2015-06-25', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('300', '2', '1', '2015-06-25', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('301', '5', '2', '2015-06-25', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('302', '5', '2', '2015-06-25', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('303', '5', '2', '2015-06-25', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('304', '5', '2', '2015-06-25', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 26 Juin
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('305', '8', '4', '2015-06-26', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('306', '8', '4', '2015-06-26', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('307', '8', '4', '2015-06-26', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('308', '8', '4', '2015-06-26', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('309', '4', '3', '2015-06-26', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('310', '4', '3', '2015-06-26', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('311', '4', '3', '2015-06-26', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('312', '4', '3', '2015-06-26', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('313', '2', '1', '2015-06-26', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('314', '2', '1', '2015-06-26', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('315', '2', '1', '2015-06-26', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('316', '2', '1', '2015-06-26', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('317', '5', '2', '2015-06-26', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('318', '5', '2', '2015-06-26', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('319', '5', '2', '2015-06-26', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('320', '5', '2', '2015-06-26', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 27 Juin
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('321', '8', '4', '2015-06-27', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('322', '8', '4', '2015-06-27', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('323', '8', '4', '2015-06-27', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('324', '8', '4', '2015-06-27', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('325', '4', '3', '2015-06-27', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('326', '4', '3', '2015-06-27', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('327', '4', '3', '2015-06-27', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('328', '4', '3', '2015-06-27', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('329', '2', '1', '2015-06-27', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('330', '2', '1', '2015-06-27', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('331', '2', '1', '2015-06-27', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('332', '2', '1', '2015-06-27', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('333', '5', '2', '2015-06-27', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('334', '5', '2', '2015-06-27', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('335', '5', '2', '2015-06-27', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('336', '5', '2', '2015-06-27', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 28 Juin
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('337', '8', '4', '2015-06-28', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('338', '8', '4', '2015-06-28', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('339', '8', '4', '2015-06-28', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('340', '8', '4', '2015-06-28', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('341', '4', '3', '2015-06-28', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('342', '4', '3', '2015-06-28', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('343', '4', '3', '2015-06-28', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('344', '4', '3', '2015-06-28', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('345', '2', '1', '2015-06-28', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('346', '2', '1', '2015-06-28', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('347', '2', '1', '2015-06-28', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('348', '2', '1', '2015-06-28', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('349', '5', '2', '2015-06-28', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('350', '5', '2', '2015-06-28', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('351', '5', '2', '2015-06-28', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('352', '5', '2', '2015-06-28', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 29 Juin
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('353', '8', '4', '2015-06-29', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('354', '8', '4', '2015-06-29', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('355', '8', '4', '2015-06-29', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('356', '8', '4', '2015-06-29', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('357', '4', '3', '2015-06-29', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('358', '4', '3', '2015-06-29', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('359', '4', '3', '2015-06-29', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('360', '4', '3', '2015-06-29', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('361', '2', '1', '2015-06-29', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('362', '2', '1', '2015-06-29', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('363', '2', '1', '2015-06-29', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('364', '2', '1', '2015-06-29', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('365', '5', '2', '2015-06-29', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('366', '5', '2', '2015-06-29', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('367', '5', '2', '2015-06-29', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('368', '5', '2', '2015-06-29', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 30 Juin
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('369', '8', '4', '2015-06-30', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('370', '8', '4', '2015-06-30', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('371', '8', '4', '2015-06-30', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('372', '8', '4', '2015-06-30', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('373', '4', '3', '2015-06-30', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('374', '4', '3', '2015-06-30', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('375', '4', '3', '2015-06-30', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('376', '4', '3', '2015-06-30', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('377', '2', '1', '2015-06-30', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('378', '2', '1', '2015-06-30', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('379', '2', '1', '2015-06-30', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('380', '2', '1', '2015-06-30', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('381', '5', '2', '2015-06-30', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('382', '5', '2', '2015-06-30', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('383', '5', '2', '2015-06-30', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('384', '5', '2', '2015-06-30', '20:30:00', '23:00:00', '200', '0');
+
+-- -----------------------------------------------------
+-- 1 Juillet
+-- -----------------------------------------------------
+-- Batkid Phybee Master
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('385', '8', '4', '2015-07-01', '14:30:00', '16:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('386', '8', '4', '2015-07-01', '17:00:00', '19:00:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('387', '8', '4', '2015-07-01', '19:30:00', '21:30:00', '300', '10');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('388', '8', '4', '2015-07-01', '22:00:00', '00:00:00', '300', '10');
+-- JurassicWorld Mention
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('389', '4', '3', '2015-07-01', '14:00:00', '16:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('390', '4', '3', '2015-07-01', '16:30:00', '19:30:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('391', '4', '3', '2015-07-01', '20:00:00', '22:00:00', '230', '20');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('392', '4', '3', '2015-07-01', '22:30:00', '00:30:00', '230', '20');
+-- Avengers Evanouke6
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('393', '2', '1', '2015-07-01', '11:30:00', '14:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('394', '2', '1', '2015-07-01', '14:30:00', '17:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('395', '2', '1', '2015-07-01', '17:30:00', '20:00:00', '200', '25');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('396', '2', '1', '2015-07-01', '20:30:00', '23:00:00', '200', '25');
+-- Furious7 Artotszka6 
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('397', '5', '2', '2015-07-01', '11:30:00', '14:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('398', '5', '2', '2015-07-01', '14:30:00', '17:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('399', '5', '2', '2015-07-01', '17:30:00', '20:00:00', '200', '0');
+INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('400', '5', '2', '2015-07-01', '20:30:00', '23:00:00', '200', '0');
 
 INSERT INTO `theater`.`ticket` (`id`, `type`, `price`) VALUES ('1', 'Adult', '7.20'), ('2', 'Child', '4.99'), ('3', 'Disabled', '5.50');
 
