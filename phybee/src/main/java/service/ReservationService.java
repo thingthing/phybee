@@ -24,14 +24,12 @@ public class ReservationService
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery("update schedule set ? = (? - ?) where id=?");
-			
 			String column_name = (is_priority ? "priority_" : "") + "seat_remain";
+			PreparedStatement preparedStatement = db.prepareQuery(
+					"update schedule set " + column_name + " = (" + column_name +  " - ?) where id=?");
 			
-			preparedStatement.setString(1, column_name);
-			preparedStatement.setString(2, column_name);
-			preparedStatement.setInt(3, seats_taken);
-			preparedStatement.setInt(4, id_schedule);
+			preparedStatement.setInt(1, seats_taken);
+			preparedStatement.setInt(2, id_schedule);
 			
 			preparedStatement.executeUpdate();
 			
@@ -166,7 +164,7 @@ public class ReservationService
 	
 	public ArrayList<ScheduleBean> getScheduleInfoWithFilmId(Integer filmId)
 	{
-		String sql = " and m.id " + filmId;
+		String sql = " and m.id = " + filmId;
 		return (this.getScheduleInfoSql(sql));
 	}
 
