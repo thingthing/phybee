@@ -1,5 +1,6 @@
 package controller;
 
+import bean.DateScheduleBean;
 import bean.MovieBean;
 import bean.UserBean;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.MovieService;
+import service.ReservationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,14 @@ public class MovieController {
     @RequestMapping("/schedule")
     public ModelAndView scheduleMovie() {
 
+    	ReservationService res = new ReservationService();
+
         this.listMovie = MovieService.getCurrentMovies();
+        
+        for (MovieBean m : listMovie) {
+        	m.setmDateSchedule(res.getScheduleInfoWithFilmId(m.getmId()));
+        }
+        
         ModelAndView mv = new ModelAndView("scheduleMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);
@@ -63,9 +72,14 @@ public class MovieController {
             @RequestParam(value = "movie", required = true) Integer movie_id
     ) {
 
+    	ReservationService res = new ReservationService();
+    	ArrayList<DateScheduleBean> schedule = null;
+
+    	schedule = res.getScheduleInfoWithFilmId(movie_id);
         ModelAndView mv = new ModelAndView("profilMovie");
         MovieBean movie = MovieService.getMovieInfo(movie_id);
         mv.addObject("list", movie);
+        mv.addObject("schedule", schedule);
         mv.addObject("user", user);
         /*mv.addObject("listmovie", title);*/
         return mv;
