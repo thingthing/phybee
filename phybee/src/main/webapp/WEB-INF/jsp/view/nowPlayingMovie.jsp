@@ -19,8 +19,8 @@
 					<a href="<c:url value="/moviedetails?movie=${list.mId}"/>"
 						class="link"> <img class="img-rounded" alt="${list.mTitle}"
 						style="max-width: 110px; max-height: 145px; margin: 20px"
-						src="<c:url value="/resources/poster/${list.mPoster}"/>"></a> <span
-						class="movieprofil-mini-info">
+						src="<c:url value="/resources/poster/${list.mPoster}"/>"></a>
+					<div class="movieprofil-mini-info">
 						<h4>${list.mTitle}</h4>
 						<p>
 							<spring:message code="field.genre" />
@@ -37,23 +37,22 @@
 							<spring:message code="field.open" />
 							: ${list.mDate.toString()}
 						</p>
-					</span> <span class="listinput"> <a
-						href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button
-								type="button" class="btn btn-primary">
-								<spring:message code="field.info" />
-							</button></a> <a
-						href="<c:url value="/moviedetails?&movie=${list.mId}#sectionC"/>"><button
-								type="button" class="btn btn-primary">
-								<spring:message code="field.schedule" />
-							</button></a> <a
-						href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"><button
-								type="button" class="btn btn-primary">
-								<spring:message code="field.trailer" />
-							</button></a> <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button
-								type="button" class="btn btn-primary">
-								<spring:message code="field.getTicket" />
-							</button></a>
-					</span>
+					</div>
+					<div class="listinput">
+						<a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"
+							class="btn btn-primary"> <spring:message code="field.info" />
+						</a> <a
+							href="<c:url value="/moviedetails?&movie=${list.mId}#sectionC"/>"
+							class="btn btn-primary"> <spring:message
+								code="field.schedule" />
+						</a> <a
+							href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"
+							class="btn btn-primary"> <spring:message code="field.trailer" />
+						</a> <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"
+							class="btn btn-primary"> <spring:message
+								code="field.getTicket" />
+						</a>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
