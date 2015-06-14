@@ -9,15 +9,17 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import bean.*;
+import bean.MovieBean;
+import bean.UserDTOBean;
+import bean.UserMovies;
 
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import db.PhybeeDb;
+import bean.UserBean;
 import validator.EmailExistsException;
 
 public class UserService
@@ -151,7 +153,7 @@ public class UserService
 		return (user);
 	}
 
-	public static boolean setUserPassword(UserBean currentUser, PasswordBean password)
+	public static boolean setUserPassword(UserBean currentUser, String password)
 	{
 		try
 		{
@@ -159,7 +161,7 @@ public class UserService
 			PreparedStatement preparedStatement = db
 					.prepareQuery("update account set password=? where id=?");
 
-			String hashedPassword = UserService.getHashPassword(password.getPassword());
+			String hashedPassword = UserService.getHashPassword(password);
 			preparedStatement.setString(1, hashedPassword);
 			preparedStatement.setInt(2, currentUser.getId());
 			preparedStatement.executeUpdate();
@@ -175,7 +177,7 @@ public class UserService
 			sqlException.printStackTrace();
 			return (false);
 		}
-		currentUser.setPassword(password.getPassword());
+		currentUser.setPassword(password);
 		return (true);
 	}
 	

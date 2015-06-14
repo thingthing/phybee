@@ -3,8 +3,8 @@ package bean;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Elyo on 01/05/2015.
@@ -20,10 +20,12 @@ public class MovieBean implements Serializable{
     private ArrayList<GenreBean> mGenre;
     private String mTitle;
     private String mSynopsis;
+    private String mTrailer;
     private Time mTime;
     private String mPoster;
     private Date mDate;
     private Date mEndDate;
+    private List<DateScheduleBean> mDateSchedule;
 
     public int getmId() {
         return mId;
@@ -57,6 +59,14 @@ public class MovieBean implements Serializable{
         this.mSynopsis = mSynopsis;
     }
 
+    public String getmTrailer() {
+        return mTrailer;
+    }
+
+    public void setmTrailer(String mTrailer) {
+        this.mTrailer = mTrailer;
+    }
+
     public Time getmTime() {
         return mTime;
     }
@@ -82,12 +92,13 @@ public class MovieBean implements Serializable{
     }
 
     public MovieBean(int id, int idProducer, String title,
-                 String synopsis, Time time, String poster,
+                 String synopsis, String trailer, Time time, String poster,
                  Date date, Date end_date, ArrayList<GenreBean> genre) {
         this.setmId(id);
         this.setmIdProducer(mIdProducer);
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
+        this.setmTrailer(trailer);
         this.setmTime(time);
         this.setmPoster(poster);
         this.setmDate(date);
@@ -96,9 +107,10 @@ public class MovieBean implements Serializable{
     }
 
     public MovieBean(String title,
-                 String synopsis, Time time, String poster, Date date) {
+                 String synopsis, String trailer, Time time, String poster, Date date) {
         this.setmTitle(title);
         this.setmSynopsis(synopsis);
+        this.setmTrailer(trailer);
         this.setmTime(time);
         this.setmPoster(poster);
         this.setmDate(date);
@@ -123,4 +135,12 @@ public class MovieBean implements Serializable{
 	{
 		this.mGenre = mGenre;
 	}
+	
+    public List<DateScheduleBean> getmDateSchedule() {
+    	return mDateSchedule;
+    }
+    
+    public void setmDateSchedule(List<DateScheduleBean> mDateSchedule) {
+    	this.mDateSchedule = mDateSchedule;
+    }
 }

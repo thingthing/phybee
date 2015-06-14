@@ -2,17 +2,7 @@
          pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<%--
-  Created by IntelliJ IDEA.
-  User: Eric
-  Date: 01/05/2015
-  Time: 19:06
-  To change this template use File | Settings | File Templates.
---%>
-<html>
-<body>
+
 <div align="center">
   <table border="0">
     <tr>
@@ -38,5 +28,3 @@
   </table>
   <a href="<c:url value="/login"/>">Login</a>
 </div>
-</body>
-</html>
