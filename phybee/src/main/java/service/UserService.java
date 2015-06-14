@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 
 import bean.MovieBean;
 import bean.UserDTOBean;
+import bean.UserMovies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

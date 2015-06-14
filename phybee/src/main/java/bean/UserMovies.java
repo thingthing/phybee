@@ -1,9 +1,7 @@
-package service;
+package bean;
 
 import java.sql.Date;
 import java.sql.Time;
-
-import bean.MovieBean;
 
 public class UserMovies
 {

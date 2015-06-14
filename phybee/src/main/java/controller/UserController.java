@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.MovieService;
-import service.UserMovies;
 import service.UserService;
 import bean.MovieBean;
 import bean.UserBean;
+import bean.UserMovies;
 
 @Controller
 public class UserController
