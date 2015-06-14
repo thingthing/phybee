@@ -49,6 +49,7 @@
 		<thead>
 			<tr>
 				<th><spring:message code="field.schedule"/></th>
+				<th><spring:message code="field.date"/></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -56,6 +57,7 @@
 			<c:forEach var="item" items="${schedule}">
 				<tr>
 					<td><c:out value="${item.getStart().toString()} to ${item.getEnd().toString()}" /></td>
+					<td><c:out value="${item.getDate().toString()}"/></td>
 					<td><a href="<c:url value="/reservation/ticket?schedule=${item.id}"/>" class="link btn btn-primary"><spring:message code="reservation.book"/></a></td>
 				</tr>
 			</c:forEach>
