@@ -115,10 +115,14 @@ public class ReservationService
 			while (resultSet.next())
 			{
 				Date date = resultSet.getDate("s.date");
-				if (dateschedule == null || dateschedule.getDate() != date)
+				if (dateschedule == null || date.equals(dateschedule.getDate()) == false)
 				{
+					System.out.println("date changed");
 					if (dateschedule != null)
-						datescheduleList.add(dateschedule);
+						{
+							System.out.println("date changed == " + date+ " --- " + dateschedule.getDate());
+							datescheduleList.add(dateschedule);
+						}
 					dateschedule = new DateScheduleBean(date, new ArrayList<ScheduleBean>());
 				}
 				dateschedule.addSchedule(new ScheduleBean(resultSet.getInt("s.id"),
