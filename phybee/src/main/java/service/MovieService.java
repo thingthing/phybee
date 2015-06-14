@@ -51,6 +51,12 @@ public class MovieService
 		return movieList;
 	}
 
+	public static ArrayList<MovieBean> getMovieLike(String movie)
+	{
+		String sql = "select * from movie where title LIKE '%" + movie + "%'";
+		return MovieService.searchMovieDb(sql);
+	}
+	
 	public static ArrayList<MovieBean> getFuturMovies()
 	{
 		String sql = "select * from movie where `release` >= DATE_ADD(CURDATE(),INTERVAL 7 DAY) &&"
