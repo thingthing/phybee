@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/DatePicker.js"/>"></script>
+<script src="<c:url value="/resources/js/Tab.js"/>"></script>
 <body>
 	<div class="progress">
 		<div class="progress-bar progress-bar-striped" role="progressbar"
@@ -43,25 +44,43 @@
 	<br />
 	<br />
 	<h2>
-		<span class="label label-primary"><spring:message code="reservation.availableSlot"/></span>
+		<span class="label label-primary"><spring:message
+				code="reservation.availableSlot" /></span>
 	</h2>
-	<table class="table">
-		<thead>
-			<tr>
-				<th><spring:message code="field.schedule"/></th>
-				<th><spring:message code="field.date"/></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="item" items="${schedule}">
-				<tr>
-					<td><c:out value="${item.getStart().toString()} to ${item.getEnd().toString()}" /></td>
-					<td><c:out value="${item.getDate().toString()}"/></td>
-					<td><a href="<c:url value="/reservation/ticket?schedule=${item.id}"/>" class="link btn btn-primary"><spring:message code="reservation.book"/></a></td>
-				</tr>
+
+	<div class="bs-example">
+		<ul class="nav nav-tabs" id="myTab">
+			<c:forEach var="item" items="${schedule}" varStatus="status">
+				<li ${status.first ? 'class="active"' : ''}><a
+					href="#section${item.getDate().toString()}">${item.getDate().toString()}</a></li>
 			</c:forEach>
-		</tbody>
-	</table>
+		</ul>
+		<div class="content">
+			<c:forEach var="item" items="${schedule}" varStatus="status">
+				<div id="section=${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
+					<table class="table">
+						<thead>
+							<tr>
+								<th><spring:message code="field.schedule" /></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="litem" items="${item.getSchedule()}">
+								<tr>
+									<td><c:out value="${litem.getStart().toString()} to ${litem.getEnd().toString()}" /></td>
+									<td>
+										<a href="<c:url value="/reservation/ticket?schedule=${litem.getId()}"/>" class="link btn btn-primary">
+											<spring:message code="reservation.book" />
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 </body>
 </html>

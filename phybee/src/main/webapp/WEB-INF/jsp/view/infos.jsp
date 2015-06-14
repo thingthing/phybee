@@ -3,19 +3,7 @@
 
 <html>
 <head>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#myTab a").click(function(e) {
-			e.preventDefault();
-			$(this).tab('show');
-		});
-	});
-</script>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/phybee.css"/>">
+<script src="<c:url value="/resources/js/Tab.js"/>"></script>
 </head>
 
 <body>
