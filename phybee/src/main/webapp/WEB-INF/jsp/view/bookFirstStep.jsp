@@ -8,7 +8,7 @@
 	href="<c:url value="/resources/css/bootstrap-datepicker.css"/>">
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/DatePicker.js"/>"></script>
-<script src="<c:url value="/resources/js/Tab.js"/>"></script>
+<script src="<c:url value="/resources/js/BigTab.js"/>"></script>
 <body>
 	<div class="progress">
 		<div class="progress-bar progress-bar-striped" role="progressbar"
@@ -48,14 +48,18 @@
 				code="reservation.availableSlot" /></span>
 	</h2>
 
-	<div class="bs-example">
-		<ul class="nav nav-tabs" id="myTab">
+	<div class="bs-example container">
+	  	<div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+  		<div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+  		<div class="wrapper">
+		<ul class="nav nav-tabs list" id="myTab">
 			<c:forEach var="item" items="${schedule}" varStatus="status">
-				<li ${status.first ? 'class="active"' : ''}><a
+				<li ${status.first ? 'class="active"' : ''}><a data-toggle="tab"
 					href="#section${item.getDate().toString()}">${item.getDate().toString()}</a></li>
 			</c:forEach>
 		</ul>
-		<div class="content">
+		</div>
+		<div class="tab-content">
 			<c:forEach var="item" items="${schedule}" varStatus="status">
 				<div id="section=${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
 					<table class="table">

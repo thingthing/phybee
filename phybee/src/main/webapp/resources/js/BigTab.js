@@ -15,7 +15,7 @@ var widthOfHidden = function(){
 };
 
 var getLeftPosi = function(){
-  return $('.list').position().left;
+  return $('.list').position().left();
 };
 
 var reAdjust = function(){
