@@ -61,7 +61,7 @@
 		</div>
 		<div class="tab-content">
 			<c:forEach var="item" items="${schedule}" varStatus="status">
-				<div id="section=${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
+				<div id="section${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
 					<table class="table">
 						<thead>
 							<tr>

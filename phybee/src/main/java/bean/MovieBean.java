@@ -3,8 +3,8 @@ package bean;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Elyo on 01/05/2015.
@@ -25,6 +25,7 @@ public class MovieBean implements Serializable{
     private String mPoster;
     private Date mDate;
     private Date mEndDate;
+    private List<DateScheduleBean> mDateSchedule;
 
     public int getmId() {
         return mId;
@@ -134,4 +135,12 @@ public class MovieBean implements Serializable{
 	{
 		this.mGenre = mGenre;
 	}
+	
+    public List<DateScheduleBean> getmDateSchedule() {
+    	return mDateSchedule;
+    }
+    
+    public void setmDateSchedule(List<DateScheduleBean> mDateSchedule) {
+    	this.mDateSchedule = mDateSchedule;
+    }
 }

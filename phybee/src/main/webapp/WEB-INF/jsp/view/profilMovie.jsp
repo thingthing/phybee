@@ -8,12 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<script>
-	$(function() {
-		var activeTab = $('[href=' + location.hash + ']');
-		activeTab && activeTab.tab('show');
-	});
-</script>
+<script src="<c:url value="/resources/js/BigTab.js"/>"></script>
+
 <div class="bs-example">
 	<ul class="nav nav-tabs" id="myTab">
 		<li class="active"><a href="#sectionA" data-toggle="tab">${list.mTitle}</a></li>
@@ -28,7 +24,8 @@
 					<div class="movie-info">
 						<img class="img-rounded"
 							src="<c:url value="/resources/poster/${list.getmPoster()}"/>"
-							alt="${list.mTitle}" style="max-width: 110px; max-height: 145px;">
+							alt="${list.mTitle}"
+							style="max-width: 110px; max-height: 145px; margin-bottom: 20px">
 						<table class="table">
 							<thead>
 								<tr>
@@ -67,39 +64,50 @@
 			</div>
 		</div>
 		<div id="sectionC" class="tab-pane fade">
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Monday</th>
-						<th>Tuesday</th>
-						<th>Wednesday</th>
-						<th>Thursday</th>
-						<th>Friday</th>
-						<th>Saturday</th>
-						<th>Sunday</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-					</tr>
-					<tr>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-						<td>14:00</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="bs-example container">
+				<div class="scroller scroller-left">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+				</div>
+				<div class="scroller scroller-right">
+					<i class="glyphicon glyphicon-chevron-right"></i>
+				</div>
+				<div class="wrapper">
+					<ul class="nav nav-tabs list" id="myTab">
+						<c:forEach var="item" items="${schedule}" varStatus="status">
+							<li ${status.first ? 'class="active"' : ''}><a
+								data-toggle="tab" href="#section${item.getDate().toString()}">${item.getDate().toString()}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<c:forEach var="item" items="${schedule}" varStatus="status">
+						<div id="section${item.getDate().toString()}"
+							${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
+							<table class="table">
+								<thead>
+									<tr>
+										<th><spring:message code="field.schedule" /></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="litem" items="${item.getSchedule()}">
+										<tr>
+											<td><c:out
+													value="${litem.getStart().toString()} to ${litem.getEnd().toString()}" /></td>
+											<td><a
+												href="<c:url value="/reservation/ticket?schedule=${litem.getId()}"/>"
+												class="link btn btn-primary"> <spring:message
+														code="reservation.book" />
+											</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
