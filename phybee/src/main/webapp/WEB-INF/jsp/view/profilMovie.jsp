@@ -16,20 +16,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap-theme.css"/>">
 <link rel="stylesheet" type="text/css" href="/resources/css/phybee.css" />
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#myTab a").click(function(e) {
-			e.preventDefault();
-			$(this).tab('show');
-		});
-	});
-</script>
-<style type="text/css">
-.bs-example {
-	margin: 20px;
-}
-</style>
+<script src="<c:url value="/resources/js/Tab.js"/>"></script>
 
 <title>${title}</title>
 </head>
@@ -124,5 +111,7 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		</div>
 </body>
 </html>
