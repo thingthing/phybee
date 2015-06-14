@@ -60,13 +60,13 @@
 		<ul class="nav nav-tabs list" id="myTab">
 			<c:forEach var="item" items="${list.getmDateSchedule()}" varStatus="status">
 				<li ${status.first ? 'class="active"' : ''}><a data-toggle="tab"
-					href="#section${item.getDate().toString()}">${item.getDate().toString()}</a></li>
+					href="#section${list.getmId()}${item.getDate().toString()}">${item.getDate().toString()}</a></li>
 			</c:forEach>
 		</ul>
 		</div>
 		<div class="tab-content">
 			<c:forEach var="item" items="${list.getmDateSchedule()}" varStatus="status">
-				<div id="section${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
+				<div id="section${list.getmId()}${item.getDate().toString()}" ${status.first ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"'}>
 					<table class="table">
 						<thead>
 							<tr>
