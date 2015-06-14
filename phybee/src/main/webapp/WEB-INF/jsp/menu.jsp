@@ -35,4 +35,10 @@
 					code="field.logout" /></a></li>
 
 	</sec:authorize>
+	<li>
+		<form style="margin-top: 13px" class="form-inline" method="get" action="<c:url value="/movie"/>">
+			<input style="background-color: #4d5359; border-color: #4d5359; color: #e3e3e3" type="text" name="search" size="15">
+			<input type="submit" value="Search" class="btn btn-xs btn-default">
+		</form>
+	</li>
 </ul>

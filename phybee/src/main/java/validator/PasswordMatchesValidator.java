@@ -1,5 +1,6 @@
 package validator;
 
+import bean.PasswordBean;
 import bean.UserDTOBean;
 
 import javax.validation.ConstraintValidator;
@@ -17,7 +18,15 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context) {
-        UserDTOBean user = (UserDTOBean) obj;
-        return user.getPassword().equals(user.getMatchingPassword());
+        if (obj instanceof UserDTOBean) {
+            UserDTOBean user = (UserDTOBean) obj;
+            return user.getPassword().equals(user.getMatchingPassword());
+        }
+        else if (obj instanceof PasswordBean) {
+            PasswordBean user = (PasswordBean) obj;
+            return user.getPassword().equals(user.getMatchingPassword());
+        }
+        else
+            return false;
     }
 }

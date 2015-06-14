@@ -30,9 +30,16 @@ public class MovieController {
     private List<MovieBean> listMovie = new ArrayList<>();
 
     @RequestMapping("/movie")
-    public ModelAndView nowPlayingMovie () {
+    public ModelAndView nowPlayingMovie (
+    		@RequestParam(value = "search", required = false, defaultValue = "") String search) {
 
-    	this.listMovie = MovieService.getCurrentMovies();
+    	if (search != null) {
+    		this.listMovie = MovieService.getCurrentMovies();
+    		System.out.println("Searched movie");
+    	}
+    	else {
+    		this.listMovie = MovieService.getCurrentMovies();
+    	}
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);

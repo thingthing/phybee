@@ -98,4 +98,14 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/view/profil.jsp" />
 	</definition>
 
+	<definition name="changePassword" extends="base.definition">
+		<put-attribute name="title" value="Update Password" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/changePassword.jsp" />
+	</definition>
+
+	<definition name="passwordChanged" extends="base.definition">
+		<put-attribute name="title" value="Update Password" />
+		<put-attribute name="body" value="/WEB-INF/jsp/view/passwordChanged.jsp" />
+	</definition>
+
 </tiles-definitions>
