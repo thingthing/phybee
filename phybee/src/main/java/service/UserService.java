@@ -9,9 +9,7 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import bean.MovieBean;
-import bean.UserDTOBean;
-import bean.UserMovies;
+import bean.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import db.PhybeeDb;
-import bean.UserBean;
 import validator.EmailExistsException;
 
 public class UserService
@@ -153,7 +150,7 @@ public class UserService
 		return (user);
 	}
 
-	public static boolean setUserPassword(UserBean currentUser, String password)
+	public static boolean setUserPassword(UserBean currentUser, PasswordBean password)
 	{
 		try
 		{
@@ -161,7 +158,7 @@ public class UserService
 			PreparedStatement preparedStatement = db
 					.prepareQuery("update account set password=? where id=?");
 
-			String hashedPassword = UserService.getHashPassword(password);
+			String hashedPassword = UserService.getHashPassword(password.getPassword());
 			preparedStatement.setString(1, hashedPassword);
 			preparedStatement.setInt(2, currentUser.getId());
 			preparedStatement.executeUpdate();
@@ -177,7 +174,7 @@ public class UserService
 			sqlException.printStackTrace();
 			return (false);
 		}
-		currentUser.setPassword(password);
+		currentUser.setPassword(password.getPassword());
 		return (true);
 	}
 	
@@ -199,6 +196,7 @@ public class UserService
 						resultSet.getInt("m.id_producer"),
 						resultSet.getString("m.title"),
 						resultSet.getString("m.synopsis"),
+						resultSet.getString("m.trailer"),
 						resultSet.getTime("m.time"),
 						resultSet.getString("m.poster"),
 						resultSet.getDate("m.release"),

@@ -73,45 +73,31 @@
 					</table>
 				</div>
 				<div id="sectionB" class="tab-pane fade">
+					<br />
 					<div>
-						<spring:message code="info.subway" />
-						<img src="<c:url value="" />" style="height: 10px; width: auto" />
-						<img src="<c:url value="" />" style="height: 10px; width: auto">La
-						Chapelle
-						<spring:message code="message.or" />
-						Barbès-Rochechouart <img src="<c:url value="" />"
-							style="height: 10px; width: auto">Barbès-Rochechouart,
-						Château Rouge, Marcadet -Poissoniers <img src="<c:url value="" />"
-							style="height: 10px; width: auto"> Marx Dormoy, Porte de la
-						Chapelle
+						<label><spring:message code="info.subway" /></label> <br />
+						<img src="<c:url value="/resources/logo/ligne2.png" />" style="height: 20px; width: auto">
+						La Chapelle <spring:message code="message.or" /> Barbès-Rochechouart <br />
+						<img src="<c:url value="/resources/logo/ligne4.png" />"	style="height: 20px; width: auto">
+						Barbès-Rochechouart, Château Rouge <spring:message code="message.or" /> Marcadet-Poissoniers <br />
+						<img src="<c:url value="/resources/logo/ligne12.png" />"style="height: 20px; width: auto">
+						Marcadet-Poissoniers, Marx Dormoy <spring:message code="message.or" /> Porte de la Chapelle <br />
 					</div>
+					<br />
 					<div>
-						Bus<img src="<c:url value="" />" style="height: 10px; width: auto" />
-						<img src="<c:url value="" />" style="height: 10px; width: auto">La
-						Chapelle
-						<spring:message code="message.or" />
-						Barbès-Rochechouart <img src="<c:url value="" />"
-							style="height: 10px; width: auto">Barbès-Rochechouart,
-						Château Rouge
-						<spring:message code="message.or" />
-						Marcadet-Poissoniers <img src="<c:url value="" />"
-							style="height: 10px; width: auto"> Marx Dormoy
-						<spring:message code="message.or" />
-						Porte de la Chapelle
+						<label>Bus</label><br />
+						<img src="<c:url value="/resources/logo/ligne31.png" />" style="height: 20px; width: auto">
+						<img src="<c:url value="/resources/logo/ligne60.png" />" style="height: 20px; width: auto">
+						<img src="<c:url value="/resources/logo/ligne302.png" />" style="height: 20px; width: auto">
+
 					</div>
+					<br />
 					<div>
-						RER<img src="<c:url value="" />" style="height: 10px; width: auto">
-						<img src="<c:url value="" />" style="height: 10px; width: auto">La
-						Chapelle
-						<spring:message code="message.or" />
-						Barbès-Rochechouart <img src="<c:url value="" />"
-							style="height: 10px; width: auto">Barbès-Rochechouart,
-						Château Rouge
-						<spring:message code="message.or" />
-						Marcadet-Poissoniers <img src="<c:url value="" />"
-							style="height: 10px; width: auto"> Marx Dormoy
-						<spring:message code="message.or" />
-						Porte de la Chapelle
+						<label>RER</label> <br />
+						<img src="<c:url value="/resources/logo/ligneb.png" />" style="height: 20px; width: auto">
+						<img src="<c:url value="/resources/logo/ligned.png" />" style="height: 20px; width: auto">
+						<img src="<c:url value="/resources/logo/lignee.png" />" style="height: 20px; width: auto">
+
 					</div>
 				</div>
 				<div id="sectionC" class="tab-pane fade">
