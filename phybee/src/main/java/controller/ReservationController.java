@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +20,7 @@ import service.DateService;
 import service.MovieService;
 import service.ReservationService;
 import service.UserService;
+import bean.DateScheduleBean;
 import bean.MovieBean;
 import bean.ScheduleBean;
 import bean.TicketBean;
@@ -42,7 +42,7 @@ public class ReservationController {
 		ReservationService res = new ReservationService();
 
 		ArrayList<MovieBean> movies = MovieService.getCurrentMovies();
-		ArrayList<ScheduleBean> schedule = null;
+		ArrayList<DateScheduleBean> schedule = null;
 
 		if (!movie.isEmpty() || !date.isEmpty()) {
 			if (!movie.isEmpty() && !date.isEmpty())
@@ -82,7 +82,7 @@ public class ReservationController {
 
 		ReservationService res = new ReservationService();
 		
-		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0);
+		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0).getSchedule().get(0);
 		MovieBean movie = MovieService.getMovieInfo(schedule.getId_movie());
 		List<TicketBean> ticket = res.getTicketInfo();
 		
@@ -107,7 +107,7 @@ public class ReservationController {
 		
 		ReservationService res = new ReservationService();
 		
-		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0);
+		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0).getSchedule().get(0);
 		Map<TicketBean, Integer> basket = new HashMap<TicketBean, Integer>();
 
 		List<TicketBean> ticket = res.getTicketInfo();
@@ -163,7 +163,6 @@ public class ReservationController {
 		{
 			return "redirect:/home";
 		}
-		System.out.println("coucou");
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
 		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
 		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);

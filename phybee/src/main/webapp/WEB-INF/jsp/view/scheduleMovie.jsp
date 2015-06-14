@@ -7,6 +7,7 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,23 +23,36 @@
         <div class="schedule-movielist">
             <c:forEach var="list" items="${listmovie}">
                 <div class="schedule-movieprofil-mini-block">
-                    <h4>${list.mTitle}</h4>
-                    <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>" class="link"> <img class="img-rounded" alt="${list.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.mPoster}"/>"></a>
-                    <span class="schedule-movieprofil-mini">
-                            <%--<p class="schedule-movielist-synopsis">Synopsis: ${list.mSynopsis}</p>--%>
-                            <p>Runtime : ${list.mTime}</p>
-                            <p>Open Nationwide : ${list.mDate}</p>
-                            <p>Producer : </p>
-                            <p>Genre :
-                                <c:forEach var="genre" items="${list.mGenre}">
-                                    ${genre.name}
-                                </c:forEach>
-                            </p>
-                    </span>
-                    <div class="schedule-movielist-interact">
+                    <h3>${list.mTitle}</h3>
+                    <div class="movie-info">
+					<a href="<c:url value="/moviedetails?&movie=${list.mId}"/>">
+							<img class="img-rounded"
+								src="<c:url value="/resources/poster/${list.getmPoster()}"/>"
+								alt="${list.mTitle}"
+								style="max-width: 110px; max-height: 145px; margin-right: 50px; margin-bottom: 20px" >
+					</a>
+							<table class="table">
+								<thead>
+									<tr>
+										<th><spring:message code="field.runtime" /></th>
+										<th><spring:message code="field.open" /></th>
+										<th><spring:message code="field.genre" /></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><b><c:out value="${list.mTime}" /></b></td>
+										<td><c:out value="${list.mDate}" /></td>
+										<td width="400"><c:forEach var="genre" items="${list.mGenre}">${genre.name} </c:forEach></td>
+										<td>
                         <a href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"><button type="button" class="btn btn-primary">Play</button></a>
                         <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
-                    </div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -73,6 +87,7 @@
                         </tbody>
                     </table>
                 </div>
+                <br/>
             </c:forEach>
         </div>
     </c:when>

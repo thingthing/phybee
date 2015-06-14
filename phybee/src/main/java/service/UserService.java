@@ -196,6 +196,7 @@ public class UserService
 						resultSet.getInt("m.id_producer"),
 						resultSet.getString("m.title"),
 						resultSet.getString("m.synopsis"),
+						resultSet.getString("m.trailer"),
 						resultSet.getTime("m.time"),
 						resultSet.getString("m.poster"),
 						resultSet.getDate("m.release"),
