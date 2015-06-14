@@ -6,6 +6,12 @@
 <html>
 <body>
     <h3 style="text-align: center">${user.firstName} ${user.lastName}</h3>
+<%--
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePwd" data-whatever=${user.lastName}><spring:message code="account.changePwd" /></button>
+--%>
+<%--
+    <a type="button" class="btn" style="width:100%;" href="#test_modal" data-toggle="modal">Add Image</a>
+--%>
     <a href="<c:url value="/changePwd"/>"><spring:message code="account.changePwd" /></a>
     <br /><br />
     <div class="profil-reservList">
@@ -54,3 +60,4 @@
     </div>
 </body>
 </html>
+

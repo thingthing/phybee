@@ -21,6 +21,7 @@
 		<intercept-url pattern="/accessdenied" access="permitAll" />	
 		<intercept-url pattern="/home" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/changePwd" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/reservation/**" access="hasRole('ROLE_USER')" />
 
 		<form-login login-page="/login" default-target-url="/"
