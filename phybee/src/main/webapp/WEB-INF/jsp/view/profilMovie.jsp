@@ -86,7 +86,7 @@
 			<div id="sectionB" class="tab-pane fade">
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item"
-						src="http://www.tudou.com/v/GecMp3EZf10/&bid=05&resourceId=0_05_05_99/v.swf"></iframe>
+						src="${list.getmTrailer()}"></iframe>
 				</div>
 			</div>
 			<div id="sectionC" class="tab-pane fade">
