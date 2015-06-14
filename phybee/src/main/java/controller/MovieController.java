@@ -43,7 +43,13 @@ public class MovieController {
     @RequestMapping("/incoming")
     public ModelAndView incomingMovie() {
 
+    	ReservationService res = new ReservationService();
+
         this.listMovie = MovieService.getFuturMovies();
+        
+        for (MovieBean m : listMovie) {
+        	m.setmDateSchedule(res.getScheduleInfoWithFilmId(m.getmId()));
+        }
         ModelAndView mv = new ModelAndView("scheduleMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);
