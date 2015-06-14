@@ -20,20 +20,23 @@ public class ReservationService
 
 	}
 
-	public void removeAvailableSeat(Integer id_schedule, Integer seats_taken, Boolean is_priority)
+	public void removeAvailableSeat(Integer id_schedule, Integer seats_taken,
+			Boolean is_priority)
 	{
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
-			String column_name = (is_priority ? "priority_" : "") + "seat_remain";
-			PreparedStatement preparedStatement = db.prepareQuery(
-					"update schedule set " + column_name + " = (" + column_name +  " - ?) where id=?");
-			
+			String column_name = (is_priority ? "priority_" : "")
+					+ "seat_remain";
+			PreparedStatement preparedStatement = db
+					.prepareQuery("update schedule set " + column_name + " = ("
+							+ column_name + " - ?) where id=?");
+
 			preparedStatement.setInt(1, seats_taken);
 			preparedStatement.setInt(2, id_schedule);
-			
+
 			preparedStatement.executeUpdate();
-			
+
 			db.closeConnection();
 
 		} catch (NamingException e)
@@ -44,7 +47,7 @@ public class ReservationService
 			sqlException.printStackTrace();
 		}
 	}
-	
+
 	public ArrayList<String> getFilmList()
 	{
 		ArrayList<String> filmList = new ArrayList<String>();
@@ -62,7 +65,7 @@ public class ReservationService
 
 			db.closeConnection();
 
-		}  catch (NamingException e)
+		} catch (NamingException e)
 		{
 			e.printStackTrace();
 		} catch (SQLException sqlException)
@@ -72,9 +75,10 @@ public class ReservationService
 
 		return filmList;
 	}
-	
-	public ArrayList<TicketBean> getTicketInfo() {
-		
+
+	public ArrayList<TicketBean> getTicketInfo()
+	{
+
 		ArrayList<TicketBean> ticketList = new ArrayList<TicketBean>();
 
 		try
@@ -85,12 +89,13 @@ public class ReservationService
 
 			while (resultSet.next())
 			{
-				ticketList.add(new TicketBean(resultSet.getInt("id"), resultSet.getString("type"), resultSet.getDouble("price")));
+				ticketList.add(new TicketBean(resultSet.getInt("id"), resultSet
+						.getString("type"), resultSet.getDouble("price")));
 			}
 
 			db.closeConnection();
 
-		}  catch (NamingException e)
+		} catch (NamingException e)
 		{
 			e.printStackTrace();
 		} catch (SQLException sqlException)
@@ -100,7 +105,6 @@ public class ReservationService
 
 		return ticketList;
 	}
-
 
 	private ArrayList<DateScheduleBean> getScheduleInfoSql(String sql)
 	{
@@ -115,19 +119,17 @@ public class ReservationService
 			while (resultSet.next())
 			{
 				Date date = resultSet.getDate("s.date");
-				if (dateschedule == null || date.equals(dateschedule.getDate()) == false)
+				if (dateschedule == null
+						|| date.equals(dateschedule.getDate()) == false)
 				{
-					System.out.println("date changed");
 					if (dateschedule != null)
-						{
-							System.out.println("date changed == " + date+ " --- " + dateschedule.getDate());
-							datescheduleList.add(dateschedule);
-						}
-					dateschedule = new DateScheduleBean(date, new ArrayList<ScheduleBean>());
+						datescheduleList.add(dateschedule);
+					dateschedule = new DateScheduleBean(date,
+							new ArrayList<ScheduleBean>());
 				}
-				dateschedule.addSchedule(new ScheduleBean(resultSet.getInt("s.id"),
-						resultSet.getInt("s.id_movie"), resultSet
-								.getInt("s.id_room"), resultSet
+				dateschedule.addSchedule(new ScheduleBean(resultSet
+						.getInt("s.id"), resultSet.getInt("s.id_movie"),
+						resultSet.getInt("s.id_room"), resultSet
 								.getString("m.title"), resultSet
 								.getTime("s.start"),
 						resultSet.getTime("s.end"),
@@ -158,10 +160,11 @@ public class ReservationService
 
 	public ArrayList<DateScheduleBean> getScheduleInfo(String film, Date date)
 	{
-		String sql = " and m.title LIKE '%" + film + "%' and s.date = '" + date + "'";
+		String sql = " and m.title LIKE '%" + film + "%' and s.date = '" + date
+				+ "'";
 		return (this.getScheduleInfoSql(sql));
 	}
-	
+
 	public ArrayList<DateScheduleBean> getScheduleInfo(String film)
 	{
 		String sql = " and m.title LIKE '%" + film + "%'";
@@ -173,35 +176,36 @@ public class ReservationService
 		String sql = " and m.id = " + filmId + " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
 	}
-	
+
 	public ArrayList<DateScheduleBean> getScheduleInfoWithFilmId(Integer filmId)
 	{
 		String sql = " and m.id = " + filmId;
 		return (this.getScheduleInfoSql(sql));
 	}
 
-	
 	public ArrayList<DateScheduleBean> getScheduleInfo(Date date)
 	{
 		String sql = " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
 	}
-	
-	public void setReservationInfo(Integer adult, Integer child, Integer disabled, Integer schedule_id, Integer user_id)
+
+	public void setReservationInfo(Integer adult, Integer child,
+			Integer disabled, Integer schedule_id, Integer user_id)
 	{
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery("insert into reservation (id_user, id_schedule, adult, child, disabled) values (?,?,?,?,?)");
+			PreparedStatement preparedStatement = db
+					.prepareQuery("insert into reservation (id_user, id_schedule, adult, child, disabled) values (?,?,?,?,?)");
 
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, schedule_id);
 			preparedStatement.setInt(3, adult);
 			preparedStatement.setInt(4, child);
 			preparedStatement.setInt(5, disabled);
-			
+
 			preparedStatement.executeUpdate();
-			
+
 			db.closeConnection();
 
 		} catch (NamingException e)

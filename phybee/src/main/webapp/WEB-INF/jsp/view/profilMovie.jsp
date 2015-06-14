@@ -8,7 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<script>
+	$(function() {
+		var activeTab = $('[href=' + location.hash + ']');
+		activeTab && activeTab.tab('show');
+	});
+</script>
 <div class="bs-example">
 	<ul class="nav nav-tabs" id="myTab">
 		<li class="active"><a href="#sectionA" data-toggle="tab">${list.mTitle}</a></li>
