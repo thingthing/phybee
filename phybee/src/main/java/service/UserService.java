@@ -1,10 +1,8 @@
 package service;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
@@ -13,7 +11,6 @@ import bean.MovieBean;
 import bean.UserDTOBean;
 import bean.UserMovies;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

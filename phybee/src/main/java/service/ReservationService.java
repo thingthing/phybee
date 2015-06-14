@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
+import bean.DateScheduleBean;
 import bean.ScheduleBean;
 import bean.TicketBean;
 import db.PhybeeDb;
@@ -103,20 +104,26 @@ public class ReservationService
 	}
 
 
-	private ArrayList<ScheduleBean> getScheduleInfoSql(String sql)
+	private ArrayList<DateScheduleBean> getScheduleInfoSql(String sql)
 	{
-		ArrayList<ScheduleBean> scheduleList = new ArrayList<ScheduleBean>();
-
+		ArrayList<DateScheduleBean> datescheduleList = new ArrayList<DateScheduleBean>();
 		sql = "select s.*, m.title from schedule as s, movie as m where m.id = s.id_movie"
-				+ sql;
+				+ sql + " order by s.date";
 		try
 		{
 			PhybeeDb db = new PhybeeDb();
 			ResultSet resultSet = db.executeQuery(sql);
-
+			DateScheduleBean dateschedule = null;
 			while (resultSet.next())
 			{
-				scheduleList.add(new ScheduleBean(resultSet.getInt("s.id"),
+				Date date = resultSet.getDate("s.date");
+				if (dateschedule == null || dateschedule.getDate() != date)
+				{
+					if (dateschedule != null)
+						datescheduleList.add(dateschedule);
+					dateschedule = new DateScheduleBean(date, new ArrayList<ScheduleBean>());
+				}
+				dateschedule.addSchedule(new ScheduleBean(resultSet.getInt("s.id"),
 						resultSet.getInt("s.id_movie"), resultSet
 								.getInt("s.id_room"), resultSet
 								.getString("m.title"), resultSet
@@ -126,7 +133,8 @@ public class ReservationService
 								.getInt("s.seat_remain"), resultSet
 								.getInt("s.priority_seat_remain")));
 			}
-
+			if (dateschedule != null)
+				datescheduleList.add(dateschedule);
 			db.closeConnection();
 
 		} catch (NamingException e)
@@ -136,42 +144,42 @@ public class ReservationService
 		{
 			sqlException.printStackTrace();
 		}
-		return (scheduleList);
+		return (datescheduleList);
 	}
 
-	public ArrayList<ScheduleBean> getScheduleInfo(Integer id_schedule)
+	public ArrayList<DateScheduleBean> getScheduleInfo(Integer id_schedule)
 	{
 		String sql = " and s.id = '" + id_schedule + "'";
 
 		return (this.getScheduleInfoSql(sql));
 	}
 
-	public ArrayList<ScheduleBean> getScheduleInfo(String film, Date date)
+	public ArrayList<DateScheduleBean> getScheduleInfo(String film, Date date)
 	{
 		String sql = " and m.title LIKE '%" + film + "%' and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
 	}
 	
-	public ArrayList<ScheduleBean> getScheduleInfo(String film)
+	public ArrayList<DateScheduleBean> getScheduleInfo(String film)
 	{
 		String sql = " and m.title LIKE '%" + film + "%'";
 		return (this.getScheduleInfoSql(sql));
 	}
 
-	public ArrayList<ScheduleBean> getScheduleInfo(Integer filmId, Date date)
+	public ArrayList<DateScheduleBean> getScheduleInfo(Integer filmId, Date date)
 	{
 		String sql = " and m.id = " + filmId + " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
 	}
 	
-	public ArrayList<ScheduleBean> getScheduleInfoWithFilmId(Integer filmId)
+	public ArrayList<DateScheduleBean> getScheduleInfoWithFilmId(Integer filmId)
 	{
 		String sql = " and m.id " + filmId;
 		return (this.getScheduleInfoSql(sql));
 	}
 
 	
-	public ArrayList<ScheduleBean> getScheduleInfo(Date date)
+	public ArrayList<DateScheduleBean> getScheduleInfo(Date date)
 	{
 		String sql = " and s.date = '" + date + "'";
 		return (this.getScheduleInfoSql(sql));
