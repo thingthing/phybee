@@ -17,7 +17,7 @@
 <body>
     <c:choose>
         <c:when test="${empty listmovie}">
-            <p>No movies available</p>
+            <p>No movies available</p> 	
         </c:when>
         <c:when test="${not empty listmovie}">
             <div class="movielist">
@@ -36,8 +36,8 @@
                             </span>
                             <span class="listinput">
                                 <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Infos</button></a>
-                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Schedule</button></a>
-                                <a href="<c:url value="/moviedetails?&movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Video</button></a>
+                                <a href="<c:url value="/moviedetails?&movie=${list.mId}#sectionC"/>"><button type="button" class="btn btn-primary">Schedule</button></a>
+                                <a href="<c:url value="/moviedetails?&movie=${list.mId}#sectionB"/>"><button type="button" class="btn btn-primary">Video</button></a>
                                 <a href="<c:url value="/reservation/movie?movie=${list.mId}"/>"><button type="button" class="btn btn-primary">Get Tickets</button></a>
                             </span>
                         </div>
