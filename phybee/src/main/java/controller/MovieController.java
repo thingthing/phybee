@@ -34,8 +34,7 @@ public class MovieController {
     		@RequestParam(value = "search", required = false, defaultValue = "") String search) {
 
     	if (search != null) {
-    		this.listMovie = MovieService.getCurrentMovies();
-    		System.out.println("Searched movie");
+    		this.listMovie = MovieService.getMovieLike(search);
     	}
     	else {
     		this.listMovie = MovieService.getCurrentMovies();
@@ -43,7 +42,6 @@ public class MovieController {
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);
-        mv.addObject("timem", listMovie.get(0).getmTime().getTime());
         return mv;
     }
 
