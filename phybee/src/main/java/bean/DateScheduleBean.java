@@ -11,7 +11,6 @@ public class DateScheduleBean
 	public DateScheduleBean()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public DateScheduleBean(Date date, ArrayList<ScheduleBean> schedule)
 	{

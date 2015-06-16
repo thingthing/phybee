@@ -6,9 +6,8 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import db.PhybeeDb;
-import bean.GenreBean;
 import bean.MovieBean;
+import db.PhybeeDb;
 
 public class MovieService
 {

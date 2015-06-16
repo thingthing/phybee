@@ -7,7 +7,6 @@ public class ProducerBean
 	public ProducerBean()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ProducerBean(Integer id, String name)
 	{

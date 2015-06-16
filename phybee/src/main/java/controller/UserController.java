@@ -1,9 +1,11 @@
 package controller;
 
-import bean.MovieBean;
-import bean.PasswordBean;
-import bean.UserBean;
-import bean.UserMovies;
+import java.security.Principal;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import service.MovieService;
 import service.UserService;
-import validator.PasswordMatches;
-
-import javax.naming.NamingException;
-import javax.validation.Valid;
-import java.security.Principal;
-import java.util.List;
-import java.util.Map;
+import bean.MovieBean;
+import bean.PasswordBean;
+import bean.UserBean;
+import bean.UserMovies;
 
 @Controller
 public class UserController

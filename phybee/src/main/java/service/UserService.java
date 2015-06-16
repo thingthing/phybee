@@ -1,23 +1,23 @@
 package service;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import bean.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import db.PhybeeDb;
 import validator.EmailExistsException;
+import bean.MovieBean;
+import bean.PasswordBean;
+import bean.UserBean;
+import bean.UserDTOBean;
+import bean.UserMovies;
+import db.PhybeeDb;
 
 public class UserService
 {
