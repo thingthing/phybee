@@ -1,5 +1,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
 <link rel="icon" type="image/png"
 	href="<c:url value="/resources/logo/Phybee.png"/>">
 <link rel="stylesheet"
@@ -13,26 +15,31 @@
 <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
-
-<div id="wrap">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<tiles:insertAttribute name="header" />
-			<div class="navbar-collapse collapse">
-				<tiles:insertAttribute name="menu" />
-				<tiles:insertAttribute name="menuLoginLayout" />
+</head>
+<body>
+	<div id="wrap">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<tiles:insertAttribute name="header" />
+				<div class="navbar-collapse collapse">
+					<tiles:insertAttribute name="menu" />
+					<tiles:insertAttribute name="menuLoginLayout" />
+				</div>
 			</div>
+		</nav>
+		<div class="container">
+			<tiles:insertAttribute name="body" />
 		</div>
-	</nav>
-	<div class="container">
-		<tiles:insertAttribute name="body" />
+		<div id="push"></div>
 	</div>
-	<div id="push"></div>
-</div>
-<div id="footer">
-	<div class="container">
-		<tiles:insertAttribute name="footer" />
+	<div id="footer">
+		<div class="container">
+			<tiles:insertAttribute name="footer" />
+		</div>
 	</div>
-</div>
+</body>
+</html>
+
+
 
 

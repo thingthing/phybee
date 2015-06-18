@@ -65,13 +65,10 @@ public class UserController
 			model.addObject("user", user);
 		} catch (Exception e)
 		{
-			e.printStackTrace();
+			System.out.println("User not log in");
 		}
 		
 		List<MovieBean> movies = MovieService.getCurrentMovies();
-
-		model.addObject("title", "Spring Security Password Encoder");
-		model.addObject("message", "This is default page!");
 		model.addObject("movies", movies);
 
 		if (logout != null)
