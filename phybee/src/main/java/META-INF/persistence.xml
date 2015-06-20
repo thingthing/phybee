@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="phybee">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<non-jta-data-source>java:comp/env/jdbc/theater</non-jta-data-source>
+		<class>entity.Account</class>
+		<class>entity.AccountPK</class>
+		<class>entity.AccountRoles</class>
+		<class>entity.Genre</class>
+		<class>entity.Movie</class>
+		<class>entity.Moviegenre</class>
+		<class>entity.Producer</class>
+		<class>entity.Reservation</class>
+		<class>entity.Room</class>
+		<class>entity.Schedule</class>
+		<class>entity.Ticket</class>
+	</persistence-unit>
+</persistence>

@@ -28,6 +28,8 @@ public class UserController
 {
 	@Autowired
 	private UserBean user;
+	@Autowired
+	private UserService userService;
 	private List<UserMovies> userMovies;
 
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
@@ -60,7 +62,7 @@ public class UserController
 
 		try
 		{
-			UserService.login(user);
+			userService.login(user);
 
 			model.addObject("user", user);
 		} catch (Exception e)
@@ -124,14 +126,14 @@ public class UserController
 	}
 
 	private Boolean updatePassword(final UserBean user, final PasswordBean pwd) {
-		Boolean success = UserService.setUserPassword(user, pwd);
+		Boolean success = userService.setUserPassword(user, pwd);
 		return success;
 	}
 
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public ModelAndView profil()
 	{
-		this.userMovies = UserService.getUserMovies(user.getId());
+		this.userMovies = userService.getUserMovies(user.getId());
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
 		model.addObject("listmovie", userMovies);

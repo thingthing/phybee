@@ -32,6 +32,8 @@ public class ReservationController {
 
 	@Autowired
 	private UserBean user;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/movie", method=RequestMethod.GET)
 	public ModelAndView chooseMovieAndDate(
@@ -61,7 +63,7 @@ public class ReservationController {
 		{
 			try
 			{
-				UserService.login(user);
+				userService.login(user);
 			} catch (Exception e)
 			{
 				e.printStackTrace();

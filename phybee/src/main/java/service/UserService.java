@@ -1,33 +1,48 @@
 package service;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.naming.NamingException;
+import javax.persistence.NoResultException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import validator.EmailExistsException;
-import bean.MovieBean;
 import bean.PasswordBean;
 import bean.UserBean;
 import bean.UserDTOBean;
 import bean.UserMovies;
-import db.PhybeeDb;
+import dao.AccountDao;
+import dao.AccountRoleDao;
+import dao.MovieDao;
+import entity.Account;
+import entity.AccountPK;
+import entity.AccountRoles;
 
+@Transactional
+@Service
 public class UserService
 {
+	@Autowired
+	private AccountDao accountDao;
 
+	@Autowired
+	private AccountRoleDao roleDao;
+
+	@Autowired
+	private MovieDao movieDao;
+	
 	public UserService()
 	{
 
 	}
 
-	public static UserBean login(UserBean user) throws Exception
+	public UserBean login(UserBean user) throws Exception
 	{
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
@@ -36,7 +51,7 @@ public class UserService
 		System.out.println("Try to login with name = " + name);
 		if (!name.equals("anonymousUser"))
 		{
-			UserBean userBean = UserService.login(name);
+			UserBean userBean = this.login(name);
 
 			user.setEmail(userBean.getEmail());
 			user.setId(userBean.getId());
@@ -55,192 +70,103 @@ public class UserService
 		throw new Exception("User not log in");
 	}
 
-	public static UserBean login(String login) throws Exception
+	public UserBean login(String login) throws Exception
 	{
-		String sql = "select * from account where email = ?";
 		UserBean user = new UserBean();
-
 		try
 		{
-			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery(sql);
-			preparedStatement.setString(1, login);
-			System.out.println(preparedStatement);
-			ResultSet resultset = preparedStatement.executeQuery();
-			if (!resultset.next())
-			{
-				throw new Exception("User not found");
-			} else
-			{
-				user.setFirstName(resultset.getString("firstname"));
-				user.setLastName(resultset.getString("lastname"));
-				user.setEmail(resultset.getString("email"));
-				user.setPassword(resultset.getString("password"));
-				user.setId(resultset.getInt("id"));
-			}
-			db.closeConnection();
-		} catch (NamingException e)
+			Account account = accountDao.findAcccountByMail(login);
+			System.out.println("User found");
+			user.setUserFromEntity(account);
+		} catch (NoResultException e)
 		{
-			e.printStackTrace();
-		} catch (SQLException sqlException)
+			System.out.println(e);
+			throw e;
+		} catch (Exception e)
 		{
-			sqlException.printStackTrace();
+			System.out.println("Other exception");
+			System.out.println(e);
 		}
+		
 		return (user);
 	}
 
-	private static String getHashPassword(String password)
+	private String getHashPassword(String password)
 	{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.encode(password);
 	}
-	
-	public static UserBean subscribe(UserDTOBean accountDto)
+
+	public UserBean subscribe(UserDTOBean accountDto)
 			throws EmailExistsException
 	{
-		if (emailExist(accountDto.getEmail()))
+		System.out.println("Trying to subscribe " + accountDto.getEmail());
+		if (this.emailExist(accountDto.getEmail()))
 		{
 			throw new EmailExistsException(
 					"There is an account with that email adress: "
 							+ accountDto.getEmail());
 		}
+		System.out.println("New account");
+		AccountPK id = new AccountPK();
+		id.setEmail(accountDto.getEmail());
+		
+		Account account = new Account();
+		System.out.println("Setting data");
+		account.setFirstname(accountDto.getFirstName());
+		account.setLastname(accountDto.getLastName());
+		account.setId(id);
+		account.setPassword(this.getHashPassword(accountDto.getPassword()));
+		account.setAccountRole(new ArrayList<AccountRoles>());
+		
+		AccountRoles role = new AccountRoles();
+		role.setRole("ROLE_USER");
+		System.out.println("Adding account role");
+		account.addAccountRole(role);
+		
+		roleDao.create(role);
+		accountDao.create(account);
+		
 		UserBean user = new UserBean();
-		user.setFirstName(accountDto.getFirstName());
-		user.setLastName(accountDto.getLastName());
-		user.setEmail(accountDto.getEmail());
-		user.setPassword(accountDto.getPassword());
-		user.setId(-1);
-
-		try
-		{
-			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db
-					.prepareQuery("insert into account (firstname, lastname, email, password) values (?,?,?,?)");
-
-			String hashedPassword = UserService.getHashPassword(accountDto.getPassword());
-			preparedStatement.setString(1, accountDto.getFirstName());
-			preparedStatement.setString(2, accountDto.getLastName());
-			preparedStatement.setString(3, accountDto.getEmail());
-			preparedStatement.setString(4, hashedPassword);
-			preparedStatement.executeUpdate();
-
-			ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-			if (generatedKeys.next())
-			{
-				Integer id = generatedKeys.getInt(1);
-				System.out.println("User id == " + id);
-				user.setId(id);
-			}
-
-			preparedStatement = db
-					.prepareQuery("insert into account_roles (email, ROLE) values (?,?)");
-			preparedStatement.setString(1, accountDto.getEmail());
-			preparedStatement.setString(2, "ROLE_USER");
-			preparedStatement.executeUpdate();
-
-			db.closeConnection();
-
-		} catch (NamingException e)
-		{
-			e.printStackTrace();
-		} catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
-		}
+		user.setUserFromEntity(account);
 		return (user);
 	}
 
-	public static boolean setUserPassword(UserBean currentUser, PasswordBean password)
+	public boolean setUserPassword(UserBean currentUser,
+			PasswordBean password)
 	{
 		try
 		{
-			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db
-					.prepareQuery("update account set password=? where id=?");
-
-			String hashedPassword = UserService.getHashPassword(password.getPassword());
-			preparedStatement.setString(1, hashedPassword);
-			preparedStatement.setInt(2, currentUser.getId());
-			preparedStatement.executeUpdate();
-
-			db.closeConnection();
-
-		} catch (NamingException e)
+			Account account = accountDao.findAcccountById(currentUser.getId());
+			String hashedPassword = this.getHashPassword(password
+					.getPassword());
+			account.setPassword(hashedPassword);
+			accountDao.update(account);
+		} catch (NoResultException e)
 		{
+			System.out.println("User not found in set user password: " + currentUser.getId());
 			e.printStackTrace();
-			return (false);
-		} catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
 			return (false);
 		}
 		currentUser.setPassword(password.getPassword());
 		return (true);
 	}
-	
-	public static ArrayList<UserMovies> getUserMovies(Integer user_id)
-	{
-		String sql = "select r.*, s.*, m.* from reservation as r, schedule as s, movie as m where r.id_user = ? and r.id_schedule = s.id and s.id_movie = m.id";
-		ArrayList<UserMovies> movieList = new ArrayList<UserMovies>();
 
-		try
-		{
-			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery(sql);
-			preparedStatement.setInt(1, user_id);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next())
-			{
-				MovieBean movie = new MovieBean(resultSet.getInt("m.id"),
-						resultSet.getInt("m.id_producer"),
-						resultSet.getString("m.title"),
-						resultSet.getString("m.synopsis"),
-						resultSet.getString("m.trailer"),
-						resultSet.getTime("m.time"),
-						resultSet.getString("m.poster"),
-						resultSet.getDate("m.release"),
-						resultSet.getDate("m.end_release"),
-						GenreService.getGenreOfMovie(resultSet.getInt("m.id")));
-				
-				movieList.add(new UserMovies(movie, resultSet.getInt("r.adult"),
-						resultSet.getInt("r.child"),
-						resultSet.getInt("r.disabled"),
-						resultSet.getDate("s.date"),
-						resultSet.getTime("s.start"),
-						resultSet.getTime("s.end")));
-			}
-			db.closeConnection();
-		} catch (NamingException e)
-		{
-			e.printStackTrace();
-		} catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
-		}
-		return (movieList);
+	public ArrayList<UserMovies> getUserMovies(Integer user_id)
+	{
+		return (movieDao.getUserMovies(user_id));
 	}
 
-	private static boolean emailExist(final String email)
+	private boolean emailExist(final String email)
 	{
-		String sql = "select * from account where email = ?";
 		try
 		{
-			PhybeeDb db = new PhybeeDb();
-			PreparedStatement preparedStatement = db.prepareQuery(sql);
-			preparedStatement.setString(1, email);
-			System.out.println(preparedStatement);
-			ResultSet resultset = preparedStatement.executeQuery();
-			if (!resultset.next())
-			{
-				db.closeConnection();
-				return false;
-			}
-			db.closeConnection();
-		} catch (NamingException e)
+			accountDao.findAcccountByMail(email);
+			System.out.println("Exit find by account");
+		} catch (NoResultException e)
 		{
-			e.printStackTrace();
-		} catch (SQLException sqlException)
+			return false;
+		} catch (Exception sqlException)
 		{
 			sqlException.printStackTrace();
 		}

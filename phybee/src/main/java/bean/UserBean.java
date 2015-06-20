@@ -3,6 +3,8 @@ package bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import entity.Account;
+
 import javax.persistence.*;
 
 /**
@@ -34,6 +36,15 @@ public class UserBean {
         this.tokenExpired = false;
     }
 
+    public void setUserFromEntity(Account account)
+    {
+    	this.firstName = account.getFirstname();
+    	this.lastName = account.getLastname();
+    	this.email = account.getId().getEmail();
+    	this.password = account.getPassword();
+    	this.id = account.getId().getId();
+    }
+    
     public Integer getId() {
         return id;
     }
