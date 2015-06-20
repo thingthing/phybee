@@ -1,11 +1,14 @@
 package controller;
 
+import java.lang.reflect.Array;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
+import bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,11 +20,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.MovieService;
+import service.ReservationService;
 import service.UserService;
-import bean.MovieBean;
-import bean.PasswordBean;
-import bean.UserBean;
-import bean.UserMovies;
 
 @Controller
 public class UserController
@@ -144,9 +144,11 @@ public class UserController
 	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ModelAndView infos()
 	{
-
+		ReservationService res = new ReservationService();
+		ArrayList<TicketBean> tickets = res.getTicketInfo();
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
+		model.addObject("tickets", tickets);
 		model.setViewName("infos");
 
 		return model;
