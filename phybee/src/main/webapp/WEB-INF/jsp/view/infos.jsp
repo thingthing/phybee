@@ -115,7 +115,7 @@
 		</div>
 	</div>
 </div>
-<div style="clear: both"/>
+<div style="clear: both"></div>
 <div>
 	<br />
 	<img src="<c:url value="/resources/poster/golden_drop.png"/>" style="width: 100%; height: auto">

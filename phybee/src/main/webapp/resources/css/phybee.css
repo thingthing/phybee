@@ -122,12 +122,10 @@ Register
 }
 
 .account-wall {
-	padding: 0px 0px 20px 0px;
 	background-color: #f7f7f7;
 	-moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 	-webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-	height: 390px;
 	width: 60%;
 	float: right;
 }

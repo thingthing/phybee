@@ -3,12 +3,12 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <c:if test="${not empty error}">
-	<div class="error">${error}</div>
+	<div class="alert alert-danger">${error}</div>
 </c:if>
 <c:if test="${not empty msg}">
-	<div class="msg">${msg}</div>
+	<div class="alert alert-info">${msg}</div>
 </c:if>
 
 <form name="loginForm" action="<c:url value='/auth/login_check' />"

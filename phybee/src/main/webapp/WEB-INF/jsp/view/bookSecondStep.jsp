@@ -11,9 +11,7 @@
 <br />
 <c:choose>
 	<c:when test="${not empty error}">
-		<h4>
-			<span class="label label-danger">${error}</span>
-		</h4>
+		<div class="alert alert-danger">${error}</div>
 	</c:when>
 </c:choose>
 <h2>
@@ -72,8 +70,7 @@
 							<td><c:out value="${schedule.prioritySeatRemain}" /></td>
 							<td><c:out value="${item.getFormatPrice()}" /></td>
 							<td><input type="number" name="${item.getType()}" size="30"
-								min="0" max="${schedule.prioritySeatRemain}" step="1"
-								value="0"></td>
+								min="0" max="${schedule.prioritySeatRemain}" step="1" value="0"></td>
 						</c:when>
 						<c:otherwise>
 							<td><c:out value="${schedule.seatRemain}" /></td>
