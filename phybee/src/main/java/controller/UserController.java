@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Movie;
+import entity.Reservation;
 import service.MovieService;
 import service.UserService;
-import bean.MovieBean;
 import bean.PasswordBean;
 import bean.UserBean;
-import bean.UserMovies;
 
 @Controller
 public class UserController
@@ -30,7 +30,10 @@ public class UserController
 	private UserBean user;
 	@Autowired
 	private UserService userService;
-	private List<UserMovies> userMovies;
+	@Autowired
+	private MovieService movieService;
+	
+	private List<Reservation> userMovies;
 
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public ModelAndView accesssDenied(Principal user)
@@ -70,7 +73,7 @@ public class UserController
 			System.out.println("User not log in");
 		}
 		
-		List<MovieBean> movies = MovieService.getCurrentMovies();
+		List<Movie> movies = movieService.getCurrentMovies();
 		model.addObject("movies", movies);
 
 		if (logout != null)

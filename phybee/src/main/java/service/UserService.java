@@ -16,13 +16,13 @@ import validator.EmailExistsException;
 import bean.PasswordBean;
 import bean.UserBean;
 import bean.UserDTOBean;
-import bean.UserMovies;
 import dao.AccountDao;
 import dao.AccountRoleDao;
-import dao.MovieDao;
+import dao.ReservationDao;
 import entity.Account;
 import entity.AccountPK;
 import entity.AccountRoles;
+import entity.Reservation;
 
 @Transactional
 @Service
@@ -33,9 +33,9 @@ public class UserService
 
 	@Autowired
 	private AccountRoleDao roleDao;
-
+	
 	@Autowired
-	private MovieDao movieDao;
+	private ReservationDao reservationDao;
 	
 	public UserService()
 	{
@@ -100,19 +100,16 @@ public class UserService
 	public UserBean subscribe(UserDTOBean accountDto)
 			throws EmailExistsException
 	{
-		System.out.println("Trying to subscribe " + accountDto.getEmail());
 		if (this.emailExist(accountDto.getEmail()))
 		{
 			throw new EmailExistsException(
 					"There is an account with that email adress: "
 							+ accountDto.getEmail());
 		}
-		System.out.println("New account");
 		AccountPK id = new AccountPK();
 		id.setEmail(accountDto.getEmail());
 		
 		Account account = new Account();
-		System.out.println("Setting data");
 		account.setFirstname(accountDto.getFirstName());
 		account.setLastname(accountDto.getLastName());
 		account.setId(id);
@@ -121,7 +118,6 @@ public class UserService
 		
 		AccountRoles role = new AccountRoles();
 		role.setRole("ROLE_USER");
-		System.out.println("Adding account role");
 		account.addAccountRole(role);
 		
 		roleDao.create(role);
@@ -152,9 +148,9 @@ public class UserService
 		return (true);
 	}
 
-	public ArrayList<UserMovies> getUserMovies(Integer user_id)
+	public List<Reservation> getUserMovies(Integer user_id)
 	{
-		return (movieDao.getUserMovies(user_id));
+		return (reservationDao.getUserReservation(user_id));
 	}
 
 	private boolean emailExist(final String email)

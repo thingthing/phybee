@@ -4,10 +4,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Movie;
+import entity.Schedule;
+import entity.Ticket;
 import service.DateService;
 import service.MovieService;
 import service.ReservationService;
 import service.UserService;
 import bean.DateScheduleBean;
-import bean.MovieBean;
-import bean.ScheduleBean;
-import bean.TicketBean;
 import bean.UserBean;
 
 @Controller
@@ -34,25 +35,32 @@ public class ReservationController {
 	private UserBean user;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private MovieService movieService;
+	
 	
 	@RequestMapping(value="/movie", method=RequestMethod.GET)
 	public ModelAndView chooseMovieAndDate(
 			@RequestParam(value = "movie", required = false, defaultValue = "") String movie,
 			@RequestParam(value = "date", required = false, defaultValue = "") String date) throws ParseException {
 		System.out.println("Book, firstStep");
- 
-		ReservationService res = new ReservationService();
 
-		ArrayList<MovieBean> movies = MovieService.getCurrentMovies();
-		ArrayList<DateScheduleBean> schedule = null;
+		List<Movie> movies = movieService.getCurrentMovies();
+		List<DateScheduleBean> schedule = null;
 
 		if (!movie.isEmpty() || !date.isEmpty()) {
-			if (!movie.isEmpty() && !date.isEmpty())
-				schedule = res.getScheduleInfo(Integer.parseInt(movie), DateService.parseDate(date, "yyyy-MM-dd"));
-			else if (!movie.isEmpty())
-				schedule = res.getScheduleInfoWithFilmId(Integer.parseInt(movie));
-			else if (!date.isEmpty())
-				schedule = res.getScheduleInfo(DateService.parseDate(date, "yyyy-MM-dd"));
+			try
+			{
+				if (!movie.isEmpty() && !date.isEmpty())
+					schedule = reservationService.getScheduleInfo(Integer.parseInt(movie), DateService.parseDate(date, "yyyy-MM-dd"));
+				else if (!movie.isEmpty())
+					schedule = reservationService.getScheduleInfoWithFilmId(Integer.parseInt(movie));
+			} catch (NoResultException e)
+			{
+				System.out.println("No schedule found");
+			}
 		}
 		
 		ModelAndView mv = new ModelAndView("bookFirstStep");
@@ -69,7 +77,6 @@ public class ReservationController {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("user is == " + user.getId());
 		mv.addObject("user", user);
 		if (schedule != null && schedule.size() > 0)
 			mv.addObject("schedule", schedule);
@@ -82,11 +89,10 @@ public class ReservationController {
 			@RequestParam(value = "error", required = false, defaultValue="") String error) {
 		System.out.println("Book, secondStep");
 
-		ReservationService res = new ReservationService();
+		Schedule schedule = reservationService.getScheduleInfo(Integer.parseInt(scheduleId));
+		Movie movie = schedule.getMovie();
 		
-		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0).getSchedule().get(0);
-		MovieBean movie = MovieService.getMovieInfo(schedule.getId_movie());
-		List<TicketBean> ticket = res.getTicketInfo();
+		List<Ticket> ticket = reservationService.getTicketInfo();
 		
 		ModelAndView mv = new ModelAndView("bookSecondStep");
 		mv.addObject("movie", movie);
@@ -106,20 +112,18 @@ public class ReservationController {
 		System.out.println("Book, thirdStep");
 
 		double amount = 0.00;
-		
-		ReservationService res = new ReservationService();
-		
-		ScheduleBean schedule = res.getScheduleInfo(Integer.parseInt(scheduleId)).get(0).getSchedule().get(0);
-		Map<TicketBean, Integer> basket = new HashMap<TicketBean, Integer>();
+	
+		Schedule schedule = reservationService.getScheduleInfo(Integer.parseInt(scheduleId));
+		Map<Ticket, Integer> basket = new HashMap<Ticket, Integer>();
 
-		List<TicketBean> ticket = res.getTicketInfo();
+		List<Ticket> ticket = reservationService.getTicketInfo();
 
 		if (Integer.parseInt(adult) == 0 && Integer.parseInt(child) == 0 && Integer.parseInt(disabled) == 0) {
 			return chooseTicket(scheduleId, "Error: Can't buy 0 tickets !");
 		}
 			
 		
-		for (TicketBean t : ticket) {
+		for (Ticket t : ticket) {
 			if (t.getType().equals("Adult"))
 				basket.put(t, Integer.parseInt(adult));
 			else if (t.getType().equals("Child"))
@@ -128,7 +132,7 @@ public class ReservationController {
 				basket.put(t, Integer.parseInt(disabled));
 		}
 		
-		for (TicketBean key : basket.keySet()) {
+		for (Ticket key : basket.keySet()) {
 			amount += basket.get(key) * key.getPrice();
 		}
 		
@@ -159,15 +163,13 @@ public class ReservationController {
 		Integer userId = user.getId();
 		System.out.println("Book, fourth user id is " + userId);
 		
-		ReservationService res = new ReservationService();
-
 		if (userId <= 0)
 		{
 			return "redirect:/home";
 		}
-		res.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
-		res.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
-		res.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
+		reservationService.removeAvailableSeat(Integer.parseInt(scheduleId), adult + child, false);
+		reservationService.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
+		reservationService.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
 		
 		return "redirect:/home";
 	}

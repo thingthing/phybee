@@ -1,6 +1,10 @@
 package entity;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+
 import javax.persistence.*;
 
 
@@ -46,6 +50,16 @@ public class Ticket implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public String getFormatPrice() {
+		NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.CHINA);
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setCurrencySymbol("¥");
+		dfs.setGroupingSeparator('.');
+		dfs.setMonetaryDecimalSeparator('.');
+		((DecimalFormat) format).setDecimalFormatSymbols(dfs);
+		return format.format(price);
 	}
 
 }

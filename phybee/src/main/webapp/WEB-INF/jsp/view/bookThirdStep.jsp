@@ -23,8 +23,8 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><c:out value="${schedule.getTitle_movie()}" /></td>
-			<td><c:out value="${schedule.getDate().toString()}" /></td>
+			<td><c:out value="${schedule.movie.title}" /></td>
+			<td><c:out value="${schedule.scheduleDate.toString()}" /></td>
 			<td><c:out value="${schedule.getStart().toString()}" /></td>
 			<td><c:out value="${schedule.getEnd().toString()}" /></td>
 		</tr>

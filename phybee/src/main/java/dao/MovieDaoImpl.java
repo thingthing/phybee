@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,10 +9,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import bean.UserMovies;
 import entity.Movie;
-import entity.Reservation;
-import entity.Schedule;
 
 @Repository
 public class MovieDaoImpl implements MovieDao
@@ -52,49 +48,76 @@ public class MovieDaoImpl implements MovieDao
 	}
 
 	@Override
-	public ArrayList<UserMovies> getUserMovies(Integer user_id)
+	public Movie findMovieById(Integer id) throws NoResultException
 	{
-		ArrayList<UserMovies> movieList = new ArrayList<UserMovies>();
-
-		CriteriaBuilder cb = this.em.getCriteriaBuilder();
-		CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
-
-		Root<Reservation> r = cq.from(Reservation.class);
-		Root<Schedule> s = cq.from(Schedule.class);
-		Root<Movie> m = cq.from(Movie.class);
-
-		cq.multiselect(r, s, m);
-		cq.where(cb.and(cb.equal(r.get("id_user"), user_id),
-				cb.equal(r.get("id_schedule"), s.get("id")), cb.equal(s.get("id_movie"), m.get("id"))));
-		
-		List<Object[]> resultSet = em.createQuery(cq).getResultList();
-		for (Object[] values : resultSet)
-		{
-			for (Object value: values)
-			{
-				System.out.println("Object == " + value);
-			}
-		}
-//		while (resultSet.next())
-//		{
-//			MovieBean movie = new MovieBean(resultSet.getInt("m.id"),
-//					resultSet.getInt("m.id_producer"),
-//					resultSet.getString("m.title"),
-//					resultSet.getString("m.synopsis"),
-//					resultSet.getString("m.trailer"),
-//					resultSet.getTime("m.time"),
-//					resultSet.getString("m.poster"),
-//					resultSet.getDate("m.release"),
-//					resultSet.getDate("m.end_release"),
-//					GenreService.getGenreOfMovie(resultSet.getInt("m.id")));
-//
-//			movieList.add(new UserMovies(movie, resultSet.getInt("r.adult"),
-//					resultSet.getInt("r.child"),
-//					resultSet.getInt("r.disabled"),
-//					resultSet.getDate("s.date"), resultSet.getTime("s.start"),
-//					resultSet.getTime("s.end")));
-//		}
-		return (movieList);
+		return this.em.find(Movie.class, id);
 	}
 
+	@Override
+	public List<Movie> findCurrentMovies()
+	{
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> m = cq.from(Movie.class);
+		cq.where(cb.and(
+				cb.lessThanOrEqualTo(m.get("startRelease"), cb.currentDate()),
+				cb.greaterThan(m.get("endRelease"), cb.currentDate())));
+		return this.em.createQuery(cq).getResultList();
+	}
+
+	@Override
+	public List<Movie> findCurrentMoviesAndSchedule()
+	{
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> m = cq.from(Movie.class);
+		cq.orderBy(cb.asc(m.get("schedules").get("scheduleDate")));
+		cq.where(cb.and(
+				cb.lessThanOrEqualTo(m.get("startRelease"), cb.currentDate()),
+				cb.greaterThan(m.get("endRelease"), cb.currentDate()),
+				cb.greaterThan(m.get("schedules").get("scheduleDate"),
+						cb.currentDate())));
+		return this.em.createQuery(cq).getResultList();
+	}
+	
+	@Override
+	public List<Movie> findNewMovies()
+	{
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> m = cq.from(Movie.class);
+		cq.where(cb.and(
+				cb.lessThanOrEqualTo(m.get("startRelease"), cb.currentDate()),
+				cb.greaterThan(m.get("schedules").get("scheduleDate"),
+						cb.currentDate()),
+				cb.greaterThan(m.get("endRelease"), cb.currentDate()),
+				cb.lessThanOrEqualTo(cb.function("datediff", Integer.class,
+						cb.currentDate(), m.get("startRelease")), cb.literal(7))));
+		return this.em.createQuery(cq).getResultList();
+	}
+
+	@Override
+	public List<Movie> findFuturMovies()
+	{
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> m = cq.from(Movie.class);
+		cq.where(cb.and(
+				cb.greaterThan(m.get("startRelease"), cb.currentDate()),
+				cb.lessThanOrEqualTo(
+						cb.function("datediff", Integer.class,
+								m.get("startRelease"), cb.currentDate()),
+						cb.literal(7))));
+		return this.em.createQuery(cq).getResultList();
+	}
+
+	@Override
+	public List<Movie> findMoviesLike(String title)
+	{
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> m = cq.from(Movie.class);
+		cq.where(cb.like(m.get("title"), "%" + title + "%"));
+		return this.em.createQuery(cq).getResultList();
+	}
 }

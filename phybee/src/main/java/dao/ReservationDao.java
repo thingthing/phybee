@@ -8,9 +8,7 @@ public interface ReservationDao
 {
 	List<Reservation> findAllReservation();
 
-//	Cours findCoursByCode(String code) throws NoResultException;
-//
-//	Cours findCoursByName(String name) throws NoResultException;
+	List<Reservation> getUserReservation(Integer user_id);
 
 	void create(Reservation entity);
 

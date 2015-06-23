@@ -23,8 +23,8 @@
 <br />
 <div class="movie-info">
 	<img class="img-circle"
-		src="<c:url value="/resources/poster/${movie.getmPoster()}"/>"
-		alt="${movie.getmId()}" width="140" height="140">
+		src="<c:url value="/resources/poster/${movie.poster}"/>"
+		alt="${movie.id}" width="140" height="140">
 	<table class="table">
 		<thead>
 			<tr>
@@ -38,12 +38,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><b><c:out value="${movie.getmTitle()}" /></b></td>
-				<td width="450"><c:out value="${movie.getmSynopsis()}" /></td>
-				<td><c:out value="${movie.getmTime()}" /></td>
-				<td><c:out value="${schedule.getStart().toString()}" /></td>
-				<td><c:out value="${schedule.getEnd().toString()}" /></td>
-				<td><c:out value="${schedule.getDate().toString()}" /></td>
+				<td><b><c:out value="${movie.title}" /></b></td>
+				<td width="450"><c:out value="${movie.synopsis}" /></td>
+				<td><c:out value="${movie.duration}" /></td>
+				<td><c:out value="${schedule.start.toString()}" /></td>
+				<td><c:out value="${schedule.end.toString()}" /></td>
+				<td><c:out value="${schedule.scheduleDate.toString()}" /></td>
 			</tr>
 		</tbody>
 	</table>
@@ -69,17 +69,17 @@
 					<td><c:out value="${item.getType()}" /></td>
 					<c:choose>
 						<c:when test="${item.type eq 'Disabled'}">
-							<td><c:out value="${schedule.getPriority_seat_remain()}" /></td>
+							<td><c:out value="${schedule.prioritySeatRemain}" /></td>
 							<td><c:out value="${item.getFormatPrice()}" /></td>
 							<td><input type="number" name="${item.getType()}" size="30"
-								min="0" max="${schedule.getPriority_seat_remain()}" step="1"
+								min="0" max="${schedule.prioritySeatRemain}" step="1"
 								value="0"></td>
 						</c:when>
 						<c:otherwise>
-							<td><c:out value="${schedule.getSeat_remain()}" /></td>
+							<td><c:out value="${schedule.seatRemain}" /></td>
 							<td><c:out value="${item.getFormatPrice()}" /></td>
 							<td><input type="number" name="${item.getType()}" size="30"
-								min="0" max="${schedule.getSeat_remain()}" step="1" value="0"></td>
+								min="0" max="${schedule.seatRemain}" step="1" value="0"></td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -88,7 +88,7 @@
 	</table>
 	<input type="hidden" name="schedule" value="${schedule.id}" />
 	<div class="row">
-		<a href="<c:url value="/reservation/movie?movie=${movie.getmId()}"/>"
+		<a href="<c:url value="/reservation/movie?movie=${movie.id}"/>"
 			class="link btn btn-primary"><c:out value="Return" /></a> <input
 			type="submit" value="Continue" class="btn btn-primary">
 	</div>

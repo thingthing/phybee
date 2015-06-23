@@ -50,20 +50,16 @@ public class AccountDaoImpl implements AccountDao
 	@Override
 	public Account findAcccountByMail(String email) throws NoResultException
 	{
-		System.out.println("Find account by mail with == " + email);
 		Query query = this.em.createNamedQuery("Account.findByMail");
-		System.out.println("Query is " + query);
 		query.setParameter("mail", email);
-		System.out.println("Query 2 is " + query);
 		Account result = (Account) query.getSingleResult();
-		System.out.println("Result found");
 		return result;
 	}
 
 	@Override
 	public Account findAcccountById(Integer id) throws NoResultException
 	{
-		return (Account) this.em.createNamedQuery("Account.findByMail")
+		return (Account) this.em.createNamedQuery("Account.findById")
 				.setParameter("id", id).getSingleResult();
 	}
 

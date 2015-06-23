@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -20,8 +20,8 @@ public class Schedule implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.DATE)
-	private Date date;
+	@Column(name="schedule_date")
+	private Date scheduleDate;
 
 	private Time end;
 
@@ -58,12 +58,12 @@ public class Schedule implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return this.date;
+	public Date getScheduleDate() {
+		return this.scheduleDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setScheduleDate(Date date) {
+		this.scheduleDate = date;
 	}
 
 	public Time getEnd() {

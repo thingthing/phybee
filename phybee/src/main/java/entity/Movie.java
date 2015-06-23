@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -20,19 +20,18 @@ public class Movie implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="end_release")
 	private Date endRelease;
 
 	private String poster;
 
-	@Temporal(TemporalType.DATE)
-	private Date release;
+	@Column(name="start_release")
+	private Date startRelease;
 
 	@Lob
 	private String synopsis;
 
-	private Time time;
+	private Time duration;
 
 	private String title;
 
@@ -79,12 +78,12 @@ public class Movie implements Serializable {
 		this.poster = poster;
 	}
 
-	public Date getRelease() {
-		return this.release;
+	public Date getStartRelease() {
+		return this.startRelease;
 	}
 
-	public void setRelease(Date release) {
-		this.release = release;
+	public void setStartRelease(Date release) {
+		this.startRelease = release;
 	}
 
 	public String getSynopsis() {
@@ -95,12 +94,12 @@ public class Movie implements Serializable {
 		this.synopsis = synopsis;
 	}
 
-	public Time getTime() {
-		return this.time;
+	public Time getDuration() {
+		return this.duration;
 	}
 
-	public void setTime(Time time) {
-		this.time = time;
+	public void setDuration(Time time) {
+		this.duration = time;
 	}
 
 	public String getTitle() {
