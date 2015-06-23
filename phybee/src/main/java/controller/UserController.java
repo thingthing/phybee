@@ -110,7 +110,7 @@ public class UserController
 	{
 		PasswordBean pwdForm = new PasswordBean();
 		model.put("pwdForm", pwdForm);
-
+		model.put("user", user);
 		return "changePassword";
 	}
 
@@ -122,14 +122,14 @@ public class UserController
 		if (!result.hasErrors()) {
 			done = updatePassword(user, pwd);
 		}
+		ModelAndView mv = new ModelAndView("passwordChanged");
 		if (result.hasErrors()) {
-			return new ModelAndView("changePassword", "password", pwd);
+			mv = new ModelAndView("changePassword", "password", pwd);
 		} else if (done == false){
-			return new ModelAndView("passwordUnchanged");
+			mv = new ModelAndView("passwordUnchanged");
 		}
-		else {
-			return new ModelAndView("passwordChanged");
-		}
+		mv.addObject("user", user);
+		return mv;
 	}
 
 	private Boolean updatePassword(final UserBean user, final PasswordBean pwd) {

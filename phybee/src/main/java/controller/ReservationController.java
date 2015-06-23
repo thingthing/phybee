@@ -99,6 +99,16 @@ public class ReservationController {
 		mv.addObject("schedule", schedule);
 		mv.addObject("ticket", ticket);
 		mv.addObject("error", error);
+		if (user == null || user.getId() == null)
+		{
+			try
+			{
+				userService.login(user);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 		mv.addObject("user", user);
 		return mv;
 	}
@@ -171,6 +181,6 @@ public class ReservationController {
 		reservationService.removeAvailableSeat(Integer.parseInt(scheduleId), disabled, true);
 		reservationService.setReservationInfo(adult, child, disabled, Integer.parseInt(scheduleId), userId);
 		
-		return "redirect:/home";
+		return "redirect:/profil";
 	}
 }
