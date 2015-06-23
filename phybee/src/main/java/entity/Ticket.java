@@ -55,7 +55,7 @@ public class Ticket implements Serializable {
 	public String getFormatPrice() {
 		NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.CHINA);
 		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-		dfs.setCurrencySymbol("¥");
+		dfs.setCurrencySymbol("RMB ");
 		dfs.setGroupingSeparator('.');
 		dfs.setMonetaryDecimalSeparator('.');
 		((DecimalFormat) format).setDecimalFormatSymbols(dfs);

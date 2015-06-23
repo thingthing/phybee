@@ -148,7 +148,7 @@ public class ReservationController {
 		
 		NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.CHINA);
 		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-		dfs.setCurrencySymbol("¥");
+		dfs.setCurrencySymbol("RMB ");
 		dfs.setGroupingSeparator('.');
 		dfs.setMonetaryDecimalSeparator('.');
 		((DecimalFormat) format).setDecimalFormatSymbols(dfs);

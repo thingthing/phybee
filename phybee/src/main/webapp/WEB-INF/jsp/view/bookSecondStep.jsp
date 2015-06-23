@@ -46,17 +46,24 @@
 		</tbody>
 	</table>
 </div>
-<form method="post" action="<c:url value="/reservation/validation"/>">
 	<br />
 	<h2>
 		<span class="label label-primary"><spring:message
 				code="reservation.tinfo" /></span>
 	</h2>
+	<br/>
+	<div class="alert alert-success" style="width: 180px">
+	<h4>
+		<spring:message code="reservation.seats" />
+	</h4>
+	<b><spring:message code="reservation.adult" />/<spring:message code="reservation.child" /></b> : ${schedule.seatRemain}<br/>
+	<b><spring:message code="reservation.disabled" /></b> : ${schedule.prioritySeatRemain}
+	</div>
+<form method="post" action="<c:url value="/reservation/validation"/>">
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Type</th>
-				<th><spring:message code="reservation.seats" /></th>
 				<th><spring:message code="reservation.price" /></th>
 				<th><spring:message code="reservation.number" /></th>
 			</tr>
@@ -67,13 +74,11 @@
 					<td><c:out value="${item.getType()}" /></td>
 					<c:choose>
 						<c:when test="${item.type eq 'Disabled'}">
-							<td><c:out value="${schedule.prioritySeatRemain}" /></td>
 							<td><c:out value="${item.getFormatPrice()}" /></td>
 							<td><input type="number" name="${item.getType()}" size="30"
 								min="0" max="${schedule.prioritySeatRemain}" step="1" value="0"></td>
 						</c:when>
 						<c:otherwise>
-							<td><c:out value="${schedule.seatRemain}" /></td>
 							<td><c:out value="${item.getFormatPrice()}" /></td>
 							<td><input type="number" name="${item.getType()}" size="30"
 								min="0" max="${schedule.seatRemain}" step="1" value="0"></td>
