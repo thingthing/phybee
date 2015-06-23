@@ -819,7 +819,7 @@ INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, 
 INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('399', '5', '2', '2015-07-01', '17:30:00', '20:00:00', '200', '0');
 INSERT INTO `theater`.`schedule` (`id`, `id_movie`, `id_room`, `date`, `start`, `end`, `seat_remain`, `priority_seat_remain`) VALUES ('400', '5', '2', '2015-07-01', '20:30:00', '23:00:00', '200', '0');
 
-INSERT INTO `theater`.`ticket` (`id`, `type`, `price`) VALUES ('1', 'Adult', '7.20'), ('2', 'Child', '4.99'), ('3', 'Disabled', '5.50');
+INSERT INTO `theater`.`ticket` (`id`, `type`, `price`) VALUES ('1', 'Adult', '50'), ('2', 'Child', '40'), ('3', 'Disabled', '35');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
