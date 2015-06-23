@@ -6,8 +6,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <sec:authorize access="isAnonymous()">
-	<div id="contents" align="center"
-		class="container row col-sm-6 col-md-4 col-md-offset-4">
+	<div id="contents" align="center" class="container"
+		style="width: 50%; margin-bottom: 20px; margin-top: 20px">
 		<div class="account-wall">
 			<tiles:insertAttribute name="loginForm" />
 		</div>

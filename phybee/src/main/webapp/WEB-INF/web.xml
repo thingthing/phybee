@@ -20,7 +20,7 @@
 		<param-value>
 			/WEB-INF/security.xml,
 			/WEB-INF/database.xml,
-			/WEB-INF/dispatcher-servlet.xml
+			/WEB-INF/applicationContext.xml
 		</param-value>
 	</context-param>
 

@@ -13,10 +13,10 @@
 	<div class="carousel-inner" role="listbox">
 		<c:forEach var="item" items="${movies}" varStatus="status">
 			<div ${status.first ? 'class="item active"' : 'class="item"' }>
-				<a href="<c:url value="/moviedetails?movie=${item.getmId()}"/>">
+				<a href="<c:url value="/moviedetails?movie=${item.id}"/>">
 					<img class="fill"
-					src="<c:url value="/resources/poster/car_${item.getmPoster()}"/>"
-					alt="${item.getmId()}" data-holder-rendered="true" width="auto"
+					src="<c:url value="/resources/poster/car_${item.poster}"/>"
+					alt="${item.id}" data-holder-rendered="true" width="auto"
 					height="auto">
 				</a>
 			</div>
@@ -35,16 +35,16 @@
 <br />
 <br />
 <div class="row">
-	<c:forEach var="item" items="${movies}" begin="1" end="3">
+	<c:forEach var="item" items="${movies}">
 		<div class="col-lg-4" align="center">
 			<img class="img-circle"
-				src="<c:url value="/resources/poster/${item.getmPoster()}"/>"
-				alt="${item.getmId()}" width="140" height="140">
-			<h2>${item.getmTitle()}</h2>
-			<p>${item.getmSynopsis()}</p>
+				src="<c:url value="/resources/poster/${item.poster}"/>"
+				alt="${item.id}" width="140" height="140">
+			<h2>${item.title}</h2>
+			<p>${item.synopsis}</p>
 			<p>
 				<a class="btn btn-primary"
-					href="<c:url value="/moviedetails?movie=${item.getmId()}"/>"
+					href="<c:url value="/moviedetails?movie=${item.id}"/>"
 					role="button">View details &raquo;</a>
 			</p>
 		</div>

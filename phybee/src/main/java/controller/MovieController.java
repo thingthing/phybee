@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Movie;
 import service.MovieService;
 import service.ReservationService;
-import bean.DateScheduleBean;
 import bean.MovieBean;
 import bean.UserBean;
 
@@ -24,18 +24,22 @@ public class MovieController {
 
 	@Autowired
 	private UserBean user;
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private MovieService movieService;
 	
-    private List<MovieBean> listMovie = new ArrayList<>();
+    private List<Movie> listMovie = new ArrayList<>();
 
     @RequestMapping("/movie")
     public ModelAndView nowPlayingMovie (
     		@RequestParam(value = "search", required = false, defaultValue = "") String search) {
 
-    	if (search != null) {
-    		this.listMovie = MovieService.getMovieLike(search);
+    	if (search.isEmpty() == false) {
+    		this.listMovie = movieService.getMovieLike(search);
     	}
     	else {
-    		this.listMovie = MovieService.getCurrentMovies();
+    		this.listMovie = movieService.getCurrentMovies();
     	}
         ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
@@ -46,32 +50,35 @@ public class MovieController {
     @RequestMapping("/incoming")
     public ModelAndView incomingMovie() {
 
-    	ReservationService res = new ReservationService();
-
-        this.listMovie = MovieService.getFuturMovies();
+        this.listMovie = movieService.getFuturMovies();
         
-        for (MovieBean m : listMovie) {
-        	m.setmDateSchedule(res.getScheduleInfoWithFilmId(m.getmId()));
-        }
-        ModelAndView mv = new ModelAndView("incomingMovie");
+        ModelAndView mv = new ModelAndView("nowPlayingMovie");
         mv.addObject("listmovie", listMovie);
         mv.addObject("user", user);
         return mv;
     }
 
+    private boolean hasMovieId(ArrayList<MovieBean> listMovie, Movie m)
+    {
+    	for (MovieBean movie : listMovie)
+    	{
+    		if (movie.getmId() == m.getId())
+    			return true;
+    	}
+    	return false;
+    }
     @RequestMapping("/schedule")
     public ModelAndView scheduleMovie() {
-
-    	ReservationService res = new ReservationService();
-
-        this.listMovie = MovieService.getCurrentMovies();
+    	ArrayList<MovieBean> listMovieWithSchedule = new ArrayList<MovieBean>();
+        List<Movie> currentMovies = movieService.getCurrentMoviesAndSchedule();
         
-        for (MovieBean m : listMovie) {
-        	m.setmDateSchedule(res.getScheduleInfoWithFilmId(m.getmId()));
+        for (Movie m : currentMovies)
+        {
+        	if (this.hasMovieId(listMovieWithSchedule, m) == false)
+        		listMovieWithSchedule.add(new MovieBean(m));
         }
-        
         ModelAndView mv = new ModelAndView("scheduleMovie");
-        mv.addObject("listmovie", listMovie);
+        mv.addObject("listmovie", listMovieWithSchedule);
         mv.addObject("user", user);
         return mv;
     }
@@ -80,17 +87,11 @@ public class MovieController {
     public ModelAndView profilMovie(
             @RequestParam(value = "movie", required = true) Integer movie_id
     ) {
-
-    	ReservationService res = new ReservationService();
-    	ArrayList<DateScheduleBean> schedule = null;
-
-    	schedule = res.getScheduleInfoWithFilmId(movie_id);
         ModelAndView mv = new ModelAndView("profilMovie");
-        MovieBean movie = MovieService.getMovieInfo(movie_id);
+        MovieBean movie = movieService.getMovieInfo(movie_id);
         mv.addObject("list", movie);
-        mv.addObject("schedule", schedule);
+        mv.addObject("schedule", movie.getmDateSchedule());
         mv.addObject("user", user);
-        /*mv.addObject("listmovie", title);*/
         return mv;
     }
 }

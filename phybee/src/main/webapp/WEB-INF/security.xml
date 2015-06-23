@@ -23,6 +23,7 @@
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/changePwd" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/reservation/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/profil" access="hasRole('ROLE_USER')" />
 
 		<form-login login-page="/login" default-target-url="/"
 			authentication-failure-url="/login?error" username-parameter="email"

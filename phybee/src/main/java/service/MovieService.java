@@ -1,93 +1,61 @@
 package service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.naming.NamingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import bean.MovieBean;
-import db.PhybeeDb;
-
+import dao.MovieDao;
+import entity.Movie;
+@Transactional
+@Service
 public class MovieService
 {
-
+	@Autowired
+	private MovieDao movieDao;
+	
 	public MovieService()
 	{
 
 	}
 
-	private static ArrayList<MovieBean> searchMovieDb(String sql)
+	public List<Movie> getMovieLike(String title)
 	{
+		return this.movieDao.findMoviesLike(title);
+	}
+	
+	public List<Movie> getFuturMovies()
+	{
+		return this.movieDao.findFuturMovies();
+	}
+
+	public List<MovieBean> getNewMovies()
+	{
+		List<Movie> movies = this.movieDao.findNewMovies();
 		ArrayList<MovieBean> movieList = new ArrayList<MovieBean>();
-
-		try
+		
+		for (Movie movie : movies)
 		{
-			PhybeeDb db = new PhybeeDb();
-			ResultSet resultSet = db.executeQuery(sql);
-
-			while (resultSet.next())
-			{
-				movieList.add(new MovieBean(resultSet.getInt("id"), resultSet
-						.getInt("id_producer"), resultSet.getString("title"),
-						resultSet.getString("synopsis"), resultSet.getString("trailer"), resultSet
-								.getTime("time"), resultSet
-								.getString("poster"), resultSet
-								.getDate("release"), resultSet
-								.getDate("end_release"), GenreService
-								.getGenreOfMovie(resultSet.getInt("id"))));
-			}
-
-			db.closeConnection();
-
-		} catch (NamingException e)
-		{
-			e.printStackTrace();
-		} catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
+			movieList.add(new MovieBean(movie));
 		}
 		return movieList;
 	}
 
-	public static ArrayList<MovieBean> getMovieLike(String movie)
+	public List<Movie> getCurrentMoviesAndSchedule()
 	{
-		String sql = "select * from movie where title LIKE '%" + movie + "%'";
-		return MovieService.searchMovieDb(sql);
+		return this.movieDao.findCurrentMoviesAndSchedule();
+	}
+
+	public List<Movie> getCurrentMovies()
+	{
+		return this.movieDao.findCurrentMovies();
 	}
 	
-	public static ArrayList<MovieBean> getFuturMovies()
+	public MovieBean getMovieInfo(Integer movie_id)
 	{
-		String sql = "select * from movie where `release` >= DATE_ADD(CURDATE(),INTERVAL 7 DAY) &&"
-				+ " `release` <= DATE_ADD(CURDATE(),INTERVAL 14 DAY)";
-		return MovieService.searchMovieDb(sql);
-	}
-
-	public static ArrayList<MovieBean> getNewMovies()
-	{
-		String sql = "select * from movie where `release` <= CURDATE() &&"
-				+ " end_release > CURDATE() &&"
-				+ " CURDATE() <= DATE_ADD(release,INTERVAL 7 DAY)";
-		return MovieService.searchMovieDb(sql);
-	}
-
-	public static ArrayList<MovieBean> getCurrentMovies()
-	{
-		String sql = "select * from movie where `release` <= CURDATE() &&"
-				+ " end_release > CURDATE()";
-		return MovieService.searchMovieDb(sql);
-	}
-
-	public static MovieBean getMovieInfo(Integer movie_id)
-	{
-		String sql = "select * from movie where id = " + movie_id;
-		return MovieService.searchMovieDb(sql).get(0);
-	}
-	
-	public static ArrayList<MovieBean> getMoiveByGenre(Integer genre_id)
-	{
-		//@TODO: SQL syntax to get movie by genre
-		String sql = "select * from movie, moviegenre as g";
-		return MovieService.searchMovieDb(sql);
+		return new MovieBean(this.movieDao.findMovieById(movie_id));
 	}
 }

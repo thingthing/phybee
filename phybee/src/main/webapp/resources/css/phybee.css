@@ -122,12 +122,10 @@ Register
 }
 
 .account-wall {
-	padding: 0px 0px 20px 0px;
 	background-color: #f7f7f7;
 	-moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 	-webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-	height: 390px;
 	width: 60%;
 	float: right;
 }
@@ -185,7 +183,7 @@ Register
     padding-left-value: 115px;
     padding-left-ltr-source: physical;
     padding-left-rtl-source: physical;*/
-	
+
 }
 
 .movieprofil-mini-info h4 {
@@ -226,7 +224,7 @@ p {
 }
 
 .schedule-movieprofil-mini-block {
-	
+
 }
 
 .schedule-movieprofil-mini-block h4 {
@@ -234,7 +232,7 @@ p {
 }
 
 .schedule-movieprofil-mini-block img, .schedule-movieprofil-mini-block span
-	{
+{
 	display: inline-block;
 	vertical-align: middle;
 	text-align: left;
@@ -250,7 +248,7 @@ p {
 }
 
 .table-schedule {
-	
+
 }
 
 .schedule-movielist-synopsis {
@@ -262,7 +260,7 @@ p {
 }
 /*Profil Movie*/
 .profil-movie-interact {
-	
+
 }
 
 /*
@@ -274,6 +272,21 @@ table {
 	border: 1px solid #000000;
 	width: 65px;
 }
+
+.info-left {
+	float: left;
+	width: 50%;
+	border-right: dashed;
+	border-width: 1px;
+}
+
+.info-right {
+	padding-left: 20px;
+	float: right;
+	text-align: left;
+	width: 50%;
+}
+
 
 /* Sticky footer styles
       -------------------------------------------------- */

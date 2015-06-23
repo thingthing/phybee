@@ -18,11 +18,11 @@
 				<select name="movie">
 					<c:forEach var="item" items="${movies}">
 						<c:choose>
-							<c:when test="${movie eq item.getmId()}">
-								<option value="${item.getmId()}" selected>${item.getmTitle()}</option>
+							<c:when test="${movie eq item.id}">
+								<option value="${item.id}" selected>${item.title}</option>
 							</c:when>
 							<c:otherwise>
-								<option value="${item.getmId()}">${item.getmTitle()}</option>
+								<option value="${item.id}">${item.title}</option>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

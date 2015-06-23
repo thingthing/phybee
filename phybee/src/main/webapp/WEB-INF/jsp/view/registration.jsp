@@ -13,32 +13,32 @@
   </div>
       <div class="account-wall">
         <h3>Create your account</h3>
-        <form:form modelAttribute="userForm" method="POST" cssClass="form-signin" cssStyle="width: 100%; height: 400px">
+        <form:form modelAttribute="userForm" method="POST" cssClass="form-signin" cssStyle="width: 100%">
         <table style="float: left; width: 100%">
           <tr>
             <td style="padding-left: 20%; width: 35%; text-align: right; padding-right: 5px"><label><spring:message code="register.firstName" /></label></td>
             <td><form:input path="firstName" value="" cssStyle="width: 100%; margin-left: auto"/></td>
-            <form:errors path="firstName" element="div"/>
+            <form:errors path="firstName" element="div" cssClass="alert-danger"/>
           </tr>
           <tr>
             <td style="padding-left: 20%; width: 35%; text-align: right; padding-right: 5px"><label><spring:message code="register.lastName" /></label></td>
             <td><form:input path="lastName" value="" cssStyle="width: 100%; margin-left: auto"/></td>
-            <form:errors path="lastName" element="div" />
+            <form:errors path="lastName" element="div" cssClass="alert-danger"/>
           </tr>
           <tr>
             <td style="padding-left: 20%; width: 35%; text-align: right; padding-right: 5px"><label>Email</label></td>
             <td><form:input path="email" value="" cssStyle="width: 100%; margin-left: auto"/></td>
-            <form:errors path="email" element="div" />
+            <form:errors path="email" element="div" cssClass="alert-danger"/>
           </tr>
           <tr>
             <td style="padding-left: 20%; width: 35%; text-align: right; padding-right: 5px"><label><spring:message code="register.password" /></label></td>
             <td><form:input path="password" value="" type="password" cssStyle="width: 100%; margin-left: auto"/></td>
-            <form:errors path="password" element="div" />
+            <form:errors path="password" element="div" cssClass="alert-danger"/>
           </tr>
           <tr>
             <td style="width: 35%; text-align: right; padding-right: 5px"><label><spring:message code="register.cpassword" /></label></td>
             <td><form:input path="matchingPassword" value="" type="password" cssStyle="width: 100%; margin-left: auto"/></td>
-            <form:errors element="div" />
+            <form:errors element="div" cssClass="alert-danger"/>
           </tr>
         </table>
           <button type="submit" class="btn btn-lg btn-primary btn-block" style="align-content: center"><spring:message code="register.signUp" /></button>

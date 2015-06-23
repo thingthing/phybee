@@ -16,19 +16,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Movie;
+import entity.Reservation;
+import entity.Ticket;
 import service.MovieService;
+import service.ReservationService;
 import service.UserService;
-import bean.MovieBean;
 import bean.PasswordBean;
 import bean.UserBean;
-import bean.UserMovies;
 
 @Controller
 public class UserController
 {
 	@Autowired
 	private UserBean user;
-	private List<UserMovies> userMovies;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private MovieService movieService;
+	@Autowired
+	private ReservationService reservationService;
+	
+	private List<Reservation> userMovies;
 
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public ModelAndView accesssDenied(Principal user)
@@ -60,7 +69,7 @@ public class UserController
 
 		try
 		{
-			UserService.login(user);
+			userService.login(user);
 
 			model.addObject("user", user);
 		} catch (Exception e)
@@ -68,7 +77,7 @@ public class UserController
 			System.out.println("User not log in");
 		}
 		
-		List<MovieBean> movies = MovieService.getCurrentMovies();
+		List<Movie> movies = movieService.getCurrentMovies();
 		model.addObject("movies", movies);
 
 		if (logout != null)
@@ -124,14 +133,14 @@ public class UserController
 	}
 
 	private Boolean updatePassword(final UserBean user, final PasswordBean pwd) {
-		Boolean success = UserService.setUserPassword(user, pwd);
+		Boolean success = userService.setUserPassword(user, pwd);
 		return success;
 	}
 
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public ModelAndView profil()
 	{
-		this.userMovies = UserService.getUserMovies(user.getId());
+		this.userMovies = userService.getUserMovies(user.getId());
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
 		model.addObject("listmovie", userMovies);
@@ -144,9 +153,10 @@ public class UserController
 	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ModelAndView infos()
 	{
-
+		List<Ticket> tickets = reservationService.getTicketInfo();
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
+		model.addObject("tickets", tickets);
 		model.setViewName("infos");
 
 		return model;

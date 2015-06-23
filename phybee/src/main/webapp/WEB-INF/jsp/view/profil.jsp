@@ -34,15 +34,15 @@
         <c:forEach var="list" items="${listmovie}">
     <tr>
             <td>
-            <a href="<c:url value="/moviedetails?movie=${list.movie.mId}"/>" class="link"> <img class="img-rounded" alt="${list.movie.mTitle}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.movie.mPoster}"/>"></a>
+            <a href="<c:url value="/moviedetails?movie=${list.schedule.movie.id}"/>" class="link"> <img class="img-rounded" alt="${list.schedule.movie.title}" style="max-width:110px;max-height:145px;" src="<c:url value="/resources/poster/${list.schedule.movie.poster}"/>"></a>
             </td>
             <td>
-            <a href="<c:url value="/moviedetails?movie=${list.movie.mId}"/>" class="link">${list.movie.mTitle}</a>
+            <a href="<c:url value="/moviedetails?movie=${list.schedule.movie.id}"/>" class="link">${list.schedule.movie.title}</a>
             </td>
-            <td>${list.date}</td>
-            <td>${list.start}</td>
-            <td>${list.end}</td>
-            <td>${list.movie.mTime}</td>
+            <td>${list.schedule.scheduleDate}</td>
+            <td>${list.schedule.start}</td>
+            <td>${list.schedule.end}</td>
+            <td>${list.schedule.movie.duration}</td>
             <td>${list.adult}</td>
             <td>${list.child}</td>
             <td>${list.disabled}</td>
